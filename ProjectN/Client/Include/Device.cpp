@@ -15,7 +15,7 @@ CDevice::~CDevice(void)
 	Release();
 }
 
-HRESULT CDevice::InitDevice(WINMODE Mode, HWND hWnd, const int& iWinCX, const int& iWinCY)
+HRESULT CDevice::InitDevice(WINTYPE Mode, HWND hWnd, const int& iWinCX, const int& iWinCY)
 {
 	//어플리케이션이 올바른 헤더로 만들어졌는지 확인
 	m_p3D = Direct3DCreate9(D3D_SDK_VERSION);

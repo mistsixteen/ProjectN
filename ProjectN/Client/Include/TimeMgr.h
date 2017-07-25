@@ -5,21 +5,21 @@ class CTimeMgr
 {
 	DECLARE_SINGLETON(CTimeMgr);
 private:
-	LARGE_INTEGER		m_FrameTime;
-	LARGE_INTEGER		m_FixTime;
-	LARGE_INTEGER		m_LastTime;
-	LARGE_INTEGER		m_CPUTick;
-	float				m_fTime;
+	LARGE_INTEGER		frameTime;
+	LARGE_INTEGER		fixTime;
+	LARGE_INTEGER		lastTime;
+	LARGE_INTEGER		cpuTick;
+	float				time;
 
-	float				m_fFps;
-	int					m_iFrameCnt;
-	float				m_fPassed;
+	float				fps;
+	int					frameCount;
+	float				passedTime;
 public:
 	void InitTimeMgr();
 	void SetTime();
 public:
-	float GetTime() const { return m_fTime; }
-	float GetFps() const { return m_fFps; }
+	float GetTime() const { return time; }
+	float GetFps() const { return fps; }
 private:
 	CTimeMgr(void);
 public:

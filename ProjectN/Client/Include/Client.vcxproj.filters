@@ -22,20 +22,32 @@
     <Filter Include="97. Input">
       <UniqueIdentifier>{c35e4011-1681-45d8-ab80-4545e67159a9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="00. MainApp">
-      <UniqueIdentifier>{75666d5e-d76b-45f2-9911-ebde41dd15ee}</UniqueIdentifier>
-    </Filter>
     <Filter Include="03. Manager">
       <UniqueIdentifier>{c8ce566d-db3e-4682-8886-490c94b8d2cd}</UniqueIdentifier>
     </Filter>
     <Filter Include="02. Object">
       <UniqueIdentifier>{81c1f8c0-8ead-4459-a99c-eac65edac65e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01. Stage">
-      <UniqueIdentifier>{c1d582ca-1b4c-480e-b13e-16c6cf764c61}</UniqueIdentifier>
-    </Filter>
     <Filter Include="03. Manager\TimeMgr">
       <UniqueIdentifier>{204a6801-db89-400f-9895-78b57af3b5cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Manager\ObjMgr">
+      <UniqueIdentifier>{bf2e2070-d317-4ed0-9246-9d79a32c979d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="96. HashTable">
+      <UniqueIdentifier>{ba3e8bd2-7c66-4b0b-bf3c-0295039348fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Scene">
+      <UniqueIdentifier>{c1d582ca-1b4c-480e-b13e-16c6cf764c61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Scene\Training">
+      <UniqueIdentifier>{4b2abacc-7a40-4041-8664-bf54c3cefbd9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Framework">
+      <UniqueIdentifier>{75666d5e-d76b-45f2-9911-ebde41dd15ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Manager\SceneMgr">
+      <UniqueIdentifier>{df83419b-3b1a-4781-98ba-2c8acc0b1f9b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -72,8 +84,26 @@
     <ClInclude Include="TimeMgr.h">
       <Filter>03. Manager\TimeMgr</Filter>
     </ClInclude>
-    <ClInclude Include="MainApp.h">
-      <Filter>00. MainApp</Filter>
+    <ClInclude Include="ObjMgr.h">
+      <Filter>03. Manager\ObjMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="HashTable.h">
+      <Filter>96. HashTable</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>01. Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework.h">
+      <Filter>00. Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneMgr.h">
+      <Filter>03. Manager\SceneMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="Training.h">
+      <Filter>01. Scene\Training</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj.h">
+      <Filter>02. Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -92,8 +122,23 @@
     <ClCompile Include="TimeMgr.cpp">
       <Filter>03. Manager\TimeMgr</Filter>
     </ClCompile>
-    <ClCompile Include="MainApp.cpp">
-      <Filter>00. MainApp</Filter>
+    <ClCompile Include="ObjMgr.cpp">
+      <Filter>03. Manager\ObjMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>01. Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework.cpp">
+      <Filter>00. Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneMgr.cpp">
+      <Filter>03. Manager\SceneMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="Training.cpp">
+      <Filter>01. Scene\Training</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj.cpp">
+      <Filter>02. Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

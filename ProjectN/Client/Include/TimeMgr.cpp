@@ -2,10 +2,10 @@
 #include "TimeMgr.h"
 
 CTimeMgr::CTimeMgr(void)
-	:m_fTime(0),
-	m_fFps(0.f),
-	m_iFrameCnt(0),
-	m_fPassed(0.f)
+	:time(0),
+	fps(0.f),
+	frameCount(0),
+	passedTime(0.f)
 {
 }
 
@@ -16,37 +16,37 @@ CTimeMgr::~CTimeMgr(void)
 
 void CTimeMgr::InitTimeMgr()
 {
-	QueryPerformanceCounter(&m_FrameTime);
-	QueryPerformanceCounter(&m_FixTime);
-	QueryPerformanceCounter(&m_LastTime);				//현재 시간
-	QueryPerformanceFrequency(&m_CPUTick);				//초당 CPU 연산
+	QueryPerformanceCounter(&frameTime);
+	QueryPerformanceCounter(&fixTime);
+	QueryPerformanceCounter(&lastTime);				//현재 시간
+	QueryPerformanceFrequency(&cpuTick);			//초당 CPU 연산
 }
 
 void CTimeMgr::SetTime()
 {
-	QueryPerformanceCounter(&m_FrameTime);
+	QueryPerformanceCounter(&frameTime);
 
 	//1초가 지났다는 의미
-	if (m_FrameTime.QuadPart - m_LastTime.QuadPart > m_CPUTick.QuadPart)
+	if (frameTime.QuadPart - lastTime.QuadPart > cpuTick.QuadPart)
 	{
-		QueryPerformanceFrequency(&m_CPUTick);
-		m_LastTime.QuadPart = m_FrameTime.QuadPart;
+		QueryPerformanceFrequency(&cpuTick);
+		lastTime.QuadPart = frameTime.QuadPart;
 	}
 
 	//FPS 구하기
-	m_fTime = float(m_FrameTime.QuadPart - m_FixTime.QuadPart) / m_CPUTick.QuadPart;
-	m_fPassed += m_fTime;
+	time = float(frameTime.QuadPart - fixTime.QuadPart) / cpuTick.QuadPart;
+	passedTime += time;
 
-	++m_iFrameCnt;
-	if (m_fPassed > 1.f)
+	++frameCount;
+	if (passedTime > 1.f)
 	{
-		m_fFps = (float)m_iFrameCnt / m_fPassed;
-		m_fPassed = 0.f;
-		m_iFrameCnt = 0;
+		fps = (float)frameCount / passedTime;
+		passedTime = 0.f;
+		frameCount = 0;
 	}
 
-	//m_fTime : 1프레임 당 실행된 시간
-	m_fTime = float(m_FrameTime.QuadPart - m_FixTime.QuadPart) / m_CPUTick.QuadPart;
-	m_FixTime = m_FrameTime;
+	//time : 1프레임 당 실행된 시간
+	time = float(frameTime.QuadPart - fixTime.QuadPart) / cpuTick.QuadPart;
+	fixTime = frameTime;
 
 }

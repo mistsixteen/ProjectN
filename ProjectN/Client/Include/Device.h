@@ -19,7 +19,7 @@ public:
 	LPD3DXSPRITE GetSprite() const { return m_pSprite; }
 	LPDIRECT3DDEVICE9 GetDevice() const { return m_pDevice; }
 public:
-	HRESULT InitDevice(WINMODE Mode, HWND hWnd, const int& iWinCX, const int& iWinCY);
+	HRESULT InitDevice(WINTYPE Mode, HWND hWnd, const int& iWinCX, const int& iWinCY);
 	void Release();
 public:
 	void Render_Begin();

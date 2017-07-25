@@ -4,7 +4,7 @@
 #include "stdafx.h"
 #include "Client.h"
 
-#include "MainApp.h"
+#include "Framework.h"
 
 #define MAX_LOADSTRING 100
 
@@ -47,8 +47,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     MSG msg;
 
 	// MainApp을 불러오고 무한루프를 들어가서 클라이언트 실행
-	CMainApp MainApp;
-	if (FAILED(MainApp.InitApp()))
+	CFramework framework;
+	if (FAILED(framework.InitApp()))
 	{
 		MSGBOX(L"3DProject : Failed to initialize main app");
 		return 0;
@@ -69,8 +69,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		}
 		else
 		{
-			MainApp.Progress();//로직
-			MainApp.Render();//출력
+			framework.Progress();//로직
+			framework.Render();//출력
 		}
 	}
 
