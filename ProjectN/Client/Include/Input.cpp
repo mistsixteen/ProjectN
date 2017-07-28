@@ -4,7 +4,7 @@
 /*
 1단계
 */
-HRESULT CInput::CreateDevice(HWND hWnd)
+HRESULT DXInput::CreateDevice(HWND hWnd)
 {
 	m_hWnd = hWnd;
 	if (FAILED(DirectInput8Create(GetModuleHandle(NULL), DIRECTINPUT_VERSION,
@@ -81,7 +81,7 @@ HRESULT CInput::CreateDevice(HWND hWnd)
 키보드와 동일하게 ReadData()함수를 매 프레임마다 호출하면서
 마우스의 이동량을 측정하고 m_ptMouse에 저장
 */
-HRESULT CInput::ReadData()
+HRESULT DXInput::ReadData()
 {
 	if (NULL == m_pMouse)
 		return S_OK;
@@ -114,17 +114,17 @@ HRESULT CInput::ReadData()
 3단계
 rgbButton 값 중에서 0이면 비클릭 1이면 클릭
 */
-BOOL CInput::PushLeft()
+BOOL DXInput::PushLeft()
 {
 	return (m_MouseState2.rgbButtons[0] & 0x80) ? TRUE : FALSE;
 }
 
-BOOL CInput::PushRight()
+BOOL DXInput::PushRight()
 {
 	return (m_MouseState2.rgbButtons[1] & 0x80) ? TRUE : FALSE;
 }
 
-BOOL CInput::PushMiddle()
+BOOL DXInput::PushMiddle()
 {
 	return (m_MouseState2.rgbButtons[2] & 0x80) ? TRUE : FALSE;
 }
@@ -134,7 +134,7 @@ BOOL CInput::PushMiddle()
 응용프로그램이 활성 또는 비활성 되었을 때
 마우스 장치에 대한 제어권을 확보하는 단계
 */
-void CInput::OnActivate(WPARAM wParam)
+void DXInput::OnActivate(WPARAM wParam)
 {
 	if (WA_INACTIVE != wParam && m_pMouse)
 	{
@@ -148,19 +148,19 @@ void CInput::OnActivate(WPARAM wParam)
 그 다음 장치를 해제하고
 마지막에 DirectInput을 해제
 */
-VOID CInput::FreeDirectInput()
+VOID DXInput::FreeDirectInput()
 {
 	SAFE_RELEASE(m_pMouse);
 	SAFE_RELEASE(m_pKeyBoard);
 	SAFE_RELEASE(m_pDI);
 }
 
-CInput::CInput(void)
+DXInput::DXInput(void)
 {
 }
 
 
-CInput::~CInput(void)
+DXInput::~DXInput(void)
 {
 	FreeDirectInput();
 }

@@ -1,7 +1,13 @@
 #pragma once
 #include "Define.h"
 
-class CFramework
+#include "DXFramework.h"
+#include "Input.h"
+
+#include "TimeManager.h"
+#include "SceneManager.h"
+
+class Framework
 {
 public:
 	HRESULT InitApp(void);
@@ -9,7 +15,7 @@ public:
 	void	Render();
 	void	Release();
 public:
-	CFramework();
-	~CFramework();
+	Framework();
+	~Framework();
 };
 

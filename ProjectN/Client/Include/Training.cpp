@@ -1,32 +1,32 @@
 #include "stdafx.h"
 #include "Training.h"
 
-CTraining::CTraining()
+Training::Training()
 {
 }
 
-CTraining::~CTraining()
+Training::~Training()
 {
 	Release();
 }
 
-HRESULT CTraining::Initialize()
+HRESULT Training::Initialize()
 {
 	return S_OK;
 }
 
-void CTraining::Progress()
+void Training::Progress()
 {
-	GET_SINGLE(CObjMgr)->Progress();
+	GET_SINGLE(ObjectFactory)->Progress();
 }
 
-void CTraining::Render()
+void Training::Render()
 {
-	GET_SINGLE(CObjMgr)->Render();
+	GET_SINGLE(ObjectFactory)->Render();
 }
 
-void CTraining::Release()
+void Training::Release()
 {
-	GET_SINGLE(CObjMgr)->Release();
+	GET_SINGLE(ObjectFactory)->Release();
 }
 

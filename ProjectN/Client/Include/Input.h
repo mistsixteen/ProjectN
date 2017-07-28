@@ -1,9 +1,9 @@
 #pragma once
 #include "Define.h"
 
-class CInput
+class DXInput
 {
-	DECLARE_SINGLETON(CInput);
+	DECLARE_SINGLETON(DXInput);
 private:
 	LPDIRECTINPUT8			m_pDI;
 	HWND					m_hWnd;
@@ -28,7 +28,7 @@ public:
 	POINT GetptMouse() const { return m_ptMouse; }
 	DIMOUSESTATE2 GetMouseState2() const { return m_MouseState2; }
 private:
-	CInput(void);
+	DXInput(void);
 public:
-	~CInput(void);
+	~DXInput(void);
 };

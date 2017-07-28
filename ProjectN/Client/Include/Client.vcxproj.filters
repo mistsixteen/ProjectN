@@ -16,26 +16,8 @@
     <Filter Include="99. Header">
       <UniqueIdentifier>{311bcd79-d536-49a9-a85c-cab8e714ae90}</UniqueIdentifier>
     </Filter>
-    <Filter Include="98. Device">
-      <UniqueIdentifier>{7dcbc485-0aaf-4e81-80a9-6e40bf3c794e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="97. Input">
-      <UniqueIdentifier>{c35e4011-1681-45d8-ab80-4545e67159a9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="03. Manager">
-      <UniqueIdentifier>{c8ce566d-db3e-4682-8886-490c94b8d2cd}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02. Object">
       <UniqueIdentifier>{81c1f8c0-8ead-4459-a99c-eac65edac65e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="03. Manager\TimeMgr">
-      <UniqueIdentifier>{204a6801-db89-400f-9895-78b57af3b5cb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="03. Manager\ObjMgr">
-      <UniqueIdentifier>{bf2e2070-d317-4ed0-9246-9d79a32c979d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="96. HashTable">
-      <UniqueIdentifier>{ba3e8bd2-7c66-4b0b-bf3c-0295039348fa}</UniqueIdentifier>
     </Filter>
     <Filter Include="01. Scene">
       <UniqueIdentifier>{c1d582ca-1b4c-480e-b13e-16c6cf764c61}</UniqueIdentifier>
@@ -46,8 +28,38 @@
     <Filter Include="00. Framework">
       <UniqueIdentifier>{75666d5e-d76b-45f2-9911-ebde41dd15ee}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03. Manager\SceneMgr">
+    <Filter Include="98. DXFramework">
+      <UniqueIdentifier>{7dcbc485-0aaf-4e81-80a9-6e40bf3c794e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="98. DXFramework\Input">
+      <UniqueIdentifier>{c35e4011-1681-45d8-ab80-4545e67159a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager">
+      <UniqueIdentifier>{c8ce566d-db3e-4682-8886-490c94b8d2cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\TimeManager">
+      <UniqueIdentifier>{204a6801-db89-400f-9895-78b57af3b5cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\SceneManager">
       <UniqueIdentifier>{df83419b-3b1a-4781-98ba-2c8acc0b1f9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. ObjectFactory">
+      <UniqueIdentifier>{bf2e2070-d317-4ed0-9246-9d79a32c979d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. ObjectFactory\HashTable">
+      <UniqueIdentifier>{ba3e8bd2-7c66-4b0b-bf3c-0295039348fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Object\Bullet">
+      <UniqueIdentifier>{87164602-d514-4702-8b2e-245d89885796}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Object\Block">
+      <UniqueIdentifier>{9d965771-6f51-48fd-966a-4b0484b572c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Object\Target">
+      <UniqueIdentifier>{5a9e2995-8daf-4596-a3e1-a3cc89c9a388}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Object\Player">
+      <UniqueIdentifier>{7dc5dad1-f1ef-42c4-ade6-f6fdc3092582}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -75,35 +87,35 @@
     <ClInclude Include="Define.h">
       <Filter>99. Header</Filter>
     </ClInclude>
-    <ClInclude Include="Device.h">
-      <Filter>98. Device</Filter>
-    </ClInclude>
     <ClInclude Include="Input.h">
-      <Filter>97. Input</Filter>
-    </ClInclude>
-    <ClInclude Include="TimeMgr.h">
-      <Filter>03. Manager\TimeMgr</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjMgr.h">
-      <Filter>03. Manager\ObjMgr</Filter>
+      <Filter>98. DXFramework\Input</Filter>
     </ClInclude>
     <ClInclude Include="HashTable.h">
-      <Filter>96. HashTable</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene.h">
-      <Filter>01. Scene</Filter>
+      <Filter>03. ObjectFactory\HashTable</Filter>
     </ClInclude>
     <ClInclude Include="Framework.h">
       <Filter>00. Framework</Filter>
     </ClInclude>
-    <ClInclude Include="SceneMgr.h">
-      <Filter>03. Manager\SceneMgr</Filter>
-    </ClInclude>
     <ClInclude Include="Training.h">
       <Filter>01. Scene\Training</Filter>
     </ClInclude>
-    <ClInclude Include="Obj.h">
+    <ClInclude Include="GameObject.h">
       <Filter>02. Object</Filter>
+    </ClInclude>
+    <ClInclude Include="DXFramework.h">
+      <Filter>98. DXFramework</Filter>
+    </ClInclude>
+    <ClInclude Include="GameScene.h">
+      <Filter>01. Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>04. Manager\SceneManager</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeManager.h">
+      <Filter>04. Manager\TimeManager</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectFactory.h">
+      <Filter>03. ObjectFactory</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -113,32 +125,32 @@
     <ClCompile Include="Client.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Device.cpp">
-      <Filter>98. Device</Filter>
-    </ClCompile>
     <ClCompile Include="Input.cpp">
-      <Filter>97. Input</Filter>
-    </ClCompile>
-    <ClCompile Include="TimeMgr.cpp">
-      <Filter>03. Manager\TimeMgr</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjMgr.cpp">
-      <Filter>03. Manager\ObjMgr</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene.cpp">
-      <Filter>01. Scene</Filter>
+      <Filter>98. DXFramework\Input</Filter>
     </ClCompile>
     <ClCompile Include="Framework.cpp">
       <Filter>00. Framework</Filter>
     </ClCompile>
-    <ClCompile Include="SceneMgr.cpp">
-      <Filter>03. Manager\SceneMgr</Filter>
-    </ClCompile>
     <ClCompile Include="Training.cpp">
       <Filter>01. Scene\Training</Filter>
     </ClCompile>
-    <ClCompile Include="Obj.cpp">
+    <ClCompile Include="GameObject.cpp">
       <Filter>02. Object</Filter>
+    </ClCompile>
+    <ClCompile Include="DXFramework.cpp">
+      <Filter>98. DXFramework</Filter>
+    </ClCompile>
+    <ClCompile Include="GameScene.cpp">
+      <Filter>01. Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>04. Manager\SceneManager</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeManager.cpp">
+      <Filter>04. Manager\TimeManager</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectFactory.cpp">
+      <Filter>03. ObjectFactory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

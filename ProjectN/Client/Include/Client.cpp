@@ -47,7 +47,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     MSG msg;
 
 	// MainApp을 불러오고 무한루프를 들어가서 클라이언트 실행
-	CFramework framework;
+	Framework framework;
 	if (FAILED(framework.InitApp()))
 	{
 		MSGBOX(L"3DProject : Failed to initialize main app");
@@ -126,7 +126,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 	AdjustWindowRect(&rcWindow, WS_OVERLAPPEDWINDOW, false);
 
 	g_hWnd = hWnd = CreateWindow(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
-		CW_USEDEFAULT, 0, rcWindow.right - rcWindow.left, rcWindow.bottom - rcWindow.top, NULL, NULL, hInstance, NULL);
+		50, 50, rcWindow.right - rcWindow.left, rcWindow.bottom - rcWindow.top, NULL, NULL, hInstance, NULL);
 
 	if (!hWnd)
 	{

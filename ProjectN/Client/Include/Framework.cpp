@@ -1,72 +1,60 @@
 #include "stdafx.h"
 #include "Framework.h"
 
-#include "Device.h"
-#include "Input.h"
-#include "TimeMgr.h"
-
-CFramework::CFramework()
+Framework::Framework()
 {
 }
 
-CFramework::~CFramework()
+Framework::~Framework()
 {
 	Release();
 }
 
-HRESULT CFramework::InitApp(void)
+HRESULT Framework::InitApp(void)
 {
 	// DirectX 초기화
-	if (FAILED(GET_SINGLE(CDevice)->InitDevice(WINTYPE_WIN, g_hWnd, WINSIZEX, WINSIZEY)))
+	if (FAILED(GET_SINGLE(DXFramework)->InitDevice(WINTYPE_WIN, g_hWnd, WINSIZEX, WINSIZEY)))
 	{
 		MSGBOX(L"CMainApp : Failed to initialize device");
 		return E_FAIL;
 	}
 
 	// DirectX 입력 초기화
-	if (FAILED(GET_SINGLE(CInput)->CreateDevice(g_hWnd)))
+	if (FAILED(GET_SINGLE(DXInput)->CreateDevice(g_hWnd)))
 	{
 		MSGBOX(L"CMainApp : Failed to initialize input device");
 		return E_FAIL;
 	}
 
 	// 시간 함수 초기화
-	GET_SINGLE(CTimeMgr)->InitTimeMgr();
+	GET_SINGLE(TimeManager)->InitTimeMgr();
+
+	// 씬 초기화 (트레이닝 룸으로 초기화)
+	GET_SINGLE(SceneManager)->InitScene(SCENE_TYPE_TRAINING);
 
 	return S_OK;
 }
 
-void CFramework::Progress()
+void Framework::Progress()
 {
-	GET_SINGLE(CTimeMgr)->SetTime();
-	GET_SINGLE(CInput)->ReadData();
+	GET_SINGLE(TimeManager)->SetTime();
+	GET_SINGLE(DXInput)->ReadData();
+	GET_SINGLE(SceneManager)->Progress();
 }
 
-void CFramework::Render()
+//GET_SINGLE(DXFramework)->Drawtext(szFps, 0, 0);
+void Framework::Render()
 {
-	GET_SINGLE(CDevice)->Render_Begin();
+	GET_SINGLE(DXFramework)->Render_Begin();
+	
+	GET_SINGLE(SceneManager)->Render();
 
-	static int iCnt;
-	++iCnt;
-	static float fTime;
-	fTime += GET_SINGLE(CTimeMgr)->GetTime();
-
-	static TCHAR szFps[128];
-
-	if (fTime > 1.f)
-	{
-		wsprintf(szFps, L"FPS:%d", iCnt);
-		iCnt = 0;
-		fTime = 0;
-	}
-	GET_SINGLE(CDevice)->Drawtext(szFps, 0, 0);
-
-	GET_SINGLE(CDevice)->Render_End();
+	GET_SINGLE(DXFramework)->Render_End();
 }
 
-void CFramework::Release()
+void Framework::Release()
 {
-	SAFE_DELETE_SINGLE(CInput);
-	SAFE_DELETE_SINGLE(CTimeMgr);
-	SAFE_DELETE_SINGLE(CDevice);
+	SAFE_DELETE_SINGLE(DXInput);
+	SAFE_DELETE_SINGLE(TimeManager);
+	SAFE_DELETE_SINGLE(DXFramework);
 }

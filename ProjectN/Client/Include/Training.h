@@ -1,8 +1,8 @@
 #pragma once
-#include "Scene.h"
+#include "GameScene.h"
 
-class CTraining :
-	public CScene
+class Training :
+	public GameScene
 {
 public:
 	virtual HRESULT Initialize();
@@ -10,7 +10,7 @@ public:
 	virtual void Render();
 	virtual void Release();
 public:
-	CTraining();
-	~CTraining();
+	Training();
+	~Training();
 };
 
