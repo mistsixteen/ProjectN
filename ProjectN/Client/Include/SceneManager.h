@@ -1,7 +1,7 @@
 #pragma once
 #include "Define.h"
 
-#include "ObjMgr.h"
+#include "GameObject.h"
 
 #include "GameScene.h"
 #include "Training.h"

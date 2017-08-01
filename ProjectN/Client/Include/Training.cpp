@@ -17,16 +17,16 @@ HRESULT Training::Initialize()
 
 void Training::Progress()
 {
-	GET_SINGLE(ObjectFactory)->Progress();
+	GET_SINGLE(ObjectManager)->Progress();
 }
 
 void Training::Render()
 {
-	GET_SINGLE(ObjectFactory)->Render();
+	GET_SINGLE(ObjectManager)->Render();
 }
 
 void Training::Release()
 {
-	GET_SINGLE(ObjectFactory)->Release();
+	GET_SINGLE(ObjectManager)->Release();
 }
 

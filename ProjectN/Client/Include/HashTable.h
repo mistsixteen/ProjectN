@@ -23,6 +23,7 @@ public:
 	{
 		return &m_pChainList[iIndex];
 	}
+
 	int Size(void)
 	{
 		return m_iSize;

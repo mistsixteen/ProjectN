@@ -54,7 +54,9 @@ void Framework::Render()
 
 void Framework::Release()
 {
-	SAFE_DELETE_SINGLE(DXInput);
+	SAFE_DELETE_SINGLE(DXInput); 
+	SAFE_DELETE_SINGLE(SceneManager);
 	SAFE_DELETE_SINGLE(TimeManager);
+	SAFE_DELETE_SINGLE(CameraManager);
 	SAFE_DELETE_SINGLE(DXFramework);
 }

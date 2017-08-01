@@ -6,6 +6,7 @@
 
 #include "TimeManager.h"
 #include "SceneManager.h"
+#include "CameraManager.h"
 
 class Framework
 {

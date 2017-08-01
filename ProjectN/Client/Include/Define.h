@@ -7,6 +7,7 @@
 
 #include "Macro.h"
 #include "Constant.h"
+#include "Struct.h"
 
 #include <vector>
 #include <list>

@@ -1,7 +1,6 @@
 #pragma once
 #include "GameObject.h"
-#include "ObjectFactory.h"
-
+#include "ObjectManager.h"
 
 class GameScene
 {

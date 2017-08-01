@@ -34,21 +34,6 @@
     <Filter Include="98. DXFramework\Input">
       <UniqueIdentifier>{c35e4011-1681-45d8-ab80-4545e67159a9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="04. Manager">
-      <UniqueIdentifier>{c8ce566d-db3e-4682-8886-490c94b8d2cd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="04. Manager\TimeManager">
-      <UniqueIdentifier>{204a6801-db89-400f-9895-78b57af3b5cb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="04. Manager\SceneManager">
-      <UniqueIdentifier>{df83419b-3b1a-4781-98ba-2c8acc0b1f9b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="03. ObjectFactory">
-      <UniqueIdentifier>{bf2e2070-d317-4ed0-9246-9d79a32c979d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="03. ObjectFactory\HashTable">
-      <UniqueIdentifier>{ba3e8bd2-7c66-4b0b-bf3c-0295039348fa}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02. Object\Bullet">
       <UniqueIdentifier>{87164602-d514-4702-8b2e-245d89885796}</UniqueIdentifier>
     </Filter>
@@ -60,6 +45,36 @@
     </Filter>
     <Filter Include="02. Object\Player">
       <UniqueIdentifier>{7dc5dad1-f1ef-42c4-ade6-f6fdc3092582}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="97. Factory">
+      <UniqueIdentifier>{b53a3458-2a6b-4779-be9b-b641727c343b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Manager">
+      <UniqueIdentifier>{c8ce566d-db3e-4682-8886-490c94b8d2cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Manager\TimeManager">
+      <UniqueIdentifier>{204a6801-db89-400f-9895-78b57af3b5cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Manager\SceneManager">
+      <UniqueIdentifier>{df83419b-3b1a-4781-98ba-2c8acc0b1f9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Manager\ObjectManager">
+      <UniqueIdentifier>{bf2e2070-d317-4ed0-9246-9d79a32c979d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Manager\ObjectManager\HashTable">
+      <UniqueIdentifier>{ba3e8bd2-7c66-4b0b-bf3c-0295039348fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Object\Terrain">
+      <UniqueIdentifier>{c477c9fb-0efe-4e7c-b7e4-b6249edb59f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Manager\CameraManager">
+      <UniqueIdentifier>{b8614b40-8fac-49e6-9e84-43d369af363f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Manager\CameraManager\Camera">
+      <UniqueIdentifier>{3eec7698-bf5d-4b67-bb56-f7dd244458e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Manager\CameraManager\Camera\FirstPerson">
+      <UniqueIdentifier>{5c67b241-67ae-4c11-8556-9efd78ed280d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -91,7 +106,7 @@
       <Filter>98. DXFramework\Input</Filter>
     </ClInclude>
     <ClInclude Include="HashTable.h">
-      <Filter>03. ObjectFactory\HashTable</Filter>
+      <Filter>03. Manager\ObjectManager\HashTable</Filter>
     </ClInclude>
     <ClInclude Include="Framework.h">
       <Filter>00. Framework</Filter>
@@ -109,13 +124,31 @@
       <Filter>01. Scene</Filter>
     </ClInclude>
     <ClInclude Include="SceneManager.h">
-      <Filter>04. Manager\SceneManager</Filter>
+      <Filter>03. Manager\SceneManager</Filter>
     </ClInclude>
     <ClInclude Include="TimeManager.h">
-      <Filter>04. Manager\TimeManager</Filter>
+      <Filter>03. Manager\TimeManager</Filter>
     </ClInclude>
-    <ClInclude Include="ObjectFactory.h">
-      <Filter>03. ObjectFactory</Filter>
+    <ClInclude Include="Factory.h">
+      <Filter>97. Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectManager.h">
+      <Filter>03. Manager\ObjectManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Terrain.h">
+      <Filter>02. Object\Terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="Struct.h">
+      <Filter>99. Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraManager.h">
+      <Filter>03. Manager\CameraManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>03. Manager\CameraManager\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="FirstPerson.h">
+      <Filter>03. Manager\CameraManager\Camera\FirstPerson</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -144,13 +177,25 @@
       <Filter>01. Scene</Filter>
     </ClCompile>
     <ClCompile Include="SceneManager.cpp">
-      <Filter>04. Manager\SceneManager</Filter>
+      <Filter>03. Manager\SceneManager</Filter>
     </ClCompile>
     <ClCompile Include="TimeManager.cpp">
-      <Filter>04. Manager\TimeManager</Filter>
+      <Filter>03. Manager\TimeManager</Filter>
     </ClCompile>
-    <ClCompile Include="ObjectFactory.cpp">
-      <Filter>03. ObjectFactory</Filter>
+    <ClCompile Include="ObjectManager.cpp">
+      <Filter>03. Manager\ObjectManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Terrain.cpp">
+      <Filter>02. Object\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraManager.cpp">
+      <Filter>03. Manager\CameraManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>03. Manager\CameraManager\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="FirstPerson.cpp">
+      <Filter>03. Manager\CameraManager\Camera\FirstPerson</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

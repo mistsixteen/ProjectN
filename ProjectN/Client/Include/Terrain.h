@@ -1,8 +1,14 @@
 #pragma once
-#include "StaticInst.h"
-class CTerrain :
-	public CStaticInst
+#include "GameObject.h"
+
+class Terrain :
+	public GameObject
 {
+private:
+	int						vertexCountX;
+	int						vertexCountZ;
+	int						vertexGap;
+private:
 
 public:
 	virtual HRESULT Initialize();
@@ -10,7 +16,8 @@ public:
 	virtual void Render();
 	virtual void Release();
 public:
-	CTerrain(const int _iVtxCntX, const int _iVtxCntZ, const int _iVtxGap);
-	~CTerrain();
+	Terrain();
+	Terrain(const TCHAR* _key, const int _vertexCountX, const int _vertexCountZ, const int _vertexGap);
+	~Terrain();
 };
 
