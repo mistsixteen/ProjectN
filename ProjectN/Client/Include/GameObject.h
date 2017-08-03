@@ -8,20 +8,12 @@ protected:
 	INFO					information;
 	const TCHAR*			key;
 protected:
-	LPDIRECT3DVERTEXBUFFER9 vertexBuffer;
-	int						vertexSize;
-	int						vertexCount;
-	DWORD					vertexFVF;
-protected:
-	LPDIRECT3DINDEXBUFFER9	indexBuffer;
-	int						triangleCount;
-	int						indexSize;
-	D3DFORMAT				indexFormat;
+	LPD3DXMESH				mesh;
 public:
-	virtual HRESULT Initialize(void);
+	virtual HRESULT Initialize(void) PURE;
 	virtual	void	Progress(void) PURE;
-	virtual	void	Render(void);
-	virtual	void	Release(void);
+	virtual	void	Render(void) PURE;
+	virtual	void	Release(void) PURE;
 public:
 	GameObject();
 	GameObject(const TCHAR* _key);

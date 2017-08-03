@@ -61,9 +61,6 @@
     <Filter Include="03. Manager\ObjectManager">
       <UniqueIdentifier>{bf2e2070-d317-4ed0-9246-9d79a32c979d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03. Manager\ObjectManager\HashTable">
-      <UniqueIdentifier>{ba3e8bd2-7c66-4b0b-bf3c-0295039348fa}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02. Object\Terrain">
       <UniqueIdentifier>{c477c9fb-0efe-4e7c-b7e4-b6249edb59f4}</UniqueIdentifier>
     </Filter>
@@ -75,6 +72,15 @@
     </Filter>
     <Filter Include="03. Manager\CameraManager\Camera\FirstPerson">
       <UniqueIdentifier>{5c67b241-67ae-4c11-8556-9efd78ed280d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Manager\MeshManager">
+      <UniqueIdentifier>{fd9db5e6-cc2d-4dfd-b8ba-048de0c65912}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Manager\MeshManager\Mesh">
+      <UniqueIdentifier>{53c9e5ee-accc-437c-9dec-73684185bb0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Manager\MeshManager\Mesh\Terrain">
+      <UniqueIdentifier>{e9bd849b-b3b3-47a1-99d9-c8d92e139b5e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -104,9 +110,6 @@
     </ClInclude>
     <ClInclude Include="Input.h">
       <Filter>98. DXFramework\Input</Filter>
-    </ClInclude>
-    <ClInclude Include="HashTable.h">
-      <Filter>03. Manager\ObjectManager\HashTable</Filter>
     </ClInclude>
     <ClInclude Include="Framework.h">
       <Filter>00. Framework</Filter>
@@ -149,6 +152,18 @@
     </ClInclude>
     <ClInclude Include="FirstPerson.h">
       <Filter>03. Manager\CameraManager\Camera\FirstPerson</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>02. Object\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshManager.h">
+      <Filter>03. Manager\MeshManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>03. Manager\MeshManager\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="TerrainMesh.h">
+      <Filter>03. Manager\MeshManager\Mesh\Terrain</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -196,6 +211,18 @@
     </ClCompile>
     <ClCompile Include="FirstPerson.cpp">
       <Filter>03. Manager\CameraManager\Camera\FirstPerson</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>02. Object\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshManager.cpp">
+      <Filter>03. Manager\MeshManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>03. Manager\MeshManager\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="TerrainMesh.cpp">
+      <Filter>03. Manager\MeshManager\Mesh\Terrain</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

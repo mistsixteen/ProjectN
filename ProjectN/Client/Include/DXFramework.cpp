@@ -119,7 +119,7 @@ void DXFramework::Render_Begin()
 	if (NULL == m_pDevice)
 		return;
 	m_pDevice->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL
-		, D3DCOLOR_ARGB(255, 0, 0, 255), 1.0f, 0);
+		, D3DCOLOR_ARGB(255, 255, 255, 255), 1.0f, 0);
 	m_pDevice->BeginScene();
 }
 
@@ -127,16 +127,6 @@ void DXFramework::Render_End()
 {
 	m_pDevice->EndScene();
 	m_pDevice->Present(NULL, NULL, NULL, NULL);
-}
-
-void DXFramework::SetRenderState(_D3DRENDERSTATETYPE Type, DWORD dwFlag)
-{
-	m_pDevice->SetRenderState(Type, dwFlag);
-}
-
-void DXFramework::SetTransform(_D3DTRANSFORMSTATETYPE Type, const D3DXMATRIX* pMatrix)
-{
-	m_pDevice->SetTransform(Type, pMatrix);
 }
 
 void DXFramework::Drawtext(const TCHAR* Message, long _lX, long _lY, long lSizeX /*= 640*/, long lSizeY /*= 480*/, DWORD Color)

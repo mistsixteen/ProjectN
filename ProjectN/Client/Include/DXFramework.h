@@ -25,9 +25,6 @@ public:
 	void Render_Begin();
 	void Render_End();
 public:
-	void SetRenderState(_D3DRENDERSTATETYPE Type, DWORD dwFlag);
-	void SetTransform(_D3DTRANSFORMSTATETYPE Type, const D3DXMATRIX* pMatrix);
-public:
 	void Drawtext(const TCHAR* Message, long _lX, long _lY,
 		long lSizeX = 640, long lSizeY = 480, DWORD Color = D3DCOLOR_ARGB(255, 255, 255, 255));
 private:

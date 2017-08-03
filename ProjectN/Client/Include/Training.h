@@ -1,5 +1,6 @@
 #pragma once
 #include "GameScene.h"
+#include "Factory.h"
 
 class Training :
 	public GameScene

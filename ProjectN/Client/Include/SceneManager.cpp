@@ -1,16 +1,22 @@
 #include "stdafx.h"
 #include "SceneManager.h"
 
-HRESULT SceneManager::InitScene(SCENE_TYPE type)
+HRESULT SceneManager::InitScene(SCENE type)
 {
-	SAFE_DELETE(m_pScene);
+	SAFE_DELETE(scene);
 	switch (type)
 	{
-	case SCENE_TYPE_LOGO:
+	case SCENE_LOGO:
 		break;
-	case SCENE_TYPE_TRAINING:
-		m_pScene = new Training;
+	case SCENE_TRAINING:
+		scene = new Training;
 		break;
+	}
+
+	if (FAILED(scene->Initialize()))
+	{
+		MSGBOX(L"SceneManager : 씬 불러오기 실패");
+		return E_FAIL;
 	}
 
 	return S_OK;
@@ -18,18 +24,21 @@ HRESULT SceneManager::InitScene(SCENE_TYPE type)
 
 void SceneManager::Progress()
 {
+	scene->Progress();
 }
 
 void SceneManager::Render()
 {
+	scene->Render();
 }
 
 void SceneManager::Release()
 {
+	SAFE_DELETE(scene);
 }
 
 SceneManager::SceneManager()
-	:m_pScene(NULL)
+	:scene(NULL)
 {
 }
 

@@ -1,6 +1,9 @@
 #pragma once
 #include "GameObject.h"
+
 #include "ObjectManager.h"
+#include "MeshManager.h"
+#include "CameraManager.h"
 
 class GameScene
 {

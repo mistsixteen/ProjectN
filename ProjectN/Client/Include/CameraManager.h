@@ -10,7 +10,7 @@ private:
 public:
 	Camera* GetCameraInfo() const { return camera; }
 public:
-	void InitCamera(CAMERA_TYPE type, const TCHAR* objectKey = NULL);
+	void InitCamera(CAMERA type, const TCHAR* objectKey = NULL);
 	void Progress();
 	void Release();
 public:

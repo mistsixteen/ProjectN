@@ -10,9 +10,9 @@ class SceneManager
 {
 	DECLARE_SINGLETON(SceneManager);
 private:
-	GameScene*	m_pScene;
+	GameScene*	scene;
 public:
-	HRESULT	InitScene(SCENE_TYPE type);
+	HRESULT	InitScene(SCENE type);
 	void Progress();
 	void Render();
 	void Release();

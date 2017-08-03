@@ -1,6 +1,5 @@
 #pragma once
 
-// 오브젝트 위치 구조체
 typedef struct tInfo
 {
 	D3DXVECTOR3		position;

@@ -2,15 +2,15 @@
 #include "CameraManager.h"
 
 
-void CameraManager::InitCamera(CAMERA_TYPE type, const TCHAR * objectKey)
+void CameraManager::InitCamera(CAMERA type, const TCHAR * objectKey)
 {
 	SAFE_DELETE(camera);
 	switch (type)
 	{
-	case CAMERA_TYPE_FIRST_PERSON:
+	case CAMERA_FIRST_PERSON:
 		camera = new FirstPerson;
 		break;
-	case CAMERA_TYPE_BACKVIEW:
+	case CAMERA_BACKVIEW:
 		break;
 	}
 

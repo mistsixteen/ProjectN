@@ -6,6 +6,11 @@ const int WINSIZEY = 720;
 //const int WINSIZEX = 800;
 //const int WINSIZEY = 600;
 
+// 터레인 변수
+const int TERRAINX = 129;
+const int TERRAINZ = 129;
+const int TERRAINGAP = 1;
+
 /**
 * 윈도우 창 모드 
 **/
@@ -18,39 +23,51 @@ enum WINTYPE
 /**
 * 화면 타입
 **/
-enum SCENE_TYPE
+enum SCENE
 {
-	SCENE_TYPE_LOGO,
-	SCENE_TYPE_TRAINING,
-	SCENE_TYPE_END,
+	SCENE_LOGO,
+	SCENE_TRAINING,
+	SCENE_END,
 };
 
 /**
 * 스테이지 오브젝트 타입
 **/
-enum OBJECT_TYPE
+enum OBJECT
 {
-	OBJECT_TYPE_ALLY,
-	OBJECT_TYPE_BULLET,
-	OBJECT_TYPE_TARGET,
-	OBJECT_TYPE_BLOCK,
-	OBJECT_TYPE_END,
+	OBJECT_ALLY,
+	OBJECT_BULLET,
+	OBJECT_TARGET,
+	OBJECT_BLOCK,
+	OBJECT_END,
 };
 
 /**
 * 카메라 타입
 */
-enum CAMERA_TYPE
+enum CAMERA
 {
-	CAMERA_TYPE_FIRST_PERSON,
-	CAMERA_TYPE_BACKVIEW,
-	CAMERA_TYPE_END,
+	CAMERA_FIRST_PERSON,
+	CAMERA_BACKVIEW,
+	CAMERA_END,
 };
 
+/**
+* 카메라 혹은 오브젝트 회전 타입
+*/
 enum ANGLE
 {
 	ANGLE_X,
 	ANGLE_Y,
 	ANGLE_Z,
 	ANGLE_END,
+};
+
+/**
+* 메쉬 타입
+*/
+enum MESH
+{
+	MESH_TERRAIN,
+	MESH_END,
 };
