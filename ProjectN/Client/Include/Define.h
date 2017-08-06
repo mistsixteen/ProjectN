@@ -12,6 +12,7 @@
 #include <iostream>
 #include <crtdbg.h>
 
+#include <memory>
 #include <vector>
 #include <list>
 #include <map>

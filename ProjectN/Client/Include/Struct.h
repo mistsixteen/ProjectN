@@ -9,13 +9,13 @@ typedef struct tInfo
 }INFO;
 
 // 오브젝트 버텍스 구조체
-typedef struct tagVertexTexture
+typedef struct tagVertex
 {
-	D3DXVECTOR3 vPos;
-	D3DXVECTOR3 vNormal;
-	D3DXVECTOR2 vTexture;
-}VTXTEX;
-const DWORD VTXFVF_TEX = D3DFVF_XYZ | D3DFVF_NORMAL | D3DFVF_TEX1;
+	D3DXVECTOR3	position;
+	D3DXVECTOR3	normal;
+	D3DXVECTOR2	texture;
+}VERTEX;
+const DWORD FVF = D3DFVF_XYZ | D3DFVF_NORMAL | D3DFVF_TEX1;
 
 // 폴리곤 렌더링 순서 구조체
 typedef struct tagIndex

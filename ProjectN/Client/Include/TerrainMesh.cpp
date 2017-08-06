@@ -1,10 +1,10 @@
 #include "stdafx.h"
 #include "TerrainMesh.h"
 
-HRESULT TerrainMesh::Initialize(const TCHAR * path, const TCHAR * fileName)
+
+HRESULT TerrainMesh::Initialize(const int vtxCntX, const int vtxCntZ, const int vtxGap)
 {
-	// 버텍스 데이터 입력
-	D3DVERTEXELEMENT9 vertexDecl[] =
+	D3DVERTEXELEMENT9 decl[] =
 	{
 		{ 0,  0, D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT,  D3DDECLUSAGE_POSITION, 0 },
 		{ 0, 12, D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT,  D3DDECLUSAGE_NORMAL,   0 },
@@ -12,78 +12,86 @@ HRESULT TerrainMesh::Initialize(const TCHAR * path, const TCHAR * fileName)
 		D3DDECL_END()
 	};
 
-	int vertexCount = TERRAINX * TERRAINZ;
-	int triangleCount = (TERRAINX - 1) * (TERRAINZ - 1) * 2;
+	vtxCnt = vtxCntX * vtxCntZ;
+	idxCnt = (vtxCntX - 1) * (vtxCntZ - 1) * 2;
 
-	VTXTEX* vertices = new VTXTEX[vertexCount];
-	for (int z = 0; z < TERRAINZ; ++z)
+	// 버텍스 버퍼 초기화
+	VERTEX* vertices = new VERTEX[vtxCnt];
+	for (int z = 0; z < vtxCntZ; ++z)
 	{
-		for (int x = 0; x < TERRAINX; ++x)
+		for (int x = 0; x < vtxCntX; ++x)
 		{
-			int idx = (z * TERRAINX) + x; 
-			vertices[idx].vPos = D3DXVECTOR3(float(x * TERRAINGAP), 0.f, float(z * TERRAINGAP));
-			vertices[idx].vTexture = D3DXVECTOR2(float(x) / (TERRAINX - 1), float(z) / (TERRAINZ - 1));
+			int idx = (z * vtxCntX) + x;
+			vertices[idx].position = D3DXVECTOR3(float(x * vtxGap), 0, float(z * vtxGap));
+			vertices[idx].texture = D3DXVECTOR2(float(x) / (vtxCntX - 1), float(z) / (vtxCntZ - 1));
 		}
 	}
 
-	INDEX*	indices = new INDEX[triangleCount];
-	int triCnt = 0;
+	// 인덱스 버퍼 초기화
+	INDEX* indices = new INDEX[idxCnt];
 	D3DXVECTOR3 dest, src, result;
-	for (int z = 0; z < TERRAINZ - 1; ++z)
+	int triCnt = 0;
+	for (int z = 0; z < vtxCntZ - 1; ++z)
 	{
-		for (int x = 0; x < TERRAINX - 1; ++x)
+		for (int x = 0; x < vtxCntX - 1; ++x)
 		{
-			int idx = (z * TERRAINX) + x;
+			int idx = (z * vtxCntX) + x;
 
 			//우측 상단
-			indices[triCnt]._1 = TERRAINX + idx;
-			indices[triCnt]._2 = TERRAINX + 1 + idx;
+			indices[triCnt]._1 = vtxCntX + idx;
+			indices[triCnt]._2 = vtxCntX + 1 + idx;
 			indices[triCnt]._3 = idx + 1;
 
-			dest = vertices[indices[triCnt]._2].vPos
-				- vertices[indices[triCnt]._1].vPos;
+			dest = vertices[indices[triCnt]._2].position
+				- vertices[indices[triCnt]._1].position;
 
-			src = vertices[indices[triCnt]._3].vPos
-				- vertices[indices[triCnt]._1].vPos;
+			src = vertices[indices[triCnt]._3].position
+				- vertices[indices[triCnt]._1].position;
+
 			D3DXVec3Cross(&result, &dest, &src);
 			D3DXVec3Normalize(&result, &result);
-			vertices[indices[triCnt]._1].vNormal += result;
-			vertices[indices[triCnt]._2].vNormal += result;
-			vertices[indices[triCnt]._3].vNormal += result;
+
+			vertices[indices[triCnt]._1].normal += result;
+			vertices[indices[triCnt]._2].normal += result;
+			vertices[indices[triCnt]._3].normal += result;
+
 			++triCnt;
 
 			//좌측 하단
-			indices[triCnt]._1 = TERRAINX + idx;
+			indices[triCnt]._1 = vtxCntX + idx;
 			indices[triCnt]._2 = idx + 1;
 			indices[triCnt]._3 = idx;
 
-			dest = vertices[indices[triCnt]._2].vPos
-				- vertices[indices[triCnt]._1].vPos;
-			src = vertices[indices[triCnt]._3].vPos
-				- vertices[indices[triCnt]._1].vPos;
+			dest = vertices[indices[triCnt]._2].position
+				- vertices[indices[triCnt]._1].position;
+			src = vertices[indices[triCnt]._3].position
+				- vertices[indices[triCnt]._1].position;
+
 			D3DXVec3Cross(&result, &dest, &src);
 			D3DXVec3Normalize(&result, &result);
-			vertices[indices[triCnt]._1].vNormal += result;
-			vertices[indices[triCnt]._2].vNormal += result;
-			vertices[indices[triCnt]._3].vNormal += result;
+
+			vertices[indices[triCnt]._1].normal += result;
+			vertices[indices[triCnt]._2].normal += result;
+			vertices[indices[triCnt]._3].normal += result;
+
 			++triCnt;
 		}
 	}
 
-	for (int i = 0; i < vertexCount; ++i)
-		D3DXVec3Normalize(&vertices[i].vNormal, &vertices[i].vNormal);
+	for (int i = 0; i < vtxCnt; ++i)
+		D3DXVec3Normalize(&vertices[i].normal, &vertices[i].normal);
 
-	D3DXCreateMesh(triangleCount, vertexCount,
-					D3DPOOL_MANAGED | D3DXMESH_32BIT, vertexDecl,
-					device, &mesh);
+	// 메쉬 생성
+	D3DXCreateMesh(idxCnt * 3, vtxCnt, D3DXMESH_MANAGED | D3DXMESH_32BIT, 
+					decl, device, &mesh);
 
-	LPVOID pData;
+	LPVOID pData = NULL;
 	mesh->LockVertexBuffer(0, (void**)&pData);
-	memcpy(pData, vertices, sizeof(VTXTEX) * vertexCount);
+	memcpy(pData, vertices, sizeof(VERTEX) * vtxCnt);
 	mesh->UnlockVertexBuffer();
 
 	mesh->LockIndexBuffer(0, (void**)&pData);
-	memcpy(pData, indices, sizeof(INDEX) * triangleCount);
+	memcpy(pData, indices, sizeof(INDEX) * idxCnt);
 	mesh->UnlockIndexBuffer();
 
 	SAFE_DELETE_ARRAY(vertices);
@@ -94,23 +102,19 @@ HRESULT TerrainMesh::Initialize(const TCHAR * path, const TCHAR * fileName)
 
 HRESULT TerrainMesh::CloneMesh(LPD3DXMESH* ppMesh)
 {
-	D3DVERTEXELEMENT9 vertexDecl[] =
-	{
-		{ 0,  0, D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT,  D3DDECLUSAGE_POSITION, 0 },
-		{ 0, 12, D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT,  D3DDECLUSAGE_NORMAL,   0 },
-		{ 0, 24, D3DDECLTYPE_FLOAT2, D3DDECLMETHOD_DEFAULT,  D3DDECLUSAGE_TEXCOORD, 0 },
-		D3DDECL_END()
-	};
-	mesh->CloneMesh(mesh->GetOptions(), vertexDecl, device, ppMesh);
-	if (mesh == *ppMesh)
-		return S_OK;
+	D3DVERTEXELEMENT9 decl[MAXD3DDECLLENGTH];
+	mesh->GetDeclaration(decl);
+	mesh->CloneMesh(mesh->GetOptions(), decl, device, ppMesh);
 	return S_OK;
 }
 
 void TerrainMesh::Mesh_Render()
 {
-	mesh->DrawSubset(0);
 	device->SetRenderState(D3DRS_LIGHTING, FALSE);
+	device->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
+	device->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
+	mesh->DrawSubset(0);
+	device->SetRenderState(D3DRS_LIGHTING, TRUE);
 }
 
 TerrainMesh::TerrainMesh()

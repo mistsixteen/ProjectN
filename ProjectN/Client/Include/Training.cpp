@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "Training.h"
 
-Terrain* t;
 Training::Training()
 {
 
@@ -17,16 +16,24 @@ HRESULT Training::Initialize()
 	// 카메라 초기화
 	GET_SINGLE(CameraManager)->InitCamera(CAMERA_FIRST_PERSON);
 
-	// 터레인 메쉬 및 오브젝트 추가
-	if (FAILED(GET_SINGLE(MeshManager)->AddMesh(L"Terrain", MESH_TERRAIN)))
+	// 메쉬 추가
+	if (FAILED(GET_SINGLE(MeshManager)->AddMesh(L"Terrain", L"Ground")))
 	{
-		MSGBOX(L"Training : Terrain 메쉬 불러오기 실패");
+		MSGBOX(L"Training : Terrain 메쉬 추가 실패");
 		return E_FAIL;
 	}
-	//GET_SINGLE(ObjectManager)->InsertObject(L"Terrain", Factory::CreateInstance(L"Terrain", L"Terrain"));
-	t = new Terrain(L"");
-	t->Initialize();
-
+	if (FAILED(GET_SINGLE(MeshManager)->AddMesh(L"Box", L"Box")))
+	{
+		MSGBOX(L"Training : Box 메쉬 추가 실패");
+		return E_FAIL;
+	}
+	
+	// 오브젝트 추가
+	INFO info;
+	ZeroMemory(&info, sizeof(INFO));
+	//GET_SINGLE(ObjectManager)->InsertObject(L"Ground", Factory::CreateInstance(L"Ground", L"Ground", info));
+	//GET_SINGLE(ObjectManager)->InsertObject(L"Box", Factory::CreateInstance(L"Player", L"Player", info));
+	
 	return S_OK;
 }
 
@@ -34,18 +41,16 @@ void Training::Progress()
 {
 	GET_SINGLE(CameraManager)->Progress();
 	GET_SINGLE(ObjectManager)->Progress();
-	t->Progress();
 }
 
 void Training::Render()
 {
 	GET_SINGLE(ObjectManager)->Render();
-	t->Render();
 }
 
 void Training::Release()
 {
+	GET_SINGLE(MeshManager)->Release();
 	GET_SINGLE(ObjectManager)->Release();
-	SAFE_DELETE(t);
 }
 

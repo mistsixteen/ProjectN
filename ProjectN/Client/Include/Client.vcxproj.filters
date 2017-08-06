@@ -82,6 +82,9 @@
     <Filter Include="03. Manager\MeshManager\Mesh\Terrain">
       <UniqueIdentifier>{e9bd849b-b3b3-47a1-99d9-c8d92e139b5e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03. Manager\MeshManager\Mesh\Box">
+      <UniqueIdentifier>{6c2c1c1a-36fd-4578-bb71-982a569aa2d3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -165,6 +168,9 @@
     <ClInclude Include="TerrainMesh.h">
       <Filter>03. Manager\MeshManager\Mesh\Terrain</Filter>
     </ClInclude>
+    <ClInclude Include="BoxMesh.h">
+      <Filter>03. Manager\MeshManager\Mesh\Box</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -223,6 +229,9 @@
     </ClCompile>
     <ClCompile Include="TerrainMesh.cpp">
       <Filter>03. Manager\MeshManager\Mesh\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="BoxMesh.cpp">
+      <Filter>03. Manager\MeshManager\Mesh\Box</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

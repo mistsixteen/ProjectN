@@ -18,7 +18,12 @@ DXFramework::~DXFramework(void)
 HRESULT DXFramework::InitDevice(WINTYPE Mode, HWND hWnd, const int& iWinCX, const int& iWinCY)
 {
 	//어플리케이션이 올바른 헤더로 만들어졌는지 확인
-	m_p3D = Direct3DCreate9(D3D_SDK_VERSION);
+	if (NULL == (m_p3D = Direct3DCreate9(D3D_SDK_VERSION)))
+	{
+		MSGBOX(L"장치 초기화 실패");
+		return E_FAIL;
+	}
+
 	D3DCAPS9 devicecaps;
 	ZeroMemory(&devicecaps, sizeof(devicecaps));
 
@@ -119,7 +124,7 @@ void DXFramework::Render_Begin()
 	if (NULL == m_pDevice)
 		return;
 	m_pDevice->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL
-		, D3DCOLOR_ARGB(255, 255, 255, 255), 1.0f, 0);
+		, D3DCOLOR_ARGB(255, 10, 10, 255), 1.0f, 0);
 	m_pDevice->BeginScene();
 }
 

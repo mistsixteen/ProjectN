@@ -2,21 +2,35 @@
 #include "stdafx.h"
 #include "GameObject.h"
 #include "Terrain.h"
+#include "Player.h"
 
 class Factory
 {
 public:
-	static GameObject* CreateInstance(const TCHAR* objectKey, const TCHAR* key)
+	static GameObject* CreateInstance(const TCHAR* factoryKey, const TCHAR* key, INFO info)
 	{
-		if (_tcscmp(objectKey, L"Terrain") == 0)
+		if (_tcscmp(factoryKey, L"Ground") == 0)
 		{
-			GameObject* object = new Terrain(key);
+			GameObject* object = new Terrain(key, info);
 			if (FAILED(object->Initialize()))
+			{
+				SAFE_DELETE(object);
 				return NULL;
+			}
 			return object;
 		}
-
-		return NULL;
+		else if (_tcscmp(factoryKey, L"Player") == 0)
+		{
+			GameObject* object = new Player(key, info);
+			if (FAILED(object->Initialize()))
+			{
+				SAFE_DELETE(object);
+				return NULL;
+			}
+			return object;
+		}
+		else
+			return NULL;
 	}
 private:
 	Factory() {};

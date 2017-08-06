@@ -6,11 +6,6 @@ const int WINSIZEY = 720;
 //const int WINSIZEX = 800;
 //const int WINSIZEY = 600;
 
-// 터레인 변수
-const int TERRAINX = 129;
-const int TERRAINZ = 129;
-const int TERRAINGAP = 1;
-
 /**
 * 윈도우 창 모드 
 **/
@@ -61,13 +56,4 @@ enum ANGLE
 	ANGLE_Y,
 	ANGLE_Z,
 	ANGLE_END,
-};
-
-/**
-* 메쉬 타입
-*/
-enum MESH
-{
-	MESH_TERRAIN,
-	MESH_END,
 };

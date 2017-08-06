@@ -3,17 +3,23 @@
 
 HRESULT Terrain::Initialize()
 {
-	information.position = D3DXVECTOR3(0.f, 0.f, 0.f);
-	information.direction = D3DXVECTOR3(0.f, 0.f, 0.f);
-	information.look = D3DXVECTOR3(0.f, 1.f, 0.f);
-
 	GET_SINGLE(MeshManager)->CloneMesh(L"Terrain",&mesh);
+	D3DXMatrixIdentity(&information.world);
 
 	return S_OK;
 }
 
 void Terrain::Progress()
 {
+	D3DXMATRIX scale, rotX, rotY, rotZ, trans;
+
+	D3DXMatrixScaling(&scale, 1.f, 1.f, 1.f);
+	D3DXMatrixRotationX(&rotX, information.direction.x);
+	D3DXMatrixRotationY(&rotY, information.direction.y);
+	D3DXMatrixRotationZ(&rotZ, information.direction.z);
+	D3DXMatrixTranslation(&trans, information.position.x, information.position.y, information.position.z);
+	information.world = scale * rotX * rotY * rotZ * trans;
+
 	device->SetTransform(D3DTS_WORLD, &information.world);
 }
 
@@ -30,11 +36,9 @@ Terrain::Terrain()
 {
 }
 
-Terrain::Terrain(const TCHAR* _key)
-	:GameObject(_key)
+Terrain::Terrain(const TCHAR* _key, INFO _info)
+	:GameObject(_key, _info)
 {
-	ZeroMemory(&information, sizeof(information));
-	D3DXMatrixIdentity(&information.world);
 }
 
 Terrain::~Terrain()

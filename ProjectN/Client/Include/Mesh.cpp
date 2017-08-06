@@ -3,6 +3,7 @@
 
 void Mesh::Release()
 {
+	SAFE_RELEASE(mesh);
 }
 
 Mesh::Mesh()

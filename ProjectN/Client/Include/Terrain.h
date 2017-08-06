@@ -1,8 +1,6 @@
 #pragma once
 #include "GameObject.h"
 
-#include "ObjectManager.h"
-#include "MeshManager.h"
 
 class Terrain :
 	public GameObject
@@ -14,7 +12,7 @@ public:
 	virtual void Release();
 public:
 	Terrain();
-	Terrain(const TCHAR* _key);
+	Terrain(const TCHAR* _key, INFO _info);
 	~Terrain();
 };
 

@@ -10,7 +10,7 @@ public:
 	virtual	void	Release(void);
 public:
 	Player();
-	Player(const TCHAR* _key);
+	Player(const TCHAR* _key, INFO _info);
 	~Player();
 };
 

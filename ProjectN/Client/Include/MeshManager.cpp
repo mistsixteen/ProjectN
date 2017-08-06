@@ -2,54 +2,57 @@
 #include "MeshManager.h"
 
 
-const D3DXVECTOR3 * MeshManager::GetMin(const TCHAR * meshKey)
+const D3DXVECTOR3 * MeshManager::GetMin(const TCHAR * mapKey)
 {
-	auto iterMesh = meshMap.find(meshKey);
+	auto iterMesh = meshMap.find(mapKey);
 	if (iterMesh == meshMap.end())
 		return NULL;
 	return iterMesh->second->GetMin();
 }
 
-const D3DXVECTOR3 * MeshManager::GetMax(const TCHAR * meshKey)
+const D3DXVECTOR3 * MeshManager::GetMax(const TCHAR * mapKey)
 {
-	auto iterMesh = meshMap.find(meshKey);
+	auto iterMesh = meshMap.find(mapKey);
 	if (iterMesh == meshMap.end())
 		return NULL;
 	return iterMesh->second->GetMax();
 }
 
-HRESULT MeshManager::AddMesh(const TCHAR * meshKey, MESH meshType, const TCHAR * pPath, const TCHAR * pFileName)
+HRESULT MeshManager::AddMesh(const TCHAR * mapKey, const TCHAR * meshKey)
 {
-	auto iterMesh = meshMap.find(meshKey);
+	auto iterMesh = meshMap.find(mapKey);
 	if (iterMesh != meshMap.end())
 		return E_FAIL;
 
 	Mesh* mesh = NULL;
-	switch (meshType)
+	if (_tcscmp(meshKey, L"Ground") == 0)
 	{
-	case MESH_TERRAIN:
 		mesh = new TerrainMesh;
-		if (FAILED(mesh->Initialize()))
+		if (FAILED(mesh->Initialize(129, 129, 1)))
 			return E_FAIL;
-		break;
+	}
+	if (_tcscmp(meshKey, L"Box") == 0)
+	{
+		mesh = new BoxMesh;
+		if (FAILED(mesh->Initialize(129, 129, 1)))
+			return E_FAIL;
 	}
 
-	meshMap.insert(make_pair(meshKey, mesh));
-
+	meshMap.insert(make_pair(mapKey, mesh));
 	return S_OK;
 }
 
-HRESULT MeshManager::CloneMesh(const TCHAR * meshKey, LPD3DXMESH* ppMesh)
+HRESULT MeshManager::CloneMesh(const TCHAR * mapKey, LPD3DXMESH* ppMesh)
 {
-	auto iterMesh = meshMap.find(meshKey);
+	auto iterMesh = meshMap.find(mapKey);
 	if (iterMesh == meshMap.end())
 		return  E_FAIL;
 	return iterMesh->second->CloneMesh(ppMesh);
 }
 
-void MeshManager::Mesh_Render(const TCHAR * meshKey)
+void MeshManager::Mesh_Render(const TCHAR * mapKey)
 {
-	auto iterMesh = meshMap.find(meshKey);
+	auto iterMesh = meshMap.find(mapKey);
 	if (iterMesh == meshMap.end())
 		return;
 	iterMesh->second->Mesh_Render();

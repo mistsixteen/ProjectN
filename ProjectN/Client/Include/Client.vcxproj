@@ -153,6 +153,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BoxMesh.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CameraManager.h" />
     <ClInclude Include="Client.h" />
@@ -181,6 +182,7 @@
     <ClInclude Include="Training.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BoxMesh.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CameraManager.cpp" />
     <ClCompile Include="Client.cpp" />
