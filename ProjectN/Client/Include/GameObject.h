@@ -1,6 +1,5 @@
 #pragma once
 #include "Define.h"
-#include "DXFramework.h"
 
 #include "ObjectManager.h"
 #include "MeshManager.h"

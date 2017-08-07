@@ -10,7 +10,7 @@ void FirstPerson::Initialize()
 	D3DXMatrixLookAtLH(&viewMatrix, &eye, &at, &up);
 	device->SetTransform(D3DTS_VIEW, &viewMatrix);
 
-	D3DXMatrixPerspectiveFovLH(&projectionMatrix, D3DX_PI / 4, WINSIZEX / WINSIZEY, 1.0f, 100.f);
+	D3DXMatrixPerspectiveFovLH(&projectionMatrix, D3DXToRadian(60.f), WINSIZEX / WINSIZEY, 1.0f, 1000.f);
 	device->SetTransform(D3DTS_PROJECTION, &projectionMatrix);
 }
 

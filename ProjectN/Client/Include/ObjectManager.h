@@ -2,6 +2,7 @@
 #include "Define.h"
 #include "GameObject.h"
 
+class GameObject;
 class ObjectManager
 {
 	DECLARE_SINGLETON(ObjectManager)

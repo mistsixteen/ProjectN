@@ -4,6 +4,7 @@
 HRESULT Player::Initialize(void)
 {
 	GET_SINGLE(MeshManager)->CloneMesh(L"Box", &mesh);
+	D3DXMatrixIdentity(&information.world);
 	return S_OK;
 }
 

@@ -12,10 +12,9 @@
 #include <iostream>
 #include <crtdbg.h>
 
-#include <memory>
 #include <vector>
-#include <list>
 #include <map>
+#include <list>
 #include <algorithm>
 
 // 메모리 누수 전처리 문장

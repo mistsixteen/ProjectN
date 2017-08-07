@@ -34,7 +34,7 @@ HRESULT MeshManager::AddMesh(const TCHAR * mapKey, const TCHAR * meshKey)
 	if (_tcscmp(meshKey, L"Box") == 0)
 	{
 		mesh = new BoxMesh;
-		if (FAILED(mesh->Initialize(129, 129, 1)))
+		if (FAILED(mesh->Initialize()))
 			return E_FAIL;
 	}
 

@@ -31,7 +31,7 @@ HRESULT BoxMesh::CloneMesh(LPD3DXMESH * ppMesh)
 void BoxMesh::Mesh_Render()
 {
 	device->SetRenderState(D3DRS_LIGHTING, FALSE);
-	device->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
+	device->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
 	device->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
 	mesh->DrawSubset(0);
 	device->SetRenderState(D3DRS_LIGHTING, TRUE);

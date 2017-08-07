@@ -31,8 +31,8 @@ HRESULT Training::Initialize()
 	// 오브젝트 추가
 	INFO info;
 	ZeroMemory(&info, sizeof(INFO));
-	//GET_SINGLE(ObjectManager)->InsertObject(L"Ground", Factory::CreateInstance(L"Ground", L"Ground", info));
-	//GET_SINGLE(ObjectManager)->InsertObject(L"Box", Factory::CreateInstance(L"Player", L"Player", info));
+	GET_SINGLE(ObjectManager)->InsertObject(L"Ground", Factory::CreateInstance(L"Ground", L"Ground", info));
+	GET_SINGLE(ObjectManager)->InsertObject(L"Box", Factory::CreateInstance(L"Player", L"Player", info));
 	
 	return S_OK;
 }
