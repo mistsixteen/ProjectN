@@ -9,7 +9,7 @@ class Factory
 public:
 	static GameObject* CreateInstance(const TCHAR* factoryKey, const TCHAR* key, INFO info)
 	{
-		if (_tcscmp(factoryKey, L"Ground") == 0)
+		if (_tcscmp(factoryKey, L"Terrain") == 0)
 		{
 			GameObject* object = new Terrain(key, info);
 			if (FAILED(object->Initialize()))

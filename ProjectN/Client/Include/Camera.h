@@ -1,8 +1,12 @@
 #pragma once
 #include "DXFramework.h"
+#include "Input.h"
+#include "ObjectManager.h"
 
 class Camera
 {
+protected:
+	INFO			targetInfo;
 protected:
 	D3DXVECTOR3		eye;
 	D3DXVECTOR3		at;

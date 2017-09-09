@@ -13,16 +13,13 @@ Training::~Training()
 
 HRESULT Training::Initialize()
 {
-	// 카메라 초기화
-	GET_SINGLE(CameraManager)->InitCamera(CAMERA_FIRST_PERSON);
-
 	// 메쉬 추가
-	if (FAILED(GET_SINGLE(MeshManager)->AddMesh(L"Terrain", L"Ground")))
+	if (FAILED(GET_SINGLE(MeshManager)->AddMesh(L"Terrain", L"Terrain")))
 	{
 		MSGBOX(L"Training : Terrain 메쉬 추가 실패");
 		return E_FAIL;
 	}
-	if (FAILED(GET_SINGLE(MeshManager)->AddMesh(L"Box", L"Box")))
+	if (FAILED(GET_SINGLE(MeshManager)->AddMesh(L"Player", L"Player")))
 	{
 		MSGBOX(L"Training : Box 메쉬 추가 실패");
 		return E_FAIL;
@@ -31,16 +28,23 @@ HRESULT Training::Initialize()
 	// 오브젝트 추가
 	INFO info;
 	ZeroMemory(&info, sizeof(INFO));
-	GET_SINGLE(ObjectManager)->InsertObject(L"Ground", Factory::CreateInstance(L"Ground", L"Ground", info));
-	GET_SINGLE(ObjectManager)->InsertObject(L"Box", Factory::CreateInstance(L"Player", L"Player", info));
-	
+	GET_SINGLE(ObjectManager)->InsertObject(L"Terrain", Factory::CreateInstance(L"Terrain", L"Terrain", info));
+
+	ZeroMemory(&info, sizeof(INFO));
+	info.position = D3DXVECTOR3(0.f, 10.f, -15.f);
+	info.direction = D3DXVECTOR3(0.f, 0.f, -1.f);
+	GET_SINGLE(ObjectManager)->InsertObject(L"Player", Factory::CreateInstance(L"Player", L"Player", info));
+
+	// 카메라 초기화
+	GET_SINGLE(CameraManager)->InitCamera(CAMERA_FIRST_PERSON);
+
 	return S_OK;
 }
 
 void Training::Progress()
 {
-	GET_SINGLE(CameraManager)->Progress();
 	GET_SINGLE(ObjectManager)->Progress();
+	GET_SINGLE(CameraManager)->Progress();
 }
 
 void Training::Render()

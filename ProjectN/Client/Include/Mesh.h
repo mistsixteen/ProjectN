@@ -1,5 +1,7 @@
 #pragma once
 
+const float sizeX = WINSIZEY / (float)WINSIZEX;
+
 class Mesh
 {
 protected:

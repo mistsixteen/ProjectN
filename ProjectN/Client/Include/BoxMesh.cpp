@@ -4,58 +4,58 @@
 
 HRESULT BoxMesh::Initialize(const TCHAR * path, const TCHAR * fileName)
 {
-	/*if (FAILED(D3DXCreateBox(device, 1.f, 1.f, 1.f, &mesh, NULL)))
+	if (FAILED(D3DXCreateBox(device, sizeX, 1.f, 1.f, &mesh, NULL)))
 		return E_FAIL;
 
-	void* vertices;
-	mesh->LockVertexBuffer(0, &vertices);
-	
-	int vtxCnt = mesh->GetNumVertices();
-	DWORD fvf = mesh->GetFVF();
-	int vtxSize = D3DXGetFVFVertexSize(fvf);
-	D3DXComputeBoundingBox((D3DXVECTOR3*)vertices, vtxCnt, vtxSize, &min, &max);
+	//void* vertices;
+	//mesh->LockVertexBuffer(0, &vertices);
+	//
+	//int vtxCnt = mesh->GetNumVertices();
+	//DWORD fvf = mesh->GetFVF();
+	//int vtxSize = D3DXGetFVFVertexSize(fvf);
+	//D3DXComputeBoundingBox((D3DXVECTOR3*)vertices, vtxCnt, vtxSize, &min, &max);
 
-	mesh->UnlockVertexBuffer();*/
+	//mesh->UnlockVertexBuffer();
 
-	D3DXVECTOR4 vertices[] = {
-		{ D3DXVECTOR3(-1.0f,1.0f,1.0f),	(float)D3DCOLOR_RGBA(255,0,255,255) },
-		{ D3DXVECTOR3(1.0f,	1.0f,1.0f),	(float)D3DCOLOR_RGBA(0,255,255,255) },
-		{ D3DXVECTOR3(1.0f,	1.0f,-1.0f),(float)D3DCOLOR_RGBA(0,0,255,255) },
-		{ D3DXVECTOR3(-1.0f,1.0f,-1.0f),(float)D3DCOLOR_RGBA(255,255,0,255) },
+	//D3DXVECTOR4 vertices[] = {
+	//	{ D3DXVECTOR3(-1.0f,1.0f,1.0f),	(float)D3DCOLOR_RGBA(255,0,255,255) },
+	//	{ D3DXVECTOR3(1.0f,	1.0f,1.0f),	(float)D3DCOLOR_RGBA(0,255,255,255) },
+	//	{ D3DXVECTOR3(1.0f,	1.0f,-1.0f),(float)D3DCOLOR_RGBA(0,0,255,255) },
+	//	{ D3DXVECTOR3(-1.0f,1.0f,-1.0f),(float)D3DCOLOR_RGBA(255,255,0,255) },
 
-		{ D3DXVECTOR3(-1.0f,-1.0f,1.0f),(float)D3DCOLOR_RGBA(255,0,255,255) },
-		{ D3DXVECTOR3(1.0f,	-1.0f,1.0f),(float)D3DCOLOR_RGBA(0,255,255,255) },
-		{ D3DXVECTOR3(1.0f,	-1.0f,-1.0f),(float)D3DCOLOR_RGBA(0,0,255,255) },
-		{ D3DXVECTOR3(-1.0f,-1.0f,-1.0f),(float)D3DCOLOR_RGBA(255,255,0,255) },
-	};
+	//	{ D3DXVECTOR3(-1.0f,-1.0f,1.0f),(float)D3DCOLOR_RGBA(255,0,255,255) },
+	//	{ D3DXVECTOR3(1.0f,	-1.0f,1.0f),(float)D3DCOLOR_RGBA(0,255,255,255) },
+	//	{ D3DXVECTOR3(1.0f,	-1.0f,-1.0f),(float)D3DCOLOR_RGBA(0,0,255,255) },
+	//	{ D3DXVECTOR3(-1.0f,-1.0f,-1.0f),(float)D3DCOLOR_RGBA(255,255,0,255) },
+	//};
 
-	WORD indices[] =
-	{
-		0,1,2, //À­¸é
-		0,2,3, //À­¸é
-		4,6,5, //¾Æ·§¸é
-		4,7,6, //¾Æ·§¸é
-		0,3,7, //ÁÂÃø¸é
-		0,7,4, //ÁÂÃø¸é
-		1,5,6, //¿ìÃø¸é
-		1,6,2, //¿ìÃø¸é
-		3,2,6, //¾Õ¸é
-		3,6,7, //¾Õ¸é
-		0,4,5, //µÞ¸é
-		0,5,1, //µÞ¸é
-	};
+	//WORD indices[] =
+	//{
+	//	0,1,2, //À­¸é
+	//	0,2,3, //À­¸é
+	//	4,6,5, //¾Æ·§¸é
+	//	4,7,6, //¾Æ·§¸é
+	//	0,3,7, //ÁÂÃø¸é
+	//	0,7,4, //ÁÂÃø¸é
+	//	1,5,6, //¿ìÃø¸é
+	//	1,6,2, //¿ìÃø¸é
+	//	3,2,6, //¾Õ¸é
+	//	3,6,7, //¾Õ¸é
+	//	0,4,5, //µÞ¸é
+	//	0,5,1, //µÞ¸é
+	//};
 
-	D3DXCreateMesh(idxCnt * 3, vtxCnt, D3DXMESH_MANAGED | D3DXMESH_32BIT,
-		decl, device, &mesh);
+	//D3DXCreateMesh(idxCnt * 3, vtxCnt, D3DXMESH_MANAGED | D3DXMESH_32BIT,
+	//	decl, device, &mesh);
 
-	LPVOID pData = NULL;
-	mesh->LockVertexBuffer(0, (void**)&pData);
-	memcpy(pData, vertices, sizeof(vertices));
-	mesh->UnlockVertexBuffer();
+	//LPVOID pData = NULL;
+	//mesh->LockVertexBuffer(0, (void**)&pData);
+	//memcpy(pData, vertices, sizeof(vertices));
+	//mesh->UnlockVertexBuffer();
 
-	mesh->LockIndexBuffer(0, (void**)&pData);
-	memcpy(pData, indices, sizeof(indices));
-	mesh->UnlockIndexBuffer();
+	//mesh->LockIndexBuffer(0, (void**)&pData);
+	//memcpy(pData, indices, sizeof(indices));
+	//mesh->UnlockIndexBuffer();
 
 	return S_OK;
 }

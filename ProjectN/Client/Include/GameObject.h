@@ -3,6 +3,7 @@
 
 #include "ObjectManager.h"
 #include "MeshManager.h"
+#include "TimeManager.h"
 
 class GameObject
 {
@@ -14,7 +15,7 @@ protected:
 public:
 	virtual HRESULT Initialize(void) PURE;
 	virtual	void	Progress(void) PURE;
-	virtual	void	Render(void) PURE;
+	virtual	void	Render(void);
 	virtual	void	Release(void) PURE;
 public:
 	INFO& GetInfo() { return information; }

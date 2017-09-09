@@ -22,8 +22,8 @@ HRESULT TerrainMesh::Initialize(const int vtxCntX, const int vtxCntZ, const int 
 		for (int x = 0; x < vtxCntX; ++x)
 		{
 			int idx = (z * vtxCntX) + x;
-			vertices[idx].position = D3DXVECTOR3(float(x * vtxGap), 0, float(z * vtxGap));
-			vertices[idx].texture = D3DXVECTOR2(float(x) / (vtxCntX - 1), float(z) / (vtxCntZ - 1));
+			vertices[idx].position = D3DXVECTOR3(float(x * vtxGap) * sizeX, 0, float(z * vtxGap));
+			vertices[idx].texture = D3DXVECTOR2(float(x) / (vtxCntX - 1) * sizeX, float(z) / (vtxCntZ - 1));
 		}
 	}
 

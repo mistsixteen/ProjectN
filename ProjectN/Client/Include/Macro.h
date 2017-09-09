@@ -1,7 +1,7 @@
 #pragma once
 
-#define PUSH_KEY(key) (GetKeyBoardState(key)&0x80) ? true : false
-#define UP_KEY(key) (GetKeyBoardState(key)&0x80) ? false :true 
+#define PUSH_KEY(key) ((*DXInput::GetInstance())->GetKeyBoardState(key)&0x80) ? true : false
+#define UP_KEY(key) ((*DXInput::GetInstance())->GetKeyBoardState(key)&0x80) ? false :true 
 
 // 싱글톤 패턴 클래스 선언 전처리기
 #define DECLARE_SINGLETON(type) public:		\

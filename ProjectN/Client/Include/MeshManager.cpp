@@ -25,13 +25,13 @@ HRESULT MeshManager::AddMesh(const TCHAR * mapKey, const TCHAR * meshKey)
 		return E_FAIL;
 
 	Mesh* mesh = NULL;
-	if (_tcscmp(meshKey, L"Ground") == 0)
+	if (_tcscmp(meshKey, L"Terrain") == 0)
 	{
 		mesh = new TerrainMesh;
 		if (FAILED(mesh->Initialize(129, 129, 1)))
 			return E_FAIL;
 	}
-	if (_tcscmp(meshKey, L"Box") == 0)
+	if (_tcscmp(meshKey, L"Player") == 0)
 	{
 		mesh = new BoxMesh;
 		if (FAILED(mesh->Initialize()))

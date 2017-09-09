@@ -56,6 +56,9 @@ void ObjectManager::Release(void)
 
 GameObject* ObjectManager::GetGameObject(const TCHAR * objectKey, int count)
 {
+	if (objectMap[objectKey].size() == 0)
+		return NULL;
+
 	int i = 0;
 	for (auto iterObj = objectMap[objectKey].begin();
 		iterObj != objectMap[objectKey].end(); ++iterObj)
@@ -64,6 +67,7 @@ GameObject* ObjectManager::GetGameObject(const TCHAR * objectKey, int count)
 			return (*iterObj);
 		++i;
 	}
+
 	return NULL;
 }
 
