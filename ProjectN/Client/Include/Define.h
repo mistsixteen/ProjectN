@@ -1,5 +1,9 @@
 #pragma once
 
+//open console
+
+
+
 #include<d3dx9.h>
 #include<d3d9.h>
 #define DIRECTINPUT_VERSION 0x0800
@@ -21,6 +25,7 @@
 #ifndef _DEBUG
 #define new new(_CLIENT_BLOCK,__FILE__,__LINE)
 #endif
+
 
 using namespace std;
 

@@ -13,6 +13,7 @@ HRESULT Player::Initialize(void)
 
 void Player::Progress(void)
 {
+
 	if (GET_SINGLE(DXInput)->PushRight())
 	{
 		if (GET_SINGLE(DXInput)->GetMouseState2().lX)
@@ -34,11 +35,25 @@ void Player::Progress(void)
 
 void Player::Render(void)
 {
+	printf("%f %f %f", information.position.x, information.position.y, information.position.z);
 	GameObject::Render();
 	TCHAR strTmp[128] = L"";
-	wsprintf(strTmp, L"dir : %d %d %d", information.direction.x, information.direction.y, information.direction.z);
+	//wsprintf(strTmp, L"pos : %f %f %f", information.position.x, information.position.y, information.position.z);
+	
+	_stprintf_s(strTmp, _countof(strTmp), L"%f", information.position.y);
 	GET_SINGLE(DXFramework)->Drawtext(strTmp, 0, 0);
 	//GET_SINGLE(MeshManager)->Mesh_Render(L"Player");
+	D3DXVECTOR3 tempPos = information.position;
+	
+	BOOL isMovable = true;
+	tempPos.y = tempPos.y - 0.001f;
+
+	GET_SINGLE(ObjectManager)->ColisionCheck(this, &tempPos, &isMovable);
+
+	if (isMovable == true)
+		information.position = tempPos;
+
+	
 }
 
 void Player::Release(void)

@@ -71,3 +71,14 @@ GameObject* ObjectManager::GetGameObject(const TCHAR * objectKey, int count)
 	return NULL;
 }
 
+void ObjectManager::ColisionCheck(GameObject* object, D3DXVECTOR3* nextpos, BOOL* ismoveable)
+{
+	if (nextpos->y < 0.0f)
+	{
+		nextpos->y = 0.0f;
+	}
+		
+}
+
+
+//void ColisionCheck(GameObject* object, D3DXVECTOR3 nextpos, BOOL* ismoveable);

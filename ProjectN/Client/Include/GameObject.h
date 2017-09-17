@@ -17,6 +17,7 @@ public:
 	virtual	void	Progress(void) PURE;
 	virtual	void	Render(void);
 	virtual	void	Release(void) PURE;
+	//virtual void	OnColision(GameObject *colide, D3DXVECTOR3 *nextpos, BOOL *movable) PURE;
 public:
 	INFO& GetInfo() { return information; }
 public:

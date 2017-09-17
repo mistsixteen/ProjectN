@@ -54,6 +54,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_CLIENT));
 
+
+
     MSG msg;
 
 	// MainApp을 불러오고 무한루프를 들어가서 클라이언트 실행

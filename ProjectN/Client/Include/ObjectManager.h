@@ -13,6 +13,7 @@ public:
 	void Progress(void);
 	void Render(void);
 	void Release(void);
+	void ColisionCheck(GameObject* object, D3DXVECTOR3* nextpos, BOOL* ismoveable);
 public:
 	GameObject* GetGameObject(const TCHAR* objectKey, int count = 0);
 private:

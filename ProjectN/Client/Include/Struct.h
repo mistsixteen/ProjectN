@@ -6,6 +6,7 @@ typedef struct tInfo
 	D3DXVECTOR3		direction;
 	D3DXVECTOR3		look;
 	D3DXMATRIX		world;
+	FLOAT			rough_length; //1차 충돌 체크에 사용할 position
 }INFO;
 
 // 오브젝트 버텍스 구조체

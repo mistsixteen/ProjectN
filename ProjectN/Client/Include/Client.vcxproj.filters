@@ -19,12 +19,6 @@
     <Filter Include="02. Object">
       <UniqueIdentifier>{81c1f8c0-8ead-4459-a99c-eac65edac65e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01. Scene">
-      <UniqueIdentifier>{c1d582ca-1b4c-480e-b13e-16c6cf764c61}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01. Scene\Training">
-      <UniqueIdentifier>{4b2abacc-7a40-4041-8664-bf54c3cefbd9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="00. Framework">
       <UniqueIdentifier>{75666d5e-d76b-45f2-9911-ebde41dd15ee}</UniqueIdentifier>
     </Filter>
@@ -84,6 +78,12 @@
     </Filter>
     <Filter Include="03. Manager\MeshManager\Mesh\Box">
       <UniqueIdentifier>{6c2c1c1a-36fd-4578-bb71-982a569aa2d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Scene">
+      <UniqueIdentifier>{c1d582ca-1b4c-480e-b13e-16c6cf764c61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Scene\Training">
+      <UniqueIdentifier>{4b2abacc-7a40-4041-8664-bf54c3cefbd9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
