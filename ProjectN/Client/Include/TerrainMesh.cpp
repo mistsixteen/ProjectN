@@ -22,8 +22,8 @@ HRESULT TerrainMesh::Initialize(const int vtxCntX, const int vtxCntZ, const int 
 		for (int x = 0; x < vtxCntX; ++x)
 		{
 			int idx = (z * vtxCntX) + x;
-			vertices[idx].position = D3DXVECTOR3(float(x * vtxGap) * sizeX, 0, float(z * vtxGap));
-			vertices[idx].texture = D3DXVECTOR2(float(x) / (vtxCntX - 1) * sizeX, float(z) / (vtxCntZ - 1));
+			vertices[idx].position = D3DXVECTOR3(float(x * vtxGap), 0, float(z * vtxGap));
+			vertices[idx].texture = D3DXVECTOR2(float(x) / (vtxCntX - 1) , float(z) / (vtxCntZ - 1));
 		}
 	}
 
@@ -83,7 +83,7 @@ HRESULT TerrainMesh::Initialize(const int vtxCntX, const int vtxCntZ, const int 
 
 	// 메쉬 생성
 	D3DXCreateMesh(idxCnt * 3, vtxCnt, D3DXMESH_MANAGED | D3DXMESH_32BIT, 
-					decl, device, &mesh);
+					decl, GET_SINGLE(DXFramework)->GetDevice(), &mesh);
 
 	LPVOID pData = NULL;
 	mesh->LockVertexBuffer(0, (void**)&pData);
@@ -104,17 +104,18 @@ HRESULT TerrainMesh::CloneMesh(LPD3DXMESH* ppMesh)
 {
 	D3DVERTEXELEMENT9 decl[MAXD3DDECLLENGTH];
 	mesh->GetDeclaration(decl);
-	mesh->CloneMesh(mesh->GetOptions(), decl, device, ppMesh);
+	mesh->CloneMesh(mesh->GetOptions(), decl,
+					GET_SINGLE(DXFramework)->GetDevice(), ppMesh);
 	return S_OK;
 }
 
 void TerrainMesh::Mesh_Render()
 {
-	device->SetRenderState(D3DRS_LIGHTING, FALSE);
-	device->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
-	device->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
+	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_LIGHTING, FALSE);
+	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
+	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
 	mesh->DrawSubset(0);
-	device->SetRenderState(D3DRS_LIGHTING, TRUE);
+	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_LIGHTING, TRUE);
 }
 
 TerrainMesh::TerrainMesh()

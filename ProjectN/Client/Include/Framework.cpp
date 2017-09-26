@@ -26,12 +26,6 @@ HRESULT Framework::InitApp(void)
 		return E_FAIL;
 	}
 
-	// DXD 장치 및 입력 변수 참조
-	device = GET_SINGLE(DXFramework)->GetDevice();
-	sprite = GET_SINGLE(DXFramework)->GetSprite();
-	font = GET_SINGLE(DXFramework)->GetFont();
-	line = GET_SINGLE(DXFramework)->GetLine();
-
 	// 시간 함수 초기화
 	GET_SINGLE(TimeManager)->InitTimeMgr();
 
@@ -67,5 +61,6 @@ void Framework::Release()
 	SAFE_DELETE_SINGLE(ObjectManager);
 	SAFE_DELETE_SINGLE(TimeManager);
 	SAFE_DELETE_SINGLE(CameraManager);
-	SAFE_DELETE_SINGLE(MeshManager);	
+	SAFE_DELETE_SINGLE(MeshManager);
+	_CrtDumpMemoryLeaks();
 }

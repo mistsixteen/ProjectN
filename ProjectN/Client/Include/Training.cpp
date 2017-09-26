@@ -31,8 +31,9 @@ HRESULT Training::Initialize()
 	GET_SINGLE(ObjectManager)->InsertObject(L"Terrain", Factory::CreateInstance(L"Terrain", L"Terrain", info));
 
 	ZeroMemory(&info, sizeof(INFO));
-	info.position = D3DXVECTOR3(0.f, 10.f, -15.f);
-	info.direction = D3DXVECTOR3(0.f, 0.f, -1.f);
+	info.position = D3DXVECTOR3(0.f, 1.f, 0.f);
+	info.look = D3DXVECTOR3(0.f, -1.f, 1.f);
+	D3DXVec3Normalize(&info.look, &info.look);
 	GET_SINGLE(ObjectManager)->InsertObject(L"Player", Factory::CreateInstance(L"Player", L"Player", info));
 
 	// 카메라 초기화

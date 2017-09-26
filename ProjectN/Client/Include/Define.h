@@ -26,11 +26,3 @@ using namespace std;
 
 extern HWND						g_hWnd;
 extern HINSTANCE				hInst;
-
-//장치 대표 전역 변수
-extern LPDIRECT3DDEVICE9		device;
-extern LPD3DXSPRITE				sprite;
-
-//폰트 출력 전역 변수
-extern LPD3DXFONT				font;
-extern LPD3DXLINE				line;

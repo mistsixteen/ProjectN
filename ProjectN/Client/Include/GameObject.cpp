@@ -12,7 +12,7 @@ void GameObject::Render(void)
 	D3DXMatrixTranslation(&trans, information.position.x, information.position.y, information.position.z);
 	information.world = scale * rotX * rotY * rotZ * trans;
 
-	device->SetTransform(D3DTS_WORLD, &information.world);
+	GET_SINGLE(DXFramework)->GetDevice()->SetTransform(D3DTS_WORLD, &information.world);
 }
 
 GameObject::GameObject()

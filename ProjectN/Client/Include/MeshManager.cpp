@@ -28,7 +28,7 @@ HRESULT MeshManager::AddMesh(const TCHAR * mapKey, const TCHAR * meshKey)
 	if (_tcscmp(meshKey, L"Terrain") == 0)
 	{
 		mesh = new TerrainMesh;
-		if (FAILED(mesh->Initialize(129, 129, 1)))
+		if (FAILED(mesh->Initialize(2, 2, 1)))
 			return E_FAIL;
 	}
 	if (_tcscmp(meshKey, L"Player") == 0)

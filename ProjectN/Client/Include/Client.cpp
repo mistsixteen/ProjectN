@@ -15,13 +15,6 @@ WCHAR szWindowClass[MAX_LOADSTRING];            // 기본 창 클래스 이름입니다.
 
 HWND g_hWnd;
 
-//장치 대표 변수
-LPDIRECT3DDEVICE9		device;
-LPD3DXSPRITE			sprite;
-
-//폰트 출력 변수
-LPD3DXFONT				font;
-LPD3DXLINE				line;
 
 // 이 코드 모듈에 들어 있는 함수의 정방향 선언입니다.
 ATOM                MyRegisterClass(HINSTANCE hInstance);
@@ -56,6 +49,14 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     MSG msg;
 
+#ifdef _DEBUG
+	// 디버그 시 콘솔 생성
+	//AllocConsole(); 
+	//freopen("CONOUT$", "a", stderr); // Redirect stderr to console
+	//freopen("CONOUT$", "a", stdout); // Redirect stdout also
+	//freopen("CONIN$", "r", stdin);
+	//SetConsoleTitleA("ProjectN Console");
+#endif
 	// MainApp을 불러오고 무한루프를 들어가서 클라이언트 실행
 	Framework framework;
 	if (FAILED(framework.InitApp()))
@@ -83,7 +84,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 			framework.Render();//출력
 		}
 	}
-
 
     return (int) msg.wParam;
 }

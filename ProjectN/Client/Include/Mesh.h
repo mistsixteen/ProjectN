@@ -1,4 +1,5 @@
 #pragma once
+#include "DXFramework.h"
 
 const float sizeX = WINSIZEY / (float)WINSIZEX;
 

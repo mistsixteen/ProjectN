@@ -4,7 +4,8 @@
 
 HRESULT BoxMesh::Initialize(const TCHAR * path, const TCHAR * fileName)
 {
-	if (FAILED(D3DXCreateBox(device, sizeX, 1.f, 1.f, &mesh, NULL)))
+	if (FAILED(D3DXCreateBox(GET_SINGLE(DXFramework)->GetDevice(), 
+							sizeX, 1.f, 1.f, &mesh, NULL)))
 		return E_FAIL;
 
 	//void* vertices;
@@ -64,17 +65,18 @@ HRESULT BoxMesh::CloneMesh(LPD3DXMESH * ppMesh)
 {
 	D3DVERTEXELEMENT9 decl[MAXD3DDECLLENGTH];
 	mesh->GetDeclaration(decl);
-	mesh->CloneMesh(mesh->GetOptions(), decl, device, ppMesh);
+	mesh->CloneMesh(mesh->GetOptions(), decl, 
+					GET_SINGLE(DXFramework)->GetDevice(), ppMesh);
 	return S_OK;
 }
 
 void BoxMesh::Mesh_Render()
 {
-	device->SetRenderState(D3DRS_LIGHTING, FALSE);
-	device->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
-	device->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
+	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_LIGHTING, FALSE);
+	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
+	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
 	mesh->DrawSubset(0);
-	device->SetRenderState(D3DRS_LIGHTING, TRUE);
+	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_LIGHTING, TRUE);
 }
 
 BoxMesh::BoxMesh()

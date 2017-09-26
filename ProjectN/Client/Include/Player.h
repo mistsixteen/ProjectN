@@ -5,6 +5,10 @@
 class Player :
 	public GameObject
 {
+private:
+	float			cameraSpeed;
+public:
+	void KeyCheck();
 public:
 	virtual HRESULT Initialize(void);
 	virtual	void	Progress(void);
