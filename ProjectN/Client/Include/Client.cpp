@@ -57,6 +57,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	//freopen("CONIN$", "r", stdin);
 	//SetConsoleTitleA("ProjectN Console");
 #endif
+
 	// MainApp을 불러오고 무한루프를 들어가서 클라이언트 실행
 	Framework framework;
 	if (FAILED(framework.InitApp()))

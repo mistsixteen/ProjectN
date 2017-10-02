@@ -6,7 +6,7 @@ class Player :
 	public GameObject
 {
 private:
-	float			cameraSpeed;
+	D3DXVECTOR3		prevPos;
 public:
 	void KeyCheck();
 public:

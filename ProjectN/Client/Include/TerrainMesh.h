@@ -8,7 +8,7 @@ private:
 	int			vtxCnt;
 	int			idxCnt;
 public:
-	virtual HRESULT Initialize(const int vtxCntX, const int vtxCntZ, const int vtxGap);
+	virtual HRESULT Initialize(const int vtxCntX, const int vtxCntZ, const float vtxGap);
 	virtual HRESULT CloneMesh(LPD3DXMESH* ppMesh);
 	virtual void Mesh_Render();
 public:

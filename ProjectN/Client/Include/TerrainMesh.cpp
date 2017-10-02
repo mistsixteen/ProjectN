@@ -2,7 +2,7 @@
 #include "TerrainMesh.h"
 
 
-HRESULT TerrainMesh::Initialize(const int vtxCntX, const int vtxCntZ, const int vtxGap)
+HRESULT TerrainMesh::Initialize(const int vtxCntX, const int vtxCntZ, const float vtxGap)
 {
 	D3DVERTEXELEMENT9 decl[] =
 	{

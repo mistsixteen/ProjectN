@@ -6,6 +6,11 @@ typedef struct tInfo
 	D3DXVECTOR3		direction;
 	D3DXVECTOR3		look;
 	D3DXMATRIX		world;
+
+	D3DXVECTOR3		min;
+	D3DXVECTOR3		max;
+
+	LPD3DXMESH				mesh;
 }INFO;
 
 // 오브젝트 버텍스 구조체

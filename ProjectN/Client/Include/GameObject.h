@@ -8,8 +8,6 @@
 class GameObject
 {
 protected:
-	LPD3DXMESH				mesh;
-protected:
 	INFO					information;
 	const TCHAR*			key;
 public:
@@ -19,6 +17,7 @@ public:
 	virtual	void	Release(void) PURE;
 public:
 	INFO& GetInfo() { return information; }
+
 public:
 	GameObject();
 	GameObject(const TCHAR* _key, INFO _info);

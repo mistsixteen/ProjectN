@@ -16,7 +16,7 @@ public:
 	/* 오브젝트 메쉬 전용 초기화 */
 	virtual HRESULT Initialize(const TCHAR* path = NULL, const TCHAR* fileName = NULL) { return S_OK; }
 	/* 터레인 메쉬 전용 초기화 */
-	virtual HRESULT Initialize(const int vtxCntX, const int vtxCntZ, const int vtxGap) { return S_OK; }
+	virtual HRESULT Initialize(const int vtxCntX, const int vtxCntZ, const float vtxGap) { return S_OK; }
 	virtual HRESULT CloneMesh(LPD3DXMESH* ppMesh) PURE;
 	virtual void Mesh_Render() PURE;
 public:

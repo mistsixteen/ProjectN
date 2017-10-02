@@ -1,7 +1,7 @@
 #pragma once
 
-const int WINSIZEX = 1280;
-const int WINSIZEY = 720;
+const int WINSIZEX	= 1280;
+const int WINSIZEY	= 720;
 
 //const int WINSIZEX = 800;
 //const int WINSIZEY = 600;

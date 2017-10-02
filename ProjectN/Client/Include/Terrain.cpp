@@ -3,9 +3,8 @@
 
 HRESULT Terrain::Initialize()
 {
-	GET_SINGLE(MeshManager)->CloneMesh(L"Terrain",&mesh);
+	GET_SINGLE(MeshManager)->CloneMesh(L"Terrain",&information.mesh);
 	D3DXMatrixIdentity(&information.world);
-
 	return S_OK;
 }
 
