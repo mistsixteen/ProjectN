@@ -71,3 +71,55 @@ GameObject* ObjectManager::GetGameObject(const TCHAR * objectKey, int count)
 	return NULL;
 }
 
+
+float ObjectManager::GetTerrainHeight(INFO srcInfo)
+{
+	for (auto iter = objectMap[L"Terrain"].begin();
+		iter != objectMap[L"Terrain"].end(); ++iter)
+	{
+		D3DXVECTOR3 destMin, destMax;
+		D3DXVECTOR3 srcMin, srcMax;
+		D3DXMATRIX world;
+		
+		D3DXMatrixIdentity(&world);
+		D3DXMatrixTranslation(&world, srcInfo.position.x, srcInfo.position.y, srcInfo.position.z);
+		D3DXVec3TransformCoord(&srcMin, &srcInfo.min, &world);
+		D3DXVec3TransformCoord(&srcMax, &srcInfo.max, &world);
+
+		D3DXMatrixIdentity(&world);
+		D3DXMatrixTranslation(&world, (*iter)->GetInfo().position.x, (*iter)->GetInfo().position.y, (*iter)->GetInfo().position.z);
+		D3DXVec3TransformCoord(&destMin, &(*iter)->GetInfo().min, &world);
+		D3DXVec3TransformCoord(&destMax, &(*iter)->GetInfo().max, &world);
+
+		// 오브젝트 기준 연산
+		/*destMin.x <= srcMin.x && srcMax.x <= destMax.x
+			&& destMin.z <= srcMin.z && srcMax.z <= destMax.z*/
+
+		// 터레인 내부에 있을 경우 연산
+		if (destMin.x <= srcInfo.position.x && srcInfo.position.x <= destMax.x
+			&& destMin.z <= srcInfo.position.z && srcInfo.position.z <= destMax.z)
+		{
+			int index = int((*iter)->GetInfo().position.z / VTXGAP) * VTXCNTX
+				+ int((*iter)->GetInfo().position.x / VTXGAP);
+
+			float ratioX = (srcInfo.position.x - (*iter)->GetVtxTex()[index + VTXCNTX].position.x) / VTXGAP;
+			float ratioZ = ((*iter)->GetVtxTex()[index + VTXCNTX].position.z - srcInfo.position.z) / VTXGAP;
+
+			float fY[4] = {
+				(*iter)->GetVtxTex()[index + VTXCNTX].position.y,			// 좌측 상단
+				(*iter)->GetVtxTex()[index + VTXCNTX + 1].position.y,		// 우측 상단
+				(*iter)->GetVtxTex()[index + 1].position.y,					// 우측 하단
+				(*iter)->GetVtxTex()[index].position.y,						// 좌측 하단
+			};
+
+			// 사각형부분에서 좌우 위치에 따른 높이 + 오브젝트 최소 충돌 y 반환
+			if (ratioX > ratioZ)
+				return fY[0] + (fY[1] - fY[0]) * ratioX + (fY[2] - fY[1]) * ratioZ + abs(srcInfo.min.y);
+			else
+				return fY[0] + (fY[2] - fY[3]) * ratioX + (fY[3] - fY[0]) * ratioZ + abs(srcInfo.min.y);
+		}
+	}
+	
+	return -1.f;
+}
+

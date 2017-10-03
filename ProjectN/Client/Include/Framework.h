@@ -8,6 +8,7 @@
 #include "SceneManager.h"
 #include "CameraManager.h"
 #include "MeshManager.h"
+#include "ShaderManager.h"
 
 class Framework
 {

@@ -6,6 +6,14 @@ const int WINSIZEY	= 720;
 //const int WINSIZEX = 800;
 //const int WINSIZEY = 600;
 
+/*
+* VTXCNT 경우엔 계획된 정점 + 1 씩 선언 필요
+*/
+const int VTXCNTX = 9;
+const int VTXCNTZ = 9;
+const int VTXGAP = 1;
+
+
 /**
 * 윈도우 창 모드 
 **/

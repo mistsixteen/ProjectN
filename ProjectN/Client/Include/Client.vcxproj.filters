@@ -85,6 +85,15 @@
     <Filter Include="03. Manager\MeshManager\Mesh\Box">
       <UniqueIdentifier>{6c2c1c1a-36fd-4578-bb71-982a569aa2d3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03. Manager\ShaderManager">
+      <UniqueIdentifier>{9aae97ed-d6dc-4159-81fb-b875771d1e85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Manager\ShaderManager\Shader">
+      <UniqueIdentifier>{5a661407-4366-4e3a-9a94-339a87197c04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Manager\ShaderManager\Shader\Terrain">
+      <UniqueIdentifier>{79cd1a29-8c37-40fe-b51b-213c06a57c2d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -171,6 +180,15 @@
     <ClInclude Include="BoxMesh.h">
       <Filter>03. Manager\MeshManager\Mesh\Box</Filter>
     </ClInclude>
+    <ClInclude Include="ShaderManager.h">
+      <Filter>03. Manager\ShaderManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>03. Manager\ShaderManager\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Shader\Terrain.hpp">
+      <Filter>03. Manager\ShaderManager\Shader\Terrain</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -232,6 +250,12 @@
     </ClCompile>
     <ClCompile Include="BoxMesh.cpp">
       <Filter>03. Manager\MeshManager\Mesh\Box</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderManager.cpp">
+      <Filter>03. Manager\ShaderManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>03. Manager\ShaderManager\Shader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -11,7 +11,6 @@ class MeshManager
 private:
 	map<const TCHAR*, Mesh*> meshMap;
 public:
-	/* 오브젝트 메쉬 추가 */
 	HRESULT AddMesh(const TCHAR* mapKey,
 					const TCHAR*  meshKey);
 	HRESULT	CloneMesh( const TCHAR* mapKey, LPD3DXMESH* ppMesh);
@@ -20,6 +19,9 @@ public:
 public:
 	const D3DXVECTOR3* GetMin(const TCHAR*	mapKey);
 	const D3DXVECTOR3* GetMax(const TCHAR*	mapKey);
+public:
+	void CopyVertexInfo_VTXTEX(const TCHAR*	mapKey, VTXTEX * vtxTex);
+	void PasteVertexInfo_VTXTEX(const TCHAR*	mapKey, VTXTEX * vtxTex);
 private:
 	MeshManager();
 public:

@@ -18,6 +18,22 @@ const D3DXVECTOR3 * MeshManager::GetMax(const TCHAR * mapKey)
 	return iterMesh->second->GetMax();
 }
 
+void MeshManager::CopyVertexInfo_VTXTEX(const TCHAR * mapKey, VTXTEX * vtxTex)
+{
+	auto iterMesh = meshMap.find(mapKey);
+	if (iterMesh == meshMap.end())
+		return ;
+	iterMesh->second->CopyVertexInfo_VTXTEX(vtxTex);
+}
+
+void MeshManager::PasteVertexInfo_VTXTEX(const TCHAR * mapKey, VTXTEX * vtxTex)
+{
+	auto iterMesh = meshMap.find(mapKey);
+	if (iterMesh == meshMap.end())
+		return ;
+	iterMesh->second->PasteVertexInfo_VTXTEX(vtxTex);
+}
+
 HRESULT MeshManager::AddMesh(const TCHAR * mapKey, const TCHAR * meshKey)
 {
 	auto iterMesh = meshMap.find(mapKey);
@@ -28,7 +44,7 @@ HRESULT MeshManager::AddMesh(const TCHAR * mapKey, const TCHAR * meshKey)
 	if (_tcscmp(meshKey, L"Terrain") == 0)
 	{
 		mesh = new TerrainMesh;
-		if (FAILED(mesh->Initialize(2, 2, 1)))
+		if (FAILED(mesh->Initialize(VTXCNTX, VTXCNTZ, VTXGAP)))
 			return E_FAIL;
 	}
 	if (_tcscmp(meshKey, L"Player") == 0)

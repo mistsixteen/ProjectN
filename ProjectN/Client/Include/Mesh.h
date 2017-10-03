@@ -20,6 +20,9 @@ public:
 	virtual HRESULT CloneMesh(LPD3DXMESH* ppMesh) PURE;
 	virtual void Mesh_Render() PURE;
 public:
+	void CopyVertexInfo_VTXTEX(VTXTEX* vtxTex);
+	void PasteVertexInfo_VTXTEX(VTXTEX* vtxTex);
+public:
 	void Release();
 public:
 	Mesh();

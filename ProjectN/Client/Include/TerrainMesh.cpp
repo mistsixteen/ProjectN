@@ -16,7 +16,7 @@ HRESULT TerrainMesh::Initialize(const int vtxCntX, const int vtxCntZ, const floa
 	idxCnt = (vtxCntX - 1) * (vtxCntZ - 1) * 2;
 
 	// 버텍스 버퍼 초기화
-	VERTEX* vertices = new VERTEX[vtxCnt];
+	VTXTEX* vertices = new VTXTEX[vtxCnt];
 	for (int z = 0; z < vtxCntZ; ++z)
 	{
 		for (int x = 0; x < vtxCntX; ++x)
@@ -87,7 +87,7 @@ HRESULT TerrainMesh::Initialize(const int vtxCntX, const int vtxCntZ, const floa
 
 	LPVOID pData = NULL;
 	mesh->LockVertexBuffer(0, (void**)&pData);
-	memcpy(pData, vertices, sizeof(VERTEX) * vtxCnt);
+	memcpy(pData, vertices, sizeof(VTXTEX) * vtxCnt);
 	mesh->UnlockVertexBuffer();
 
 	mesh->LockIndexBuffer(0, (void**)&pData);
@@ -96,6 +96,14 @@ HRESULT TerrainMesh::Initialize(const int vtxCntX, const int vtxCntZ, const floa
 
 	SAFE_DELETE_ARRAY(vertices);
 	SAFE_DELETE_ARRAY(indices);
+
+	// 최소 최대 지점 설정
+	D3DXVECTOR3* vtx = NULL;
+	mesh->LockVertexBuffer(D3DLOCK_READONLY, (void**)&vtx);
+	D3DXComputeBoundingBox(vtx, mesh->GetNumVertices(),
+		D3DXGetFVFVertexSize(mesh->GetFVF()),
+		&min, &max);
+	mesh->UnlockVertexBuffer();
 
 	return S_OK;
 }

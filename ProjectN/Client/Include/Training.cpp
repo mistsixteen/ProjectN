@@ -31,8 +31,8 @@ HRESULT Training::Initialize()
 	GET_SINGLE(ObjectManager)->InsertObject(L"Terrain", Factory::CreateInstance(L"Terrain", L"Terrain", info));
 
 	ZeroMemory(&info, sizeof(INFO));
-	info.position = D3DXVECTOR3(0.f, 1.f, 0.f);
-	info.look = D3DXVECTOR3(0.f, -1.f, 1.f);
+	info.position = D3DXVECTOR3((VTXCNTX - 1) * 0.5f * VTXGAP, 5.f, (VTXCNTZ - 1) * 0.5f * VTXGAP);
+	info.look = D3DXVECTOR3(0.f, 0.f, 1.f);
 	D3DXVec3Normalize(&info.look, &info.look);
 	GET_SINGLE(ObjectManager)->InsertObject(L"Player", Factory::CreateInstance(L"Player", L"Player", info));
 

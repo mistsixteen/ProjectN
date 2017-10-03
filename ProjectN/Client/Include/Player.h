@@ -7,7 +7,11 @@ class Player :
 {
 private:
 	D3DXVECTOR3		prevPos;
+private:
+	bool			flying;
+	float			fallingSpeed;
 public:
+	void SetPosition();
 	void KeyCheck();
 public:
 	virtual HRESULT Initialize(void);

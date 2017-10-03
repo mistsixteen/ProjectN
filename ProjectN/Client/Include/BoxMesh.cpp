@@ -4,9 +4,18 @@
 
 HRESULT BoxMesh::Initialize(const TCHAR * path, const TCHAR * fileName)
 {
+	// 박스 메쉬 생성
 	if (FAILED(D3DXCreateBox(GET_SINGLE(DXFramework)->GetDevice(), 
-							sizeX, 1.f, 1.f, &mesh, NULL)))
+							1.f, 1.f, 1.f, &mesh, NULL)))
 		return E_FAIL;
+
+	// 최소 최대 충돌 지점 설정
+	D3DXVECTOR3* vertices;
+	mesh->LockVertexBuffer(D3DLOCK_READONLY, (void**)&vertices);
+	D3DXComputeBoundingBox(vertices, mesh->GetNumVertices(),
+		D3DXGetFVFVertexSize(mesh->GetFVF()),
+		&min, &max);
+	mesh->UnlockVertexBuffer();
 
 	//void* vertices;
 	//mesh->LockVertexBuffer(0, &vertices);

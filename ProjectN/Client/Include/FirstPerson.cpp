@@ -33,6 +33,7 @@ void FirstPerson::Progress()
 		ClipCursor(&windowRect);
 
 		INFO& information = GET_SINGLE(ObjectManager)->GetGameObject(L"Player")->GetInfo();
+
 		// 카메라 좌우
 		if (GET_SINGLE(DXInput)->GetMouseState2().lX)
 		{
@@ -42,6 +43,8 @@ void FirstPerson::Progress()
 					* cameraSpeed
 					* GET_SINGLE(TimeManager)->GetTime()));
 			D3DXVec3TransformNormal(&information.look, &information.look, &matAxis);
+
+			// 좌우 전환에 따른 오브젝트 설정 필요
 		}
 		
 		// 카메라 상하
@@ -62,6 +65,7 @@ void FirstPerson::Progress()
 				information.look = prevLook;
 			if (information.look.y > 0.9f && information.look.z < 0.1f)
 				information.look = prevLook;
+
 		}
 	}
 	else
@@ -77,7 +81,7 @@ void FirstPerson::Progress()
 
 FirstPerson::FirstPerson()
 {
-	cameraSpeed = 300.f;
+	cameraSpeed = 1000.f;
 }
 
 

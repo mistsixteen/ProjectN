@@ -1,6 +1,7 @@
 #pragma once
 #include "Define.h"
 #include "GameObject.h"
+#include "Math.h"
 
 class GameObject;
 class ObjectManager
@@ -15,6 +16,7 @@ public:
 	void Release(void);
 public:
 	GameObject* GetGameObject(const TCHAR* objectKey, int count = 0);
+	float GetTerrainHeight(INFO srcInfo);
 private:
 	ObjectManager();
 public:

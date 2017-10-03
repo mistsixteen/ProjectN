@@ -9,25 +9,47 @@ HRESULT Player::Initialize(void)
 	GET_SINGLE(MeshManager)->CloneMesh(L"Player", &information.mesh);
 	
 	// 충돌 정점 설정
-	D3DXVECTOR3* vertices;
-	information.mesh->LockVertexBuffer(D3DLOCK_READONLY, (void**)&vertices);
-	D3DXComputeBoundingBox(vertices, information.mesh->GetNumVertices(),
-							D3DXGetFVFVertexSize(information.mesh->GetFVF()), 
-							&information.min, &information.max);
-	information.mesh->UnlockVertexBuffer();
+	information.min = *GET_SINGLE(MeshManager)->GetMin(L"Player");
+	information.max = *GET_SINGLE(MeshManager)->GetMax(L"Player");
 
 	// 매트릭스 초기화
 	D3DXMatrixIdentity(&information.world);
+
+	// 플레이어 속도 초기화
+	information.speed = 10.f;
+
+	// 비행 상태 초기화
+	flying = true;
+	
+	// 낙하 속도 초기화
+	fallingSpeed = 0.f;
 
 	return S_OK;
 }
 
 void Player::Progress(void)
 {
+	prevPos = information.position;
 	if (GET_SINGLE(DXInput)->PushRight())
 		KeyCheck();
+	SetPosition();
+}
 
-	// 이동했을 시 충돌 체크
+void Player::SetPosition()
+{
+	float height = GET_SINGLE(ObjectManager)->GetTerrainHeight(information);
+	// 터레인에 벗어났을 경우
+	if (height == -1.f)
+	{
+		// 부드러운 이동 불가, 수정 필요
+		information.position = prevPos;
+	}
+	else
+	{
+		// 터레인 통과 불가
+		if (information.position.y < height)
+			information.position.y = height;
+	}
 }
 
 void Player::KeyCheck()
@@ -38,13 +60,13 @@ void Player::KeyCheck()
 	if (PUSH_KEY(DIK_W))
 	{
 		D3DXVec3Normalize(&information.look, &information.look);
-		information.position += information.look * GET_SINGLE(TimeManager)->GetTime();
+		information.position += information.look * GET_SINGLE(TimeManager)->GetTime() * information.speed;
 	}
 	// 후진 이동
 	if (PUSH_KEY(DIK_S))
 	{
 		D3DXVec3Normalize(&information.look, &information.look);
-		information.position -= information.look * GET_SINGLE(TimeManager)->GetTime();
+		information.position -= information.look * GET_SINGLE(TimeManager)->GetTime() * information.speed;
 	}
 	// 좌측 이동
 	if (PUSH_KEY(DIK_A))
@@ -53,7 +75,7 @@ void Player::KeyCheck()
 		D3DXVec3Cross(&vRight, &up, &information.look);
 		D3DXVec3Normalize(&vRight, &vRight);
 
-		information.position -= vRight * GET_SINGLE(TimeManager)->GetTime();
+		information.position -= vRight * GET_SINGLE(TimeManager)->GetTime() * information.speed;
 	}
 	// 우측 이동
 	if (PUSH_KEY(DIK_D))
@@ -62,7 +84,7 @@ void Player::KeyCheck()
 		D3DXVec3Cross(&vRight, &up, &information.look);
 		D3DXVec3Normalize(&vRight, &vRight);
 
-		information.position += vRight * GET_SINGLE(TimeManager)->GetTime();
+		information.position += vRight * GET_SINGLE(TimeManager)->GetTime() * information.speed;
 	}
 }
 
@@ -70,9 +92,13 @@ void Player::Render(void)
 {
 	GameObject::Render();
 	/*TCHAR strTmp[128] = L"";
-	wsprintf(strTmp, L"Pos : %d %d %d",
-		(int)information.position.x, (int)information.position.y, (int)information.position.z);
+	wsprintf(strTmp, L"Look : %d %d %d",
+		(int)information.look.x, (int)information.look.y, (int)information.look.z);
 	GET_SINGLE(DXFramework)->Drawtext(strTmp, 0, 0);*/
+
+	// 해당 오브젝트 회전 실험
+	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
+	information.mesh->DrawSubset(0);
 }
 
 void Player::Release(void)
