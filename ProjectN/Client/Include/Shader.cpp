@@ -8,7 +8,7 @@ HRESULT Shader::InitShader(const TCHAR * fileName)
 				fileName, NULL, NULL, D3DXSHADER_DEBUG, NULL,
 				&effect, &error)))
 	{
-		MSGBOX((LPCTSTR)error->GetBufferPointer());
+		MSGBOX(L"셰이더 초기화 실패");
 		return E_FAIL;
 	}
 
@@ -33,8 +33,8 @@ void Shader::Shader_End()
 
 void Shader::Release()
 {
-	SAFE_DELETE(effect);
-	SAFE_DELETE(error);
+	SAFE_RELEASE(effect);
+	SAFE_RELEASE(error);
 }
 
 Shader::Shader()

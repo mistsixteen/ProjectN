@@ -11,6 +11,7 @@ void CameraManager::InitCamera(CAMERA type, const TCHAR * objectKey)
 		camera = new FirstPerson;
 		break;
 	case CAMERA_BACKVIEW:
+		camera = new BackView;
 		break;
 	}
 

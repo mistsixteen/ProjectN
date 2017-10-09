@@ -94,6 +94,9 @@
     <Filter Include="03. Manager\ShaderManager\Shader\Terrain">
       <UniqueIdentifier>{79cd1a29-8c37-40fe-b51b-213c06a57c2d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03. Manager\CameraManager\Camera\BackView">
+      <UniqueIdentifier>{e5a81287-6f9b-4f19-be30-a8592d18e059}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -189,6 +192,9 @@
     <ClInclude Include="Resource\Shader\Terrain.hpp">
       <Filter>03. Manager\ShaderManager\Shader\Terrain</Filter>
     </ClInclude>
+    <ClInclude Include="BackView.h">
+      <Filter>03. Manager\CameraManager\Camera\BackView</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -256,6 +262,9 @@
     </ClCompile>
     <ClCompile Include="Shader.cpp">
       <Filter>03. Manager\ShaderManager\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="BackView.cpp">
+      <Filter>03. Manager\CameraManager\Camera\BackView</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

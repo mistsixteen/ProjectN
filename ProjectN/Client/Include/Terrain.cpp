@@ -7,7 +7,7 @@ HRESULT Terrain::Initialize()
 	GET_SINGLE(MeshManager)->CloneMesh(L"Terrain",&information.mesh);
 
 	// 터레인 셰이더 추가
-	//GET_SINGLE(ShaderManager)->AddShader(L"Terrain", L"./Resource/Shader/Terrain.hpp");
+	GET_SINGLE(ShaderManager)->AddShader(L"Terrain", L"./Resource/Shader/Terrain.hpp");
 
 	// 충돌 정점 설정
 	information.min = *GET_SINGLE(MeshManager)->GetMin(L"Terrain");
@@ -28,15 +28,21 @@ void Terrain::Render()
 {
 	GameObject::Render();
 
-	GET_SINGLE(ShaderManager)->Shader_Begin(L"Terrain");
+	// 셰이더 변수 설정
+	LPD3DXEFFECT effect = GET_SINGLE(ShaderManager)->GetShader(L"Terrain");
+	effect->SetMatrix("gWorldMatrix", &information.world);
+
+	D3DXMATRIX matView, matProj;
+	GET_SINGLE(DXFramework)->GetDevice()->GetTransform(D3DTS_VIEW, &matView);
+	GET_SINGLE(DXFramework)->GetDevice()->GetTransform(D3DTS_PROJECTION, &matProj);
+
+	effect->SetMatrix("gWorldMatrix", &information.world);
+	effect->SetMatrix("gViewMatrix", &matView);
+	effect->SetMatrix("gProjectionMatrix", &matProj);
 
 	// 메쉬 렌더링
-	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_LIGHTING, FALSE);
-	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
-	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
-	information.mesh->DrawSubset(0);
-	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_LIGHTING, TRUE);
-
+	GET_SINGLE(ShaderManager)->Shader_Begin(L"Terrain");
+	GET_SINGLE(MeshManager)->Mesh_Render(L"Terrain");
 	GET_SINGLE(ShaderManager)->Shader_End(L"Terrain");
 }
 

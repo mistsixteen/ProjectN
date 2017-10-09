@@ -8,8 +8,6 @@ class Camera
 protected:
 	float			cameraSpeed;
 protected:
-	INFO			targetInfo;
-protected:
 	D3DXVECTOR3		eye;
 	D3DXVECTOR3		at;
 	D3DXVECTOR3		up;

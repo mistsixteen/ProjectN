@@ -6,7 +6,7 @@
 HRESULT Player::Initialize(void)
 {
 	// 생선된 캐릭터 메쉬 복제
-	//GET_SINGLE(MeshManager)->CloneMesh(L"Player", &information.mesh);
+	GET_SINGLE(MeshManager)->CloneMesh(L"Player", &information.mesh);
 	
 	// 충돌 정점 설정
 	information.min = *GET_SINGLE(MeshManager)->GetMin(L"Player");
@@ -44,7 +44,7 @@ void Player::Progress(void)
 {
 	prevPos = information.position;
 	//if (GET_SINGLE(DXInput)->PushRight())
-		KeyCheck();
+	KeyCheck();
 	SetPosition();
 }
 
@@ -78,7 +78,7 @@ void Player::KeyCheck()
 		move.y = 0.0f;
 		
 		D3DXVec3Normalize(&move, &move);
-		information.position -= move * GET_SINGLE(TimeManager)->GetTime() * information.speed;
+		information.position += move * GET_SINGLE(TimeManager)->GetTime() * information.speed;
 	}
 	// 후진 이동
 	if (PUSH_KEY(DIK_S))
@@ -88,7 +88,7 @@ void Player::KeyCheck()
 		move.y = 0.0f;
 
 		D3DXVec3Normalize(&move, &move);
-		information.position += move * GET_SINGLE(TimeManager)->GetTime() * information.speed;
+		information.position -= move * GET_SINGLE(TimeManager)->GetTime() * information.speed;
 	}
 	// 좌측 이동
 	if (PUSH_KEY(DIK_A))
@@ -192,9 +192,8 @@ void Player::Render(void)
 		(int)information.look.x, (int)information.look.y, (int)information.look.z);
 	GET_SINGLE(DXFramework)->Drawtext(strTmp, 0, 0);*/
 
-	// 해당 오브젝트 회전 실험
-	/*GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
-	information.mesh->DrawSubset(0);*/
+
+	GET_SINGLE(MeshManager)->Mesh_Render(L"Player");
 }
 
 void Player::Release(void)
