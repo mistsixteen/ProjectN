@@ -24,20 +24,22 @@ void ObjectManager::Progress(void)
 			iterList != (*iterMap).second.end(); ++iterList)
 		{
 			(*iterList)->Progress();
+			GET_SINGLE(SortManager)->Insert(*iterList);
 		}
 	}
 }
 
 void ObjectManager::Render(void)
 {
-	for (auto iterMap = objectMap.begin(); iterMap != objectMap.end(); ++iterMap)
+	GET_SINGLE(SortManager)->Render();
+	/*for (auto iterMap = objectMap.begin(); iterMap != objectMap.end(); ++iterMap)
 	{
 		for (auto iterList = (*iterMap).second.begin();
 			iterList != (*iterMap).second.end(); ++iterList)
 		{
 			(*iterList)->Render();
 		}
-	}
+	}*/
 }
 
 void ObjectManager::Release(void)
@@ -52,6 +54,7 @@ void ObjectManager::Release(void)
 		(*iterMap).second.clear();
 	}
 	objectMap.clear();
+	SAFE_DELETE_SINGLE(SortManager);
 }
 
 GameObject* ObjectManager::GetGameObject(const TCHAR * objectKey, int count)

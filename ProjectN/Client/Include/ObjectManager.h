@@ -3,6 +3,8 @@
 #include "GameObject.h"
 #include "Math.h"
 
+#include "SortManager.h"
+
 class GameObject;
 class ObjectManager
 {

@@ -43,8 +43,8 @@ HRESULT Training::Initialize()
 
 void Training::Progress()
 {
-	GET_SINGLE(ObjectManager)->Progress();
 	GET_SINGLE(CameraManager)->Progress();
+	GET_SINGLE(ObjectManager)->Progress();
 }
 
 void Training::Render()

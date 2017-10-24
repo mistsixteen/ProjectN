@@ -26,6 +26,8 @@ public:
 	VTXTEX* GetVtxTex() const { return vtxTex; }
 	VTXCOL* GetVtxCol() const { return vtxCol; }
 public:
+	bool operator<(const GameObject& another);
+public:
 	GameObject();
 	GameObject(const TCHAR* _key, INFO _info);
 	virtual ~GameObject();

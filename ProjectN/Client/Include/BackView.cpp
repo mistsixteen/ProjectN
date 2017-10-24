@@ -1,6 +1,9 @@
 #include "stdafx.h"
 #include "BackView.h"
 
+/* 오브젝트 정렬용 전역 카메라 변수 */
+D3DXVECTOR3 gCameraEye;
+
 void BackView::Initialize()
 {
 	INFO& information = GET_SINGLE(ObjectManager)->GetGameObject(L"Player")->GetInfo();
@@ -21,9 +24,8 @@ void BackView::Initialize()
 	GET_SINGLE(DXFramework)->GetDevice()->SetSamplerState(0, D3DSAMP_MAGFILTER, D3DTEXF_LINEAR);
 	GET_SINGLE(DXFramework)->GetDevice()->SetSamplerState(0, D3DSAMP_MIPFILTER, D3DTEXF_LINEAR);
 
-	/* 조명 켜기 */
-	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_LIGHTING, false);
-
+	/* 전역 카메라 위치 변수 초기화 */
+	gCameraEye = eye;
 }
 
 void BackView::Progress()
@@ -87,6 +89,9 @@ void BackView::Progress()
 
 	D3DXMatrixPerspectiveFovLH(&projectionMatrix, D3DXToRadian(60.f), WINSIZEX / (float)WINSIZEY, 0.f, 1000.f);
 	GET_SINGLE(DXFramework)->GetDevice()->SetTransform(D3DTS_PROJECTION, &projectionMatrix);
+
+	/* 전역 카메라 위치 변수 초기화 */
+	gCameraEye = eye;
 }
 
 BackView::BackView()

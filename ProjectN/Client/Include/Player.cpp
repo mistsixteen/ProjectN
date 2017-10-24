@@ -35,8 +35,6 @@ HRESULT Player::Initialize(void)
 	buspeedmax = 20.0f;
 	buspeeddecrese = 3.0f;
 
-
-
 	return S_OK;
 }
 

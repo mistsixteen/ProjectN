@@ -26,3 +26,6 @@ using namespace std;
 
 extern HWND						g_hWnd;
 extern HINSTANCE				hInst;
+
+// 정렬용 카메라 위치 변수
+extern D3DXVECTOR3 gCameraEye;

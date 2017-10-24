@@ -5,7 +5,7 @@
 
 class CameraManager
 {
-	DECLARE_SINGLETON(CameraManager);
+	DECLARE_SINGLETON(CameraManager)
 private:
 	Camera*			camera;
 public:

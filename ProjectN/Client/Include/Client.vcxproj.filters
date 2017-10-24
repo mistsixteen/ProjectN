@@ -97,6 +97,9 @@
     <Filter Include="03. Manager\CameraManager\Camera\BackView">
       <UniqueIdentifier>{e5a81287-6f9b-4f19-be30-a8592d18e059}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03. Manager\SortManager">
+      <UniqueIdentifier>{ffd8953b-4538-4dbf-a9ab-bcf07aeeb2dd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -195,6 +198,9 @@
     <ClInclude Include="BackView.h">
       <Filter>03. Manager\CameraManager\Camera\BackView</Filter>
     </ClInclude>
+    <ClInclude Include="SortManager.h">
+      <Filter>03. Manager\SortManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -265,6 +271,9 @@
     </ClCompile>
     <ClCompile Include="BackView.cpp">
       <Filter>03. Manager\CameraManager\Camera\BackView</Filter>
+    </ClCompile>
+    <ClCompile Include="SortManager.cpp">
+      <Filter>03. Manager\SortManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
