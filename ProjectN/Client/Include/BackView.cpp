@@ -24,8 +24,6 @@ void BackView::Initialize()
 	GET_SINGLE(DXFramework)->GetDevice()->SetSamplerState(0, D3DSAMP_MAGFILTER, D3DTEXF_LINEAR);
 	GET_SINGLE(DXFramework)->GetDevice()->SetSamplerState(0, D3DSAMP_MIPFILTER, D3DTEXF_LINEAR);
 
-	/* 전역 카메라 위치 변수 초기화 */
-	gCameraEye = eye;
 }
 
 void BackView::Progress()

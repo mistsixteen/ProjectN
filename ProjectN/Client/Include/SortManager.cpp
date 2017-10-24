@@ -1,25 +1,33 @@
 #include "stdafx.h"
 #include "SortManager.h"
 
+struct RenderingSort
+{
+	bool operator()(GameObject* a, GameObject* b)
+	{
+		return D3DXVec3LengthSq(new D3DXVECTOR3(gCameraEye - a->GetInfo().position)) 
+			< D3DXVec3LengthSq(new D3DXVECTOR3(gCameraEye - b->GetInfo().position));
+	}
+};
 
 void SortManager::Insert(GameObject* object)
 {
-	sortList.push_back(object);
+	sortVector.push_back(object);
 }
 
 void SortManager::Render()
 {
-	sortList.sort();
-	for (auto iter = sortList.begin(); iter != sortList.end(); ++iter)
+	sort(sortVector.begin(), sortVector.end(), RenderingSort());
+	for (auto iter = sortVector.begin(); iter != sortVector.end(); ++iter)
 		(*iter)->Render();
-	sortList.clear();
+	sortVector.clear();
 }
 
 void SortManager::Release()
 {
-	for (auto iter = sortList.begin(); iter != sortList.end(); ++iter)
+	for (auto iter = sortVector.begin(); iter != sortVector.end(); ++iter)
 		SAFE_DELETE(*iter);
-	sortList.clear();
+	sortVector.clear();
 }
 
 SortManager::SortManager()

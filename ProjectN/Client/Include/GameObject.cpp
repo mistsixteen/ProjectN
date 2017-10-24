@@ -15,12 +15,6 @@ void GameObject::Render(void)
 	GET_SINGLE(DXFramework)->GetDevice()->SetTransform(D3DTS_WORLD, &information.world);
 }
 
-bool GameObject::operator<(const GameObject& another)
-{
-	return D3DXVec3LengthSq(new D3DXVECTOR3(gCameraEye - information.position))
-			< D3DXVec3LengthSq(new D3DXVECTOR3(gCameraEye - another.information.position));
-}
-
 GameObject::GameObject()
 	:key(NULL)
 {

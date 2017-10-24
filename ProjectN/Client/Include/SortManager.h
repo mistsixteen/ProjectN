@@ -7,7 +7,7 @@ class SortManager
 {
 	DECLARE_SINGLETON(SortManager)
 private:
-	list<GameObject*>	sortList;
+	vector<GameObject*>	sortVector;
 public:
 	void Insert(GameObject* object);
 	void Render();

@@ -18,19 +18,27 @@ void ObjectManager::InsertObject(const TCHAR* objectKey, GameObject* object)
 
 void ObjectManager::Progress(void)
 {
+	for(auto iterList = objectMap[L"Terrain"].begin() ; iterList != objectMap[L"Terrain"].end() ; ++iterList)
+		(*iterList)->Progress();
+
 	for(auto iterMap = objectMap.begin() ; iterMap != objectMap.end() ; ++iterMap)
 	{ 
-		for (auto iterList = (*iterMap).second.begin();
-			iterList != (*iterMap).second.end(); ++iterList)
+		if ((*iterMap).first != L"Terrain")
 		{
-			(*iterList)->Progress();
-			GET_SINGLE(SortManager)->Insert(*iterList);
+			for (auto iterList = (*iterMap).second.begin();
+				iterList != (*iterMap).second.end(); ++iterList)
+			{
+				(*iterList)->Progress();
+				GET_SINGLE(SortManager)->Insert(*iterList);
+			}
 		}
 	}
 }
 
 void ObjectManager::Render(void)
 {
+	for (auto iterList = objectMap[L"Terrain"].begin(); iterList != objectMap[L"Terrain"].end(); ++iterList)
+		(*iterList)->Render();
 	GET_SINGLE(SortManager)->Render();
 	/*for (auto iterMap = objectMap.begin(); iterMap != objectMap.end(); ++iterMap)
 	{
