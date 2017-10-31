@@ -18,36 +18,36 @@ const D3DXVECTOR3 * MeshManager::GetMax(const TCHAR * mapKey)
 	return iterMesh->second->GetMax();
 }
 
-void MeshManager::CopyVertexInfo_VTXTEX(const TCHAR * mapKey, VTXTEX * vtxTex)
+void MeshManager::CopyVertexTextureInfo(const TCHAR * mapKey, VTXTEX * vtxTex)
 {
 	auto iterMesh = meshMap.find(mapKey);
 	if (iterMesh == meshMap.end())
 		return ;
-	iterMesh->second->CopyVertexInfo_VTXTEX(vtxTex);
+	iterMesh->second->CopyVertexTextureInfo(vtxTex);
 }
 
-void MeshManager::PasteVertexInfo_VTXTEX(const TCHAR * mapKey, VTXTEX * vtxTex)
+void MeshManager::PasteVertexTextureInfo(const TCHAR * mapKey, VTXTEX * vtxTex)
 {
 	auto iterMesh = meshMap.find(mapKey);
 	if (iterMesh == meshMap.end())
 		return ;
-	iterMesh->second->PasteVertexInfo_VTXTEX(vtxTex);
+	iterMesh->second->PasteVertexTextureInfo(vtxTex);
 }
 
 HRESULT MeshManager::AddMesh(const TCHAR * mapKey, const TCHAR * meshKey)
 {
-	auto iterMesh = meshMap.find(mapKey);
-	if (iterMesh != meshMap.end())
+	auto iterMap = meshMap.find(mapKey);
+	if (iterMap != meshMap.end())
 		return E_FAIL;
 
 	Mesh* mesh = NULL;
 	if (_tcscmp(meshKey, L"Terrain") == 0)
 	{
 		mesh = new TerrainMesh;
-		if (FAILED(mesh->Initialize(VTXCNTX, VTXCNTZ, VTXGAP)))
+		if (FAILED(mesh->Initialize()))
 			return E_FAIL;
 	}
-	if (_tcscmp(meshKey, L"Player") == 0)
+	else if (_tcscmp(meshKey, L"Box") == 0)
 	{
 		mesh = new BoxMesh;
 		if (FAILED(mesh->Initialize()))
@@ -60,26 +60,26 @@ HRESULT MeshManager::AddMesh(const TCHAR * mapKey, const TCHAR * meshKey)
 
 HRESULT MeshManager::CloneMesh(const TCHAR * mapKey, LPD3DXMESH* ppMesh)
 {
-	auto iterMesh = meshMap.find(mapKey);
-	if (iterMesh == meshMap.end())
+	auto iterMap = meshMap.find(mapKey);
+	if (iterMap == meshMap.end())
 		return  E_FAIL;
-	return iterMesh->second->CloneMesh(ppMesh);
+	return iterMap->second->CloneMesh(ppMesh);
 }
 
-void MeshManager::Mesh_Render(const TCHAR * mapKey)
+void MeshManager::Render(const TCHAR * mapKey)
 {
-	auto iterMesh = meshMap.find(mapKey);
-	if (iterMesh == meshMap.end())
+	auto iterMap = meshMap.find(mapKey);
+	if (iterMap == meshMap.end())
 		return;
-	iterMesh->second->Mesh_Render();
+	iterMap->second->Render();
 }
 
 void MeshManager::Release()
 {
-	for (auto iterMesh = meshMap.begin();
-		iterMesh != meshMap.end(); ++iterMesh)
+	for (auto iterMap = meshMap.begin();
+		iterMap != meshMap.end(); ++iterMap)
 	{
-		SAFE_DELETE(iterMesh->second);
+		SAFE_DELETE(iterMap->second);
 	}
 	meshMap.clear();
 }

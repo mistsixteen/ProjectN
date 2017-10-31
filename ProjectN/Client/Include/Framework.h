@@ -9,6 +9,8 @@
 #include "CameraManager.h"
 #include "MeshManager.h"
 #include "ShaderManager.h"
+#include "TextureManager.h"
+#include "BufferManager.h"
 
 class Framework
 {

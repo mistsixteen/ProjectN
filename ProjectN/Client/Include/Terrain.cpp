@@ -3,20 +3,40 @@
 
 HRESULT Terrain::Initialize()
 {
-	// 생성된 터레인 메쉬 복제
-	GET_SINGLE(MeshManager)->CloneMesh(L"Terrain",&information.mesh);
+	// 버퍼 초기화
+	if (FAILED(GET_SINGLE(BufferManager)->AddBuffer(L"Terrain", L"Terrain")))
+	{
+		MSGBOX(L"Terrain 버퍼 추가 실패");
+		return E_FAIL;
+	}
 
-	// 터레인 셰이더 추가
+	// 메쉬는 이후 충돌 박스 설계시 사용
+	if (FAILED(GET_SINGLE(MeshManager)->AddMesh(L"Terrain", L"Terrain")))
+	{
+		MSGBOX(L"Terrain 메쉬 추가 실패");
+		return E_FAIL;
+	}
+
+	// 셰이더 초기화
 	GET_SINGLE(ShaderManager)->AddShader(L"Terrain", L"./Resource/Shader/Terrain.hpp");
 
-	// 충돌 정점 설정
-	information.min = *GET_SINGLE(MeshManager)->GetMin(L"Terrain");
-	information.max = *GET_SINGLE(MeshManager)->GetMax(L"Terrain");
+	information.min = *(GET_SINGLE(MeshManager)->GetMin(L"Terrain"));
+	information.max = *(GET_SINGLE(MeshManager)->GetMax(L"Terrain"));
 
-	vtxTex = new VTXTEX[information.mesh->GetNumVertices()];
-	GET_SINGLE(MeshManager)->CopyVertexInfo_VTXTEX(L"Terrain", vtxTex);
+	// 버텍스 정보 초기화
+	const int& vertexCnt = GET_SINGLE(BufferManager)->GetVertexCount(L"Terrain");
+	if (vertexCnt == -1) {
+		MSGBOX(L"Terrain 버텍스 개수 초기화 실패");
+		return E_FAIL;
+	}
 
-	D3DXMatrixIdentity(&information.world);
+	vtxTex = new VTXTEX[vertexCnt];
+	GET_SINGLE(BufferManager)->CopyVertexTextureInfo(L"Terrain", vtxTex);
+
+	// 매트릭스 초기화
+	D3DXMatrixIdentity(&world);
+	D3DXMatrixScaling(&scale, 1.f, 1.f, 1.f);
+
 	return S_OK;
 }
 
@@ -30,19 +50,28 @@ void Terrain::Render()
 
 	// 셰이더 변수 설정
 	LPD3DXEFFECT effect = GET_SINGLE(ShaderManager)->GetShader(L"Terrain");
-	effect->SetMatrix("gWorldMatrix", &information.world);
+	effect->SetMatrix("gWorldMatrix", &world);
 
 	D3DXMATRIX matView, matProj;
 	GET_SINGLE(DXFramework)->GetDevice()->GetTransform(D3DTS_VIEW, &matView);
 	GET_SINGLE(DXFramework)->GetDevice()->GetTransform(D3DTS_PROJECTION, &matProj);
 
-	effect->SetMatrix("gWorldMatrix", &information.world);
+	effect->SetMatrix("gWorldMatrix", &world);
 	effect->SetMatrix("gViewMatrix", &matView);
 	effect->SetMatrix("gProjectionMatrix", &matProj);
 
 	// 메쉬 렌더링
 	GET_SINGLE(ShaderManager)->Shader_Begin(L"Terrain");
-	GET_SINGLE(MeshManager)->Mesh_Render(L"Terrain");
+
+	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_ZENABLE, TRUE);
+	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_ZWRITEENABLE, FALSE);
+	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_LIGHTING, FALSE);
+	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_LIGHTING, FALSE);
+	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
+	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
+	GET_SINGLE(BufferManager)->Render(L"Terrain");
+	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_LIGHTING, TRUE);
+
 	GET_SINGLE(ShaderManager)->Shader_End(L"Terrain");
 }
 

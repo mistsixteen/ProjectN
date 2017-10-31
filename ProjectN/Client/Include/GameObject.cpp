@@ -3,16 +3,12 @@
 
 void GameObject::Render(void)
 {
-	D3DXMATRIX scale, rotX, rotY, rotZ, trans;
-
-	D3DXMatrixScaling(&scale, 1.f, 1.f, 1.f);
 	D3DXMatrixRotationX(&rotX, information.direction.x);
 	D3DXMatrixRotationY(&rotY, information.direction.y);
 	D3DXMatrixRotationZ(&rotZ, information.direction.z);
 	D3DXMatrixTranslation(&trans, information.position.x, information.position.y, information.position.z);
-	information.world = scale * rotX * rotY * rotZ * trans;
-
-	GET_SINGLE(DXFramework)->GetDevice()->SetTransform(D3DTS_WORLD, &information.world);
+	world = scale * rotX * rotY * rotZ * trans;
+	GET_SINGLE(DXFramework)->GetDevice()->SetTransform(D3DTS_WORLD, &world);
 }
 
 GameObject::GameObject()

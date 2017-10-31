@@ -79,12 +79,6 @@
     <Filter Include="03. Manager\MeshManager\Mesh">
       <UniqueIdentifier>{53c9e5ee-accc-437c-9dec-73684185bb0a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03. Manager\MeshManager\Mesh\Terrain">
-      <UniqueIdentifier>{e9bd849b-b3b3-47a1-99d9-c8d92e139b5e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="03. Manager\MeshManager\Mesh\Box">
-      <UniqueIdentifier>{6c2c1c1a-36fd-4578-bb71-982a569aa2d3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="03. Manager\ShaderManager">
       <UniqueIdentifier>{9aae97ed-d6dc-4159-81fb-b875771d1e85}</UniqueIdentifier>
     </Filter>
@@ -99,6 +93,36 @@
     </Filter>
     <Filter Include="03. Manager\SortManager">
       <UniqueIdentifier>{ffd8953b-4538-4dbf-a9ab-bcf07aeeb2dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Manager\TextureManager">
+      <UniqueIdentifier>{2afc6110-42db-4984-9416-c46c35ec255a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Manager\TextureManager\Texture">
+      <UniqueIdentifier>{9c105a03-d9c8-4c1c-b878-9aa844547b8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Manager\TextureManager\Texture\MultiTexture">
+      <UniqueIdentifier>{9337d6db-1b87-4423-82b8-94be4a1748f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Object\Background">
+      <UniqueIdentifier>{ff69b1ee-5581-432c-8c1f-f8108232a9be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Manager\BufferManager">
+      <UniqueIdentifier>{01112cd1-612f-4427-b7ac-5373211743ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Manager\BufferManager\Buffer">
+      <UniqueIdentifier>{df32019e-87f7-46c2-b663-d037f4141f53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Manager\BufferManager\Buffer\Terrain">
+      <UniqueIdentifier>{e75b56af-97f5-4cfc-8cc0-7493ef46a50d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Manager\BufferManager\Buffer\Box">
+      <UniqueIdentifier>{9444f221-b94c-4b36-b64b-9c6988de2d53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Manager\MeshManager\Mesh\Box">
+      <UniqueIdentifier>{6c2c1c1a-36fd-4578-bb71-982a569aa2d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Manager\MeshManager\Mesh\Terrain">
+      <UniqueIdentifier>{e9bd849b-b3b3-47a1-99d9-c8d92e139b5e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -201,6 +225,30 @@
     <ClInclude Include="SortManager.h">
       <Filter>03. Manager\SortManager</Filter>
     </ClInclude>
+    <ClInclude Include="TextureManager.h">
+      <Filter>03. Manager\TextureManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>03. Manager\TextureManager\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiTexture.h">
+      <Filter>03. Manager\TextureManager\Texture\MultiTexture</Filter>
+    </ClInclude>
+    <ClInclude Include="Background.h">
+      <Filter>02. Object\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="BufferManager.h">
+      <Filter>03. Manager\BufferManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Buffer.h">
+      <Filter>03. Manager\BufferManager\Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="BoxBuffer.h">
+      <Filter>03. Manager\BufferManager\Buffer\Box</Filter>
+    </ClInclude>
+    <ClInclude Include="TerrainBuffer.h">
+      <Filter>03. Manager\BufferManager\Buffer\Terrain</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -274,6 +322,30 @@
     </ClCompile>
     <ClCompile Include="SortManager.cpp">
       <Filter>03. Manager\SortManager</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureManager.cpp">
+      <Filter>03. Manager\TextureManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>03. Manager\TextureManager\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiTexture.cpp">
+      <Filter>03. Manager\TextureManager\Texture\MultiTexture</Filter>
+    </ClCompile>
+    <ClCompile Include="Background.cpp">
+      <Filter>02. Object\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="BufferManager.cpp">
+      <Filter>03. Manager\BufferManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Buffer.cpp">
+      <Filter>03. Manager\BufferManager\Buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="BoxBuffer.cpp">
+      <Filter>03. Manager\BufferManager\Buffer\Box</Filter>
+    </ClCompile>
+    <ClCompile Include="TerrainBuffer.cpp">
+      <Filter>03. Manager\BufferManager\Buffer\Terrain</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

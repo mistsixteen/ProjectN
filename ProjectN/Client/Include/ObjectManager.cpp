@@ -11,19 +11,20 @@ ObjectManager::~ObjectManager(void)
 	Release();
 }
 
-void ObjectManager::InsertObject(const TCHAR* objectKey, GameObject* object)
+void ObjectManager::AddObject(const TCHAR* key, GameObject* object)
 {
-	objectMap[objectKey].push_back(object);
+	objectMap[key].push_back(object);
 }
 
 void ObjectManager::Progress(void)
 {
+	(*objectMap[L"Background"].begin())->Progress();
 	for(auto iterList = objectMap[L"Terrain"].begin() ; iterList != objectMap[L"Terrain"].end() ; ++iterList)
 		(*iterList)->Progress();
 
 	for(auto iterMap = objectMap.begin() ; iterMap != objectMap.end() ; ++iterMap)
 	{ 
-		if ((*iterMap).first != L"Terrain")
+		if ((*iterMap).first != L"Terrain" && (*iterMap).first != L"Background")
 		{
 			for (auto iterList = (*iterMap).second.begin();
 				iterList != (*iterMap).second.end(); ++iterList)
@@ -37,6 +38,7 @@ void ObjectManager::Progress(void)
 
 void ObjectManager::Render(void)
 {
+	(*objectMap[L"Background"].begin())->Render();
 	for (auto iterList = objectMap[L"Terrain"].begin(); iterList != objectMap[L"Terrain"].end(); ++iterList)
 		(*iterList)->Render();
 	GET_SINGLE(SortManager)->Render();
@@ -65,14 +67,14 @@ void ObjectManager::Release(void)
 	SAFE_DELETE_SINGLE(SortManager);
 }
 
-GameObject* ObjectManager::GetGameObject(const TCHAR * objectKey, int count)
+GameObject* ObjectManager::GetGameObject(const TCHAR * key, int count)
 {
-	if (objectMap[objectKey].size() == 0)
+	if (objectMap[key].size() == 0)
 		return NULL;
 
 	int i = 0;
-	for (auto iterObj = objectMap[objectKey].begin();
-		iterObj != objectMap[objectKey].end(); ++iterObj)
+	for (auto iterObj = objectMap[key].begin();
+		iterObj != objectMap[key].end(); ++iterObj)
 	{
 		if (i == count)
 			return (*iterObj);

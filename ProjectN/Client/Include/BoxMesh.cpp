@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "BoxMesh.h"
 
-
 HRESULT BoxMesh::Initialize(const TCHAR * path, const TCHAR * fileName)
 {
 	// 박스 메쉬 생성
@@ -12,9 +11,11 @@ HRESULT BoxMesh::Initialize(const TCHAR * path, const TCHAR * fileName)
 	// 최소 최대 충돌 지점 설정
 	D3DXVECTOR3* vertices;
 	mesh->LockVertexBuffer(D3DLOCK_READONLY, (void**)&vertices);
+
 	D3DXComputeBoundingBox(vertices, mesh->GetNumVertices(),
 		D3DXGetFVFVertexSize(mesh->GetFVF()),
 		&min, &max);
+
 	mesh->UnlockVertexBuffer();
 
 	//void* vertices;
@@ -79,15 +80,9 @@ HRESULT BoxMesh::CloneMesh(LPD3DXMESH * ppMesh)
 	return S_OK;
 }
 
-void BoxMesh::Mesh_Render()
+void BoxMesh::Render()
 {
-	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_LIGHTING, FALSE);
-	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
-	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
-
 	mesh->DrawSubset(0);
-
-	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_LIGHTING, TRUE);
 }
 
 BoxMesh::BoxMesh()

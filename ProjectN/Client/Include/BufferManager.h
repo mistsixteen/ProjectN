@@ -1,0 +1,32 @@
+#pragma once
+#include "Define.h"
+#include "Buffer.h"
+#include "BoxBuffer.h"
+#include "TerrainBuffer.h"
+
+class BufferManager
+{
+	DECLARE_SINGLETON(BufferManager)
+private:
+	map<const TCHAR*, Buffer*> bufferMap;
+public:
+	HRESULT AddBuffer(const TCHAR* mapKey, const TCHAR* bufferKey);
+	void Render(const TCHAR* mapKey);
+	void Release();
+public:
+	const int& GetVertexCount(const TCHAR* mapKey);
+
+	void CopyVertexColorInfo(const TCHAR* mapKey, VTXCOL* pVtxCol);
+	void PasteVertexColorInfo(const TCHAR* mapKey, VTXCOL* pVtxCol);
+
+	void CopyVertexTextureInfo(const TCHAR* mapKey, VTXTEX* pVtxtex);
+	void PasteVertexTextureInfo(const TCHAR* mapKey, VTXTEX* pVtxtex);
+
+	void CopyIndexInfo(const TCHAR* mapKey, INDEX* pIndex, int& triCnt);
+	void PasteIndexInfo(const TCHAR* mapKey, INDEX* pIndex, int triCnt);
+private:
+	BufferManager();
+public:
+	~BufferManager();
+};
+

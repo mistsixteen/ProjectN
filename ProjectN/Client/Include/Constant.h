@@ -9,9 +9,9 @@ const int WINSIZEY	= 720;
 /*
 * VTXCNT 경우엔 계획된 정점 + 1 씩 선언 필요
 */
-const int VTXCNTX = 9;
-const int VTXCNTZ = 9;
-const int VTXGAP = 1;
+const int VTXCNTX = 65;
+const int VTXCNTZ = 65;
+const float VTXGAP = 1.f;
 
 
 /**
@@ -64,4 +64,14 @@ enum ANGLE
 	ANGLE_Y,
 	ANGLE_Z,
 	ANGLE_END,
+};
+
+
+/**
+* 텍스쳐 타입
+*/
+enum TEXTYPE
+{
+	TEXTYPE_GENERAL,
+	TEXTYPE_CUBE,
 };

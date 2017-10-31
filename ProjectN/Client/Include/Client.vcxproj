@@ -153,8 +153,12 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Background.h" />
     <ClInclude Include="BackView.h" />
+    <ClInclude Include="BoxBuffer.h" />
     <ClInclude Include="BoxMesh.h" />
+    <ClInclude Include="Buffer.h" />
+    <ClInclude Include="BufferManager.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CameraManager.h" />
     <ClInclude Include="Client.h" />
@@ -169,6 +173,7 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="MeshManager.h" />
+    <ClInclude Include="MultiTexture.h" />
     <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Resource.h" />
@@ -182,13 +187,20 @@
     <ClInclude Include="Struct.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Terrain.h" />
+    <ClInclude Include="TerrainBuffer.h" />
     <ClInclude Include="TerrainMesh.h" />
+    <ClInclude Include="Texture.h" />
+    <ClInclude Include="TextureManager.h" />
     <ClInclude Include="TimeManager.h" />
     <ClInclude Include="Training.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Background.cpp" />
     <ClCompile Include="BackView.cpp" />
+    <ClCompile Include="BoxBuffer.cpp" />
     <ClCompile Include="BoxMesh.cpp" />
+    <ClCompile Include="Buffer.cpp" />
+    <ClCompile Include="BufferManager.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CameraManager.cpp" />
     <ClCompile Include="Client.cpp" />
@@ -199,6 +211,7 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="MeshManager.cpp" />
+    <ClCompile Include="MultiTexture.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -213,7 +226,10 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Terrain.cpp" />
+    <ClCompile Include="TerrainBuffer.cpp" />
     <ClCompile Include="TerrainMesh.cpp" />
+    <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="Training.cpp" />
   </ItemGroup>

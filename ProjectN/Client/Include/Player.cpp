@@ -5,15 +5,29 @@
 
 HRESULT Player::Initialize(void)
 {
-	// 생선된 캐릭터 메쉬 복제
-	GET_SINGLE(MeshManager)->CloneMesh(L"Player", &information.mesh);
-	
-	// 충돌 정점 설정
-	information.min = *GET_SINGLE(MeshManager)->GetMin(L"Player");
-	information.max = *GET_SINGLE(MeshManager)->GetMax(L"Player");
+	// 버퍼 초기화
+	if (FAILED(GET_SINGLE(BufferManager)->AddBuffer(L"Player", L"Box")))
+	{
+		MSGBOX(L"플레이어 box 버퍼 추가 실패");
+		return E_FAIL;
+	}
+
+	// 메쉬는 이후 충돌 박스 설계시 사용
+	if (FAILED(GET_SINGLE(MeshManager)->AddMesh(L"Player", L"Box")))
+	{
+		MSGBOX(L"플레이어 box 메쉬 추가 실패");
+		return E_FAIL;
+	}
+
+	information.min = *(GET_SINGLE(MeshManager)->GetMin(L"Player"));
+	information.max = *(GET_SINGLE(MeshManager)->GetMax(L"Player"));
+
+	// 셰이더 초기화
+	GET_SINGLE(ShaderManager)->AddShader(L"Player", L"./Resource/Shader/Player.hpp");
 
 	// 매트릭스 초기화
-	D3DXMatrixIdentity(&information.world);
+	D3DXMatrixIdentity(&world);
+	D3DXMatrixScaling(&scale, 1.f, 1.f, 1.f);
 
 	// 플레이어 속도 초기화
 	information.speed = 10.f;
@@ -34,6 +48,10 @@ HRESULT Player::Initialize(void)
 	burstspeed = 0.0f;
 	buspeedmax = 20.0f;
 	buspeeddecrese = 3.0f;
+
+	// 매트릭스 초기화
+	D3DXMatrixIdentity(&world);
+	D3DXMatrixScaling(&scale, 1.f, 1.f, 1.f);
 
 	return S_OK;
 }
@@ -107,9 +125,6 @@ void Player::KeyCheck()
 		information.position += vRight * GET_SINGLE(TimeManager)->GetTime() * information.speed;
 	}
 
-	
-
-
 	//falling
 	D3DXVECTOR3 failing;
 	failing.x = 0.0f;
@@ -177,21 +192,36 @@ void Player::KeyCheck()
 	burst.z = 0.0f;
 
 	information.position += burst * GET_SINGLE(TimeManager)->GetTime() * information.speed;
-
-
-
 }
 
 void Player::Render(void)
 {
 	GameObject::Render();
-	/*TCHAR strTmp[128] = L"";
-	wsprintf(strTmp, L"Look : %d %d %d",
-		(int)information.look.x, (int)information.look.y, (int)information.look.z);
-	GET_SINGLE(DXFramework)->Drawtext(strTmp, 0, 0);*/
 
+	// 셰이더 변수 설정
+	LPD3DXEFFECT effect = GET_SINGLE(ShaderManager)->GetShader(L"Player");
+	effect->SetMatrix("gWorldMatrix", &world);
 
-	GET_SINGLE(MeshManager)->Mesh_Render(L"Player");
+	D3DXMATRIX matView, matProj;
+	GET_SINGLE(DXFramework)->GetDevice()->GetTransform(D3DTS_VIEW, &matView);
+	GET_SINGLE(DXFramework)->GetDevice()->GetTransform(D3DTS_PROJECTION, &matProj);
+
+	effect->SetMatrix("gWorldMatrix", &world);
+	effect->SetMatrix("gViewMatrix", &matView);
+	effect->SetMatrix("gProjectionMatrix", &matProj);
+
+	// 메쉬 렌더링
+	GET_SINGLE(ShaderManager)->Shader_Begin(L"Player");
+
+	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_ZENABLE, TRUE);
+	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_ZWRITEENABLE, FALSE);
+	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_LIGHTING, FALSE);
+	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
+	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
+	GET_SINGLE(BufferManager)->Render(L"Player");
+	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_LIGHTING, TRUE);
+
+	GET_SINGLE(ShaderManager)->Shader_End(L"Player");
 }
 
 void Player::Release(void)
@@ -205,7 +235,7 @@ Player::Player()
 Player::Player(const TCHAR * _key, INFO _info)
 	:GameObject(_key, _info)
 {
-	memset(&prevPos,NULL, sizeof(D3DXVECTOR3));
+	memset(&prevPos, NULL, sizeof(D3DXVECTOR3));
 }
 
 
@@ -213,3 +243,10 @@ Player::~Player()
 {
 	Release();
 }
+
+/*TCHAR strTmp[128] = L"";
+wsprintf(strTmp, L"Look : %d %d %d",
+(int)information.look.x, (int)information.look.y, (int)information.look.z);
+GET_SINGLE(DXFramework)->Drawtext(strTmp, 0, 0);*/
+//GET_SINGLE(MeshManager)->Mesh_Render(L"Player");
+

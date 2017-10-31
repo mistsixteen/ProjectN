@@ -2,7 +2,7 @@
 #include "TerrainMesh.h"
 
 
-HRESULT TerrainMesh::Initialize(const int vtxCntX, const int vtxCntZ, const float vtxGap)
+HRESULT TerrainMesh::Initialize(const TCHAR* path, const TCHAR* fileName)
 {
 	D3DVERTEXELEMENT9 decl[] =
 	{
@@ -12,18 +12,18 @@ HRESULT TerrainMesh::Initialize(const int vtxCntX, const int vtxCntZ, const floa
 		D3DDECL_END()
 	};
 
-	vtxCnt = vtxCntX * vtxCntZ;
-	idxCnt = (vtxCntX - 1) * (vtxCntZ - 1) * 2;
+	vtxCnt = VTXCNTX * VTXCNTZ;
+	idxCnt = (VTXCNTX - 1) * (VTXCNTZ - 1) * 2;
 
 	// 버텍스 버퍼 초기화
 	VTXTEX* vertices = new VTXTEX[vtxCnt];
-	for (int z = 0; z < vtxCntZ; ++z)
+	for (int z = 0; z < VTXCNTZ; ++z)
 	{
-		for (int x = 0; x < vtxCntX; ++x)
+		for (int x = 0; x < VTXCNTX; ++x)
 		{
-			int idx = (z * vtxCntX) + x;
-			vertices[idx].position = D3DXVECTOR3(float(x * vtxGap), 0, float(z * vtxGap));
-			vertices[idx].texture = D3DXVECTOR2(float(x) / (vtxCntX - 1) , float(z) / (vtxCntZ - 1));
+			int idx = (z * VTXCNTX) + x;
+			vertices[idx].position = D3DXVECTOR3(float(x * VTXGAP), 0, float(z * VTXGAP));
+			vertices[idx].texture = D3DXVECTOR2(float(x) / (VTXCNTX - 1) , float(z) / (VTXCNTZ - 1));
 		}
 	}
 
@@ -31,15 +31,15 @@ HRESULT TerrainMesh::Initialize(const int vtxCntX, const int vtxCntZ, const floa
 	INDEX* indices = new INDEX[idxCnt];
 	D3DXVECTOR3 dest, src, result;
 	int triCnt = 0;
-	for (int z = 0; z < vtxCntZ - 1; ++z)
+	for (int z = 0; z < VTXCNTZ - 1; ++z)
 	{
-		for (int x = 0; x < vtxCntX - 1; ++x)
+		for (int x = 0; x < VTXCNTX - 1; ++x)
 		{
-			int idx = (z * vtxCntX) + x;
+			int idx = (z * VTXCNTX) + x;
 
 			//우측 상단
-			indices[triCnt]._1 = vtxCntX + idx;
-			indices[triCnt]._2 = vtxCntX + 1 + idx;
+			indices[triCnt]._1 = VTXCNTX + idx;
+			indices[triCnt]._2 = VTXCNTX + 1 + idx;
 			indices[triCnt]._3 = idx + 1;
 
 			dest = vertices[indices[triCnt]._2].position
@@ -58,7 +58,7 @@ HRESULT TerrainMesh::Initialize(const int vtxCntX, const int vtxCntZ, const floa
 			++triCnt;
 
 			//좌측 하단
-			indices[triCnt]._1 = vtxCntX + idx;
+			indices[triCnt]._1 = VTXCNTX + idx;
 			indices[triCnt]._2 = idx + 1;
 			indices[triCnt]._3 = idx;
 
@@ -117,15 +117,9 @@ HRESULT TerrainMesh::CloneMesh(LPD3DXMESH* ppMesh)
 	return S_OK;
 }
 
-void TerrainMesh::Mesh_Render()
+void TerrainMesh::Render()
 {
-	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_LIGHTING, FALSE);
-	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
-	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
-
 	mesh->DrawSubset(0);
-
-	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_LIGHTING, TRUE);
 }
 
 TerrainMesh::TerrainMesh()

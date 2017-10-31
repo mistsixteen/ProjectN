@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Mesh.h"
 
-void Mesh::CopyVertexInfo_VTXTEX(VTXTEX * vtxTex)
+void Mesh::CopyVertexTextureInfo(VTXTEX * vtxTex)
 {
 	LPDIRECT3DVERTEXBUFFER9 vb;
 	VTXTEX* oriVtxTex;
@@ -11,7 +11,7 @@ void Mesh::CopyVertexInfo_VTXTEX(VTXTEX * vtxTex)
 	vb->Unlock();
 }
 
-void Mesh::PasteVertexInfo_VTXTEX(VTXTEX * vtxTex)
+void Mesh::PasteVertexTextureInfo(VTXTEX * vtxTex)
 {
 	LPDIRECT3DVERTEXBUFFER9 vb;
 	VTXTEX* oriVtxTex;

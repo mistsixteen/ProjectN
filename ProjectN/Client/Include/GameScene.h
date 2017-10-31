@@ -1,8 +1,9 @@
 #pragma once
-#include "GameObject.h"
+#include "Factory.h"
 
 #include "ObjectManager.h"
 #include "MeshManager.h"
+#include "BufferManager.h"
 #include "CameraManager.h"
 
 class GameScene

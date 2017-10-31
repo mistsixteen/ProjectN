@@ -14,14 +14,12 @@ public :
 	const D3DXVECTOR3*	GetMax(void) { return &max; }
 public:
 	/* 오브젝트 메쉬 전용 초기화 */
-	virtual HRESULT Initialize(const TCHAR* path = NULL, const TCHAR* fileName = NULL) { return S_OK; }
-	/* 터레인 메쉬 전용 초기화 */
-	virtual HRESULT Initialize(const int vtxCntX, const int vtxCntZ, const float vtxGap) { return S_OK; }
+	virtual HRESULT Initialize(const TCHAR* path = NULL, const TCHAR* fileName = NULL) PURE;
 	virtual HRESULT CloneMesh(LPD3DXMESH* ppMesh) PURE;
-	virtual void Mesh_Render() PURE;
+	virtual void Render() PURE;
 public:
-	void CopyVertexInfo_VTXTEX(VTXTEX* vtxTex);
-	void PasteVertexInfo_VTXTEX(VTXTEX* vtxTex);
+	void CopyVertexTextureInfo(VTXTEX* vtxTex);
+	void PasteVertexTextureInfo(VTXTEX* vtxTex);
 public:
 	void Release();
 public:
