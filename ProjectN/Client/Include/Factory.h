@@ -4,6 +4,7 @@
 #include "Terrain.h"
 #include "Player.h"
 #include "Background.h"
+#include "Target.h"
 
 template<typename T>
 class Factory

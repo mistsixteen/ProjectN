@@ -3,25 +3,11 @@
 
 HRESULT Terrain::Initialize()
 {
-	// 버퍼 초기화
-	if (FAILED(GET_SINGLE(BufferManager)->AddBuffer(L"Terrain", L"Terrain")))
-	{
-		MSGBOX(L"Terrain 버퍼 추가 실패");
-		return E_FAIL;
-	}
-
-	// 메쉬는 이후 충돌 박스 설계시 사용
-	if (FAILED(GET_SINGLE(MeshManager)->AddMesh(L"Terrain", L"Terrain")))
-	{
-		MSGBOX(L"Terrain 메쉬 추가 실패");
-		return E_FAIL;
-	}
-
 	// 셰이더 초기화
 	GET_SINGLE(ShaderManager)->AddShader(L"Terrain", L"./Resource/Shader/Terrain.hpp");
 
-	information.min = *(GET_SINGLE(MeshManager)->GetMin(L"Terrain"));
-	information.max = *(GET_SINGLE(MeshManager)->GetMax(L"Terrain"));
+	information.min = *(GET_SINGLE(BufferManager)->GetMin(L"Terrain"));
+	information.max = *(GET_SINGLE(BufferManager)->GetMax(L"Terrain"));
 
 	// 버텍스 정보 초기화
 	const int& vertexCnt = GET_SINGLE(BufferManager)->GetVertexCount(L"Terrain");

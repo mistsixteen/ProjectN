@@ -4,13 +4,6 @@
 
 HRESULT Background::Initialize(void)
 {
-	// 버퍼 초기화
-	if (FAILED(GET_SINGLE(BufferManager)->AddBuffer(L"Background", L"Box")))
-	{
-		MSGBOX(L"백그라운드 box 버퍼 추가 실패");
-		return E_FAIL;
-	}
-
 	// 큐브 텍스쳐 초기화
 	if (FAILED(GET_SINGLE(TextureManager)->AddTexture(L"./Resource/Texture/Environment/Background/Sky_%d.dds"
 														, TEXTYPE_CUBE, L"Background", L"Sky", 1))) {
@@ -31,7 +24,8 @@ void Background::Progress(void)
 void Background::Render(void)
 {
 	GameObject::Render();
-	GET_SINGLE(DXFramework)->GetDevice()->SetTexture(0, GET_SINGLE(TextureManager)->GetTexture(L"Background", L"Sky", 0)->cubeTexture);
+	GET_SINGLE(DXFramework)->GetDevice()->SetTexture(0, 
+		GET_SINGLE(TextureManager)->GetTexture(L"Background", L"Sky", 0)->cubeTexture);
 
 	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_ZENABLE, TRUE);
 	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_ZWRITEENABLE, FALSE);

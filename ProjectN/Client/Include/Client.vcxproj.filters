@@ -91,9 +91,6 @@
     <Filter Include="03. Manager\CameraManager\Camera\BackView">
       <UniqueIdentifier>{e5a81287-6f9b-4f19-be30-a8592d18e059}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03. Manager\SortManager">
-      <UniqueIdentifier>{ffd8953b-4538-4dbf-a9ab-bcf07aeeb2dd}</UniqueIdentifier>
-    </Filter>
     <Filter Include="03. Manager\TextureManager">
       <UniqueIdentifier>{2afc6110-42db-4984-9416-c46c35ec255a}</UniqueIdentifier>
     </Filter>
@@ -123,6 +120,9 @@
     </Filter>
     <Filter Include="03. Manager\MeshManager\Mesh\Terrain">
       <UniqueIdentifier>{e9bd849b-b3b3-47a1-99d9-c8d92e139b5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Manager\ObjectManager\SortManager">
+      <UniqueIdentifier>{ffd8953b-4538-4dbf-a9ab-bcf07aeeb2dd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -223,7 +223,7 @@
       <Filter>03. Manager\CameraManager\Camera\BackView</Filter>
     </ClInclude>
     <ClInclude Include="SortManager.h">
-      <Filter>03. Manager\SortManager</Filter>
+      <Filter>03. Manager\ObjectManager\SortManager</Filter>
     </ClInclude>
     <ClInclude Include="TextureManager.h">
       <Filter>03. Manager\TextureManager</Filter>
@@ -248,6 +248,9 @@
     </ClInclude>
     <ClInclude Include="TerrainBuffer.h">
       <Filter>03. Manager\BufferManager\Buffer\Terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="Target.h">
+      <Filter>02. Object\Target</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -321,7 +324,7 @@
       <Filter>03. Manager\CameraManager\Camera\BackView</Filter>
     </ClCompile>
     <ClCompile Include="SortManager.cpp">
-      <Filter>03. Manager\SortManager</Filter>
+      <Filter>03. Manager\ObjectManager\SortManager</Filter>
     </ClCompile>
     <ClCompile Include="TextureManager.cpp">
       <Filter>03. Manager\TextureManager</Filter>
@@ -346,6 +349,9 @@
     </ClCompile>
     <ClCompile Include="TerrainBuffer.cpp">
       <Filter>03. Manager\BufferManager\Buffer\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="Target.cpp">
+      <Filter>02. Object\Target</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

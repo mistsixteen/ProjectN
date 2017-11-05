@@ -1,8 +1,6 @@
 #pragma once
 #include "Define.h"
 
-#include "Math.h"
-
 #include "ObjectManager.h"
 #include "MeshManager.h"
 #include "BufferManager.h"

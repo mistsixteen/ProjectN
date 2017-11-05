@@ -53,6 +53,22 @@ void BufferManager::Release()
 	bufferMap.clear();
 }
 
+const D3DXVECTOR3 * BufferManager::GetMin(const TCHAR * mapKey)
+{
+	auto iterMap = bufferMap.find(mapKey);
+	if (iterMap == bufferMap.end())
+		return nullptr;
+	return iterMap->second->GetMin();
+}
+
+const D3DXVECTOR3 * BufferManager::GetMax(const TCHAR * mapKey)
+{
+	auto iterMap = bufferMap.find(mapKey);
+	if (iterMap == bufferMap.end())
+		return nullptr;
+	return iterMap->second->GetMax();
+}
+
 const int & BufferManager::GetVertexCount(const TCHAR * mapKey)
 {
 	auto iterMap = bufferMap.find(mapKey);

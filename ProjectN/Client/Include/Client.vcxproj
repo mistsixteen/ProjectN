@@ -185,6 +185,7 @@
     <ClInclude Include="SortManager.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Struct.h" />
+    <ClInclude Include="Target.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Terrain.h" />
     <ClInclude Include="TerrainBuffer.h" />
@@ -225,6 +226,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Target.cpp" />
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="TerrainBuffer.cpp" />
     <ClCompile Include="TerrainMesh.cpp" />

@@ -1,7 +1,6 @@
 #pragma once
 #include "Define.h"
 #include "GameObject.h"
-#include "Math.h"
 
 #include "SortManager.h"
 

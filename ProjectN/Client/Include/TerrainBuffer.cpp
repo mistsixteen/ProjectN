@@ -85,6 +85,12 @@ HRESULT TerrainBuffer::Initialize()
 
 	indexBuffer->Unlock();
 
+	// 최소 최대 충돌 지점 설정
+	D3DXVECTOR3* vertices = NULL;
+	vertexBuffer->Lock(0, 0, (void**)&vertices, NULL);
+	D3DXComputeBoundingBox(vertices, vertexCnt, D3DXGetFVFVertexSize(vertexFVF), &min, &max);
+	vertexBuffer->Unlock();
+
 	return S_OK;
 }
 

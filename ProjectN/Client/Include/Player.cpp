@@ -5,22 +5,8 @@
 
 HRESULT Player::Initialize(void)
 {
-	// 버퍼 초기화
-	if (FAILED(GET_SINGLE(BufferManager)->AddBuffer(L"Player", L"Box")))
-	{
-		MSGBOX(L"플레이어 box 버퍼 추가 실패");
-		return E_FAIL;
-	}
-
-	// 메쉬는 이후 충돌 박스 설계시 사용
-	if (FAILED(GET_SINGLE(MeshManager)->AddMesh(L"Player", L"Box")))
-	{
-		MSGBOX(L"플레이어 box 메쉬 추가 실패");
-		return E_FAIL;
-	}
-
-	information.min = *(GET_SINGLE(MeshManager)->GetMin(L"Player"));
-	information.max = *(GET_SINGLE(MeshManager)->GetMax(L"Player"));
+	information.min = *(GET_SINGLE(BufferManager)->GetMin(L"Player"));
+	information.max = *(GET_SINGLE(BufferManager)->GetMax(L"Player"));
 
 	// 셰이더 초기화
 	GET_SINGLE(ShaderManager)->AddShader(L"Player", L"./Resource/Shader/Player.hpp");

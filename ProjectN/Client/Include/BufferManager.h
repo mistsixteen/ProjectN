@@ -12,7 +12,10 @@ private:
 public:
 	HRESULT AddBuffer(const TCHAR* mapKey, const TCHAR* bufferKey);
 	void Render(const TCHAR* mapKey);
-	void Release();
+	void Release(); 
+public:
+		const D3DXVECTOR3* GetMin(const TCHAR*	mapKey);
+		const D3DXVECTOR3* GetMax(const TCHAR*	mapKey);
 public:
 	const int& GetVertexCount(const TCHAR* mapKey);
 

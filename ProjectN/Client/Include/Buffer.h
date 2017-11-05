@@ -23,8 +23,8 @@ public:
 	void Release();
 public:
 	const int& GetVertexCount(void) const { return vertexCnt; }
-	const D3DXVECTOR3* GetMin(void) const { return &min; };
-	const D3DXVECTOR3* GetMax(void) const { return &max; };;
+	const D3DXVECTOR3* GetMin(void) const { return &min; }
+	const D3DXVECTOR3* GetMax(void) const { return &max; }
 
 	void CopyVertexColorInfo(VTXCOL* pVtxCol);
 	void PasteVertexColorInfo(VTXCOL* pVtxCol);

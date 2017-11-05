@@ -13,6 +13,34 @@ Training::~Training()
 
 HRESULT Training::Initialize()
 {
+	// 터레인, 배경, 플레이어, 타겟 순으로 버퍼, 메쉬 및 오브젝트 초기화
+	// 버퍼 초기화 
+	if (FAILED(GET_SINGLE(BufferManager)->AddBuffer(L"Terrain", L"Terrain")))
+	{
+		MSGBOX(L"Terrain 버퍼 추가 실패");
+		return E_FAIL;
+	}
+
+	if (FAILED(GET_SINGLE(BufferManager)->AddBuffer(L"Background", L"Box")))
+	{
+		MSGBOX(L"백그라운드 box 버퍼 추가 실패");
+		return E_FAIL;
+	}
+
+	if (FAILED(GET_SINGLE(BufferManager)->AddBuffer(L"Player", L"Box")))
+	{
+		MSGBOX(L"플레이어 box 버퍼 추가 실패");
+		return E_FAIL;
+	}
+
+	if (FAILED(GET_SINGLE(BufferManager)->AddBuffer(L"Target", L"Box")))
+	{
+		MSGBOX(L"표적 box 버퍼 추가 실패");
+		return E_FAIL;
+	}
+
+	// 메쉬 초기화
+
 	// 오브젝트 추가
 	INFO info;
 	ZeroMemory(&info, sizeof(INFO));
@@ -26,6 +54,10 @@ HRESULT Training::Initialize()
 	info.position = D3DXVECTOR3((VTXCNTX - 1) * 0.5f * VTXGAP, 1.f, (VTXCNTZ - 1) * 0.5f * VTXGAP);
 	info.look = D3DXVECTOR3(0.f, 0.f, 1.f);
 	GET_SINGLE(ObjectManager)->AddObject(L"Player", Factory<Player>::CreateInstance(L"Player", info));
+
+	ZeroMemory(&info, sizeof(INFO));
+	GET_SINGLE(ObjectManager)->AddObject(L"Target", Factory<Target>::CreateInstance(L"Player", info));
+	GET_SINGLE(ObjectManager)->AddObject(L"Target", Factory<Target>::CreateInstance(L"Player", info));
 
 	// 카메라 초기화
 	GET_SINGLE(CameraManager)->InitCamera(CAMERA_BACKVIEW);

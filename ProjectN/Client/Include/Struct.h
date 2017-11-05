@@ -11,6 +11,10 @@ typedef struct tInfo
 
 	LPD3DXMESH		mesh;
 
+	int				hp;
+	int				stamina;
+	int				damage;
+
 	float			speed;
 }INFO;
 
