@@ -159,6 +159,7 @@
     <ClInclude Include="BoxMesh.h" />
     <ClInclude Include="Buffer.h" />
     <ClInclude Include="BufferManager.h" />
+    <ClInclude Include="Bullet.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CameraManager.h" />
     <ClInclude Include="Client.h" />
@@ -183,6 +184,7 @@
     <ClInclude Include="Shader.h" />
     <ClInclude Include="ShaderManager.h" />
     <ClInclude Include="SortManager.h" />
+    <ClInclude Include="SphereMesh.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Struct.h" />
     <ClInclude Include="Target.h" />
@@ -202,6 +204,7 @@
     <ClCompile Include="BoxMesh.cpp" />
     <ClCompile Include="Buffer.cpp" />
     <ClCompile Include="BufferManager.cpp" />
+    <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CameraManager.cpp" />
     <ClCompile Include="Client.cpp" />
@@ -220,6 +223,7 @@
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShaderManager.cpp" />
     <ClCompile Include="SortManager.cpp" />
+    <ClCompile Include="SphereMesh.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

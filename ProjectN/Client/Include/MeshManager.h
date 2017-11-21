@@ -4,6 +4,7 @@
 #include "Mesh.h"
 #include "TerrainMesh.h"
 #include "BoxMesh.h"
+#include "SphereMesh.h"
 
 class MeshManager
 {

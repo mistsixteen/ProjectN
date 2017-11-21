@@ -18,6 +18,7 @@ public:
 public:
 	GameObject* GetGameObject(const TCHAR* key, int count = 0);
 	float GetTerrainHeight(INFO srcInfo);
+	GameObject* GetInterectedObject(INFO srcInfo);
 private:
 	ObjectManager();
 public:

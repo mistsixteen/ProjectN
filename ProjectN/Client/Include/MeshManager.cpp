@@ -53,6 +53,12 @@ HRESULT MeshManager::AddMesh(const TCHAR * mapKey, const TCHAR * meshKey)
 		if (FAILED(mesh->Initialize()))
 			return E_FAIL;
 	}
+	else if (_tcscmp(meshKey, L"Sphere") == 0)
+	{
+		mesh = new SphereMesh;
+		if (FAILED(mesh->Initialize()))
+			return E_FAIL;
+	}
 
 	meshMap.insert(make_pair(mapKey, mesh));
 	return S_OK;

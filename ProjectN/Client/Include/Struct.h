@@ -2,19 +2,27 @@
 
 typedef struct tInfo
 {
+	// 기본 위치, 오브젝트 방향, 시각 방향
 	D3DXVECTOR3		position;
 	D3DXVECTOR3		direction;
 	D3DXVECTOR3		look;
-
+	
+	// 오브젝트 최대, 최소
 	D3DXVECTOR3		min;
 	D3DXVECTOR3		max;
 
+	// 메쉬
 	LPD3DXMESH		mesh;
 
+	// 체력
 	int				hp;
+	// 스태미나
 	int				stamina;
+	// 공격력
+	int				attack;
+	// 피격량
 	int				damage;
-
+	// 이동속도
 	float			speed;
 }INFO;
 

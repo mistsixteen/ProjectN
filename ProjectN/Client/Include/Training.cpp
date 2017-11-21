@@ -40,6 +40,11 @@ HRESULT Training::Initialize()
 	}
 
 	// 메쉬 초기화
+	if (FAILED(GET_SINGLE(MeshManager)->AddMesh(L"Bullet", L"Sphere")))
+	{
+		MSGBOX(L"총탄 sphere 추가 실패");
+		return E_FAIL;
+	}
 
 	// 오브젝트 추가
 	INFO info;

@@ -1,5 +1,6 @@
 ﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(368,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
-  Target.cpp
-f:\project\projectn\projectn\client\include\target.cpp(17): warning C4244: '초기화 중': 'std::chrono::system_clock::rep'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Player.cpp
+  Bullet.cpp
+  코드를 생성하고 있습니다...
   Client.vcxproj -> F:\Project\ProjectN\ProjectN\Client\Include\../bin\Client.exe
   Client.vcxproj -> ../bin\Client.pdb (Full PDB)

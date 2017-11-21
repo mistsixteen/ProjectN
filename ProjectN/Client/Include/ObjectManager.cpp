@@ -136,3 +136,22 @@ float ObjectManager::GetTerrainHeight(INFO srcInfo)
 	return -1.f;
 }
 
+GameObject * ObjectManager::GetInterectedObject(INFO srcInfo)
+{
+	for (auto iterMap = objectMap.begin(); iterMap != objectMap.end(); ++iterMap)
+	{
+		if ((*iterMap).first != L"Terrain")
+		{
+			for (auto iterList = (*iterMap).second.begin();
+				iterList != (*iterMap).second.end(); ++iterList)
+			{
+				D3DXVECTOR3 distance = (*iterList)->GetInfo().position - srcInfo.position;
+				if (D3DXVec3Length(&distance) < 1.f) {
+
+				}
+			}
+		}
+	}
+	return nullptr;
+}
+
