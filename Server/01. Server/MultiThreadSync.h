@@ -5,6 +5,9 @@
 * 해당 개체가 MultiThreadSync 클래스를 상속받으면
 * 다중 스레드에 대해서 안전하게 된다는 의미
 */
+
+#include "CriticalSection.h"
+
 template <class T>
 class MultiThreadSync
 {

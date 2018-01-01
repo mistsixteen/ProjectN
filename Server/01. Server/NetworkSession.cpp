@@ -1,6 +1,14 @@
 #include "stdafx.h"
 #include "NetworkSession.h"
 
+DWORD WINAPI ReliableUdpThreadCallback(LPVOID parameter)
+{
+	NetworkSession *UdpNetwork = (NetworkSession*)parameter;
+	UdpNetwork->ReliableUdpThreadCallback();
+
+	return 0;
+}
+
 NetworkSession::NetworkSession(VOID)
 {
 	// Accept에 관련된 Overlapped 구조체
@@ -16,12 +24,14 @@ NetworkSession::NetworkSession(VOID)
 	ZeroMemory(&UdpRemoteInfo, sizeof(UdpRemoteInfo));
 
 	Socket							= NULL;		// 소켓 핸들 값 저장
-	ReliableUdpThreadHandle			= NULL;		// Reliable UDP 관련 변수
-	ReliableUdpThreadStartupEvent	= NULL;		// Reliable UDP 관련 변수
-	ReliableUdpThreadDestroyEvent	= NULL;		// Reliable UDP 관련 변수
-	ReliableUdpThreadWakeUpEvent	= NULL;		// Reliable UDP 관련 변수
-	ReliableUdpWriteCompleteEvent	= NULL;		// Reliable UDP 관련 변수
-	IsReliableUdpSending			= NULL;		// Reliable UDP 관련 변수
+	ReliableUdpThreadHandle			= NULL;		// 같은 패킷을 받을 때까지 계속 전송해주는
+												// 스레드(ReliableUpdThread) 핸들
+	ReliableUdpThreadStartupEvent	= NULL;		// ReliableUdpThread의 시작을 알리는 이벤트
+	ReliableUdpThreadDestroyEvent	= NULL;		// ReliableUdpThread의 종료를 알리는 이벤트
+	ReliableUdpThreadWakeUpEvent	= NULL;		// ReliableUdpThread를 깨울 때 사용하는 이벤트
+	ReliableUdpWriteCompleteEvent	= NULL;		// 상대가 패킷을 받아 더 이상 보낼 필요가 없을 떄
+												// 사용하는 이벤트
+	IsReliableUdpSending			= NULL;		// 현재 보내고 있는 Reliable Data가 있는지 확인
 
 	AcceptOverlapped.IoType			= IO_ACCEPT;// Overlapped 구조체의 종류를 정의
 	ReadOverlapped.IoType			= IO_READ;	// Overlapped 구조체의 종류를 정의
@@ -66,6 +76,7 @@ BOOL NetworkSession::Begin(VOID)
 	return TRUE;
 }
 
+// 종료
 BOOL NetworkSession::End(VOID)
 {
 	ThreadSync	Sync;		// 다중 스레드 동기화
@@ -75,7 +86,7 @@ BOOL NetworkSession::End(VOID)
 
 	Socket = NULL;
 
-	if (ReliableUdpThreadHandle) {
+	if (ReliableUdpThreadHandle) {					// ReliableUpdThread가 실행 중일 경우
 		// 일단 스레드를 종료하는 이벤트를 발생
 		SetEvent(ReliableUdpThreadDestroyEvent);
 
@@ -84,9 +95,10 @@ BOOL NetworkSession::End(VOID)
 		// TerminateThread를 이용해서 강제 종료하는 것도 방법
 		WaitForSingleObject(ReliableUdpThreadHandle, INFINITE);
 
-		CloseHandle(ReliableUdpThreadHandle);
+		CloseHandle(ReliableUdpThreadHandle);		// 종료가 되면 핸들을 닫아줌
 	}
 
+	// 관련 이벤트를 모두 종료해줌
 	if (ReliableUdpThreadDestroyEvent)
 		CloseHandle(ReliableUdpThreadDestroyEvent);
 
@@ -128,6 +140,140 @@ BOOL NetworkSession::TcpBind(VOID)
 	//setsockopt(Socket, IPPROTO_TCP, TCP_NODELAY, (const char FAR*)&NoDelay, sizeof(NoDelay));
 
 	return TRUE;
+}
+
+BOOL NetworkSession::UdpBind(USHORT port)
+{
+	ThreadSync	Sync;							// 다중 스레드 동기화
+
+	if (Socket)
+		return FALSE;
+
+	SOCKADDR_IN RemoteAddressInfo;				// 사용할 UDP 주소, 포트를 설정
+	RemoteAddressInfo.sin_family = AF_INET;
+	// 지정된 포트로 데이터를 받기 위해 지정
+	RemoteAddressInfo.sin_port = htons(port);	
+	RemoteAddressInfo.sin_addr.S_un.S_addr = htonl(INADDR_ANY);
+
+	// UDP용 소켓을 생성. SOCK_DRAM과 IPPROTO_UDP로 정의해서 생성한 것을 확인
+	Socket = WSASocket(AF_INET, SOCK_DGRAM, IPPROTO_UDP, NULL, 0, WSA_FLAG_OVERLAPPED);
+	if (Socket == INVALID_SOCKET)
+		return FALSE;
+	
+	// 설정된 주소를 Bind
+	if (bind(Socket, (struct sockaddr*) &RemoteAddressInfo, sizeof(SOCKADDR_IN)) == SOCKET_ERROR) {
+		End();
+		return FALSE;
+	}
+
+	// ReliableUdpThread에서 사용할 핸들, 이벤트들을 생성
+	// ReliableUdpThreadDestroyEvent
+	// ReliableUdpThread를 종료할 때 발생시키는 이벤트
+	ReliableUdpThreadDestroyEvent = CreateEvent(0, FALSE, FALSE, 0);
+	if (ReliableUdpThreadDestroyEvent == NULL) {
+		End();
+		return FALSE;
+	}
+
+	// ReliableUdpThreadStartupEvent
+	// ReliableUdpThread가 시작되었을 때 발생시키는 이벤트
+	ReliableUdpThreadStartupEvent = CreateEvent(0, FALSE, FALSE, 0);
+	if (ReliableUdpThreadStartupEvent == NULL) {
+		End();
+		return FALSE;
+	}
+
+	// ReliableUdpThreadWakeUpEvent
+	// ReliableUdpThread를 깨울 때 사용하는 이벤트
+	ReliableUdpThreadWakeUpEvent = CreateEvent(0, FALSE, FALSE, 0);
+	if (ReliableUdpThreadWakeUpEvent == NULL) {
+		End();
+		return FALSE;
+	}
+
+	// ReliableUdpWriteCompleteEvent
+	// ReliableUdpThread에서 데이터 하나를 보내고 완료했을 때 발생하는 이벤트
+	ReliableUdpWriteCompleteEvent = CreateEvent(0, FALSE, FALSE, 0);
+	if (ReliableUdpWriteCompleteEvent == NULL) {
+		End();
+		return FALSE;
+	}
+
+	// ReliableUdpThread에서 사용할 큐를 초기화
+	if (!ReliableWriteQueue.Begin()) {
+		End();
+		return FALSE;
+	}
+
+	// ReliableUdpThread를 생성
+	DWORD ReliableUdpThreadID = 0;
+	// 2번째는 DWORD WINAPI 스레드 함수 포인터, 3번째는 LPVOID형 스레드 함수 매개변수
+	// this를 넣음으로써 클래스 포인터를 초기화한 후
+	// 클래스내 ReliableUdpThreadCallback 함수를 사용
+	ReliableUdpThreadHandle = CreateThread(NULL, 0, ::ReliableUdpThreadCallback,
+											this, 0, &ReliableUdpThreadID);
+
+	// 생성이 될 때까지 무한 대기
+	WaitForSingleObject(ReliableUdpThreadStartupEvent, INFINITE);
+	
+	return TRUE;
+}
+
+// ReliableUDPThread 내부
+VOID NetworkSession::ReliableUdpThreadCallback(VOID)
+{
+	DWORD EventID = 0;										// 시작 종료를 체크하는 이벤트 ID 값
+	// ReliableUdpThread의 시작과 종료를 담당하는 이벤트
+	HANDLE ThreadEvent[2] = { ReliableUdpThreadDestroyEvent, 
+								ReliableUdpThreadWakeUpEvent };
+
+	CHAR RemoteAddress[32]			= { 0, };				// 데이터를 보낼 주소
+	USHORT RemotePort				= 0;					// 데이터를 보낼 포트
+	BYTE Data[MAX_BUFFER_LENGTH]	= { 0, };				// 보낼 데이터
+	DWORD DataLength				= 0;					// 보낼 데이터 길이
+	VOID* Object = NULL;									// 오브젝트 미사용
+	
+	while(TRUE) {
+		SetEvent(ReliableUdpThreadStartupEvent);			// ReliableUdpThread 시작을 알리는 이벤트
+															// UdpBind의 wait를 종료시킴
+		EventID = WaitForMultipleObjects(2, ThreadEvent,	// 이벤트 발생까지 무한 대기
+										FALSE, INFINITE);
+
+		switch (EventID) {
+		// ReliableUdpThreadDestroyEvent 발생 시 종료
+		case WAIT_OBJECT_0:		// 종료
+			return;
+		case WAIT_OBJECT_0 + 1:
+		NEXT_DATA:
+			// write일 경우 1개의 보낼 데이터를 Pop해주고
+			if (ReliableWriteQueue.Pop(&Object, Data, DataLength, RemoteAddress, RemotePort)) {
+				// 데이터가 있을 경우
+				// 실제 Write를 해주고 WaitForSingleObject를 실행
+				// 받았을 때 그 SetEvent를 해주면 풀림
+			RETRY:
+				// 실제로 데이터를 전송하는 함수
+				if (!WriteTo2(RemoteAddress, RemotePort, Data, DataLength)) {
+					return;
+				}
+
+				// 응답이 오기를 0.01초 동안 대기
+				DWORD Result = WaitForSingleObject(ReliableUdpWriteCompleteEvent, 10);
+
+				// 받았을 경우 다음 데이터 처리
+				if (Result == WAIT_OBJECT_0)
+					goto NEXT_DATA;
+				// 오지 않았을 경우 데이터 재전송
+				else
+					goto RETRY;
+			}
+			else {
+				// WriteTo 함수에서 현재 보내는 데이터 확인 FLAG 변수
+				IsReliableUdpSending = FALSE;				// 큐에 더이상 보낼 데이터가 없을 경우
+			}
+			break;
+		}
+	}
+
 }
 
 BOOL NetworkSession::Listen(USHORT port, INT backLog)
@@ -236,7 +382,8 @@ BOOL NetworkSession::Accept(SOCKET listenSocket)
 	// AcceptEx를 통해 AcceptEx당 하나의 소켓을 미리 만들어두고
 	// ACcept 요청이 있을 때 만들어둔 소켓을 활용하는 방식
 	// 이를 통해 여러 개의 AcceptEx를 호출해 놓으면 갑자기 많이 접속이 몰릴 경우를 대비 가능
-	if (!AcceptEx(listenSocket,
+	if (!AcceptEx(listenSocket,				// AcceptEx 함수를 사용하려면
+											// mswsock.lib 라이브러리 참조
 		Socket,
 		ReadBuffer,							// 버퍼는 정의해 주나,
 		0,									// 크기를 0으로 잡아서 받지 않음
@@ -288,6 +435,44 @@ BOOL NetworkSession::InitializeReadForIocp(VOID)
 	return TRUE;
 }
 
+BOOL NetworkSession::InitializeReadForFromIocp(VOID)
+{
+	ThreadSync	Sync;					// 다중 스레드 동기화
+
+	if (!Socket)
+		return FALSE;
+
+	WSABUF			Wsabuf;											// WSABUF buf, len으로 구성
+	DWORD			ReadBytes = 0;
+	DWORD			ReadFlag = 0;
+	INT				RemoteAddressInfoSize = sizeof(UdpRemoteInfo);	// 데이터 받은 주소를 저장
+
+	Wsabuf.buf = (CHAR*)ReadBuffer;	// 멤버로 선언된 ReadBuffer 포인터를 넘겨줌
+	Wsabuf.len = MAX_BUFFER_LENGTH;	// 최대 버퍼 길이
+
+	// WSARecvFrom을 호출
+	INT ReturnValue = WSARecvFrom(Socket,
+		&Wsabuf,
+		1,					
+		&ReadBytes,
+		&ReadFlag,
+		(SOCKADDR*)& UdpRemoteInfo,			// WSARecv와는 다른 파라미터
+											// 데이터를 받은 주소 정보가 들어감
+		&RemoteAddressInfoSize,				// 주소 정보 길이
+		&ReadOverlapped.Overlapped,
+		NULL
+		);
+
+	// SOCKET_ERROR이지만 WSA_IO_PENDING 이거나 WSAEWOULDBLOCK이면 정상적으로 진행
+	if (ReturnValue == SOCKET_ERROR && WSAGetLastError() != WSA_IO_PENDING
+		&& WSAGetLastError() != WSAEWOULDBLOCK) {
+		End();
+		return FALSE;
+	}
+
+	return TRUE;
+}
+
 // 받은 데이터 가져오기
 BOOL NetworkSession::ReadForIocp(BYTE * data, DWORD & dataLength)
 {
@@ -301,6 +486,40 @@ BOOL NetworkSession::ReadForIocp(BYTE * data, DWORD & dataLength)
 
 	// WSARecv를 통해서 받아온 데이터가 들어있는 ReadBuffer에서 데이터를 복제
 	CopyMemory(data, ReadBuffer, dataLength);
+
+	return TRUE;
+}
+
+// IOCP에서 실제로 받은 데이터 확인
+BOOL NetworkSession::ReadFromForIocp(LPSTR remoteAddress, USHORT & remotePort, BYTE * data, DWORD & dataLength)
+{
+	ThreadSync	Sync;					// 다중 스레드 동기화
+
+	if (!Socket)
+		return FALSE;
+
+	if (!data || dataLength <= 0)
+		return FALSE;
+
+	// WSARecvFrom을 통해서 받아온 데이터가 들어있는 ReadBuffer에서 데이터를 복제
+	CopyMemory(data, ReadBuffer, dataLength);
+
+	strcpy(remoteAddress, inet_ntoa(UdpRemoteInfo.sin_addr));		// 데이터를 보낸 주소 확인
+	remotePort = ntohs(UdpRemoteInfo.sin_port);						// 데이터를 보낸 포트 확인
+
+	USHORT Ack = 0;
+	// 받은 데이터의 앞부분 2바이트를 확인한 후
+	CopyMemory(&Ack, ReadBuffer, sizeof(USHORT));
+
+	if (Ack == 9999) {
+		// 앞의 2바이트가 9999일 경우 데이터를 잘 받은 응답 패킷으로 인식
+		return FALSE;
+	}
+	else {
+		Ack = 9999;			// 새로운 데이터일 경우
+		// 데이터를 보낸 주소로 2바이트를 전송
+		WriteTo2(remoteAddress, remotePort, (BYTE*)&Ack, sizeof(USHORT));
+	}
 
 	return TRUE;
 }
@@ -358,6 +577,74 @@ BOOL NetworkSession::ReadForEventSelect(BYTE * data, DWORD & dataLength)
 	return TRUE;
 }
 
+// EventSelect 방식을 사용할 때의 ReadFrom
+BOOL NetworkSession::ReadFromForEventSelect(LPSTR remoteAddress, USHORT & remotePort, BYTE * data, DWORD & dataLength)
+{
+	ThreadSync	Sync;					// 다중 스레드 동기화
+
+	if (!Socket)
+		return FALSE;
+
+	if (!data)
+		return FALSE;
+
+	if (!Socket)
+		return FALSE;
+
+	WSABUF			Wsabuf;											// WSABUF buf, len으로 구성
+	DWORD			ReadBytes = 0;
+	DWORD			ReadFlag = 0;
+	INT				RemoteAddressInfoSize = sizeof(UdpRemoteInfo);	// 주소 데이터 길이
+
+	Wsabuf.buf = (CHAR*)ReadBuffer;	// 멤버로 선언된 ReadBuffer 포인터를 넘겨줌
+	Wsabuf.len = MAX_BUFFER_LENGTH;	// 최대 버퍼 길이
+									// WSARecv를 호출
+	INT ReturnValue = WSARecvFrom(Socket,
+		&Wsabuf,
+		1,									// 버퍼 개수를 지정. WSABUF를 이용한 원형 버퍼를 사용할 경우
+											// 1이상의 숫자를 입력
+		&ReadBytes,
+		&ReadFlag,
+		(SOCKADDR*)&UdpRemoteInfo,
+		&RemoteAddressInfoSize,
+		&ReadOverlapped.Overlapped,			// ReadOverlapped를 사용
+		NULL);
+
+	// SOCKET_ERROR이지만 WSA_IO_PENDING 이거나 WSAEWOULDBLOCK이면 정상적으로 진행
+	if (ReturnValue == SOCKET_ERROR && WSAGetLastError() != WSA_IO_PENDING
+		&& WSAGetLastError() != WSAEWOULDBLOCK) {
+		End();
+		return FALSE;
+	}
+
+	// IOCP와 달리 바로 결과가 나옴
+	
+	CopyMemory(data, ReadBuffer, ReadBytes);		// 데이터를 복사
+	dataLength = ReadBytes;							// 파라미터로 데이터 길이를 받아옴
+
+	// 주소 정보를 복사
+	strcpy(remoteAddress, inet_ntoa(UdpRemoteInfo.sin_addr));
+	remotePort = ntohs(UdpRemoteInfo.sin_port);
+
+	// IOCP 쪽과 같은 ReliableUDP 코드
+
+	USHORT Ack = 0;
+	CopyMemory(&Ack, ReadBuffer, sizeof(USHORT));
+
+	if (Ack == 9999) {
+		// 앞의 2바이트가 9999일 경우 데이터를 잘 받은 응답 패킷으로 인식
+		SetEvent(ReliableUdpWriteCompleteEvent);
+		return FALSE;
+	}
+	else {
+		Ack = 9999;			// 새로운 데이터일 경우
+							// 데이터를 보낸 주소로 2바이트를 전송
+		WriteTo2(remoteAddress, remotePort, (BYTE*)&Ack, sizeof(USHORT));
+	}
+
+	return TRUE;
+}
+
 // IOCP용과 EventSelect용으로 따로 구분하지 않음
 // Write를 할때 넣었던 데이터 포인터를 보내기 완료가 될 때까지 살려두어야 함
 // 그렇지 않으면 도중에 문제 발생 여부가 있음
@@ -398,4 +685,81 @@ BOOL NetworkSession::Write(BYTE * data, DWORD dataLength)
 	}
 
 	return TRUE;
+}
+
+// 사용자들이 호출하는 WriteTo 함수
+BOOL NetworkSession::WriteTo(LPCSTR remoteAddress, USHORT remotePort, BYTE * data, DWORD dataLength)
+{
+	ThreadSync	Sync;		// 다중 스레드 동기화
+
+	if (!Socket)
+		return FALSE;
+
+	if (!remoteAddress || remotePort <= 0 || !data || dataLength <= 0)
+		return FALSE;
+
+	// 큐에 데이터를 입력
+	if (!ReliableWriteQueue.Push(this, data, dataLength, remoteAddress, remotePort))
+		return FALSE;
+
+	// 만약 현재 보내는 데이터가 없을 경우
+	if (!IsReliableUdpSending) {
+		// 보내는 데이터가 있다고 플래그를 바꿔주고 ReliableUDPThread를 꺠움
+		IsReliableUdpSending = TRUE;
+		SetEvent(ReliableUdpThreadWakeUpEvent);
+	}
+
+	return TRUE;
+}
+
+BOOL NetworkSession::WriteTo2(LPCSTR remoteAddress, USHORT remotePort, BYTE * data, DWORD dataLength)
+{
+	ThreadSync	Sync;					// 다중 스레드 동기화
+
+	if (!Socket)
+		return FALSE;
+
+	if (!remoteAddress || remotePort <= 0 || !data || dataLength <= 0)
+		return FALSE;
+
+	WSABUF			Wsabuf;											// WSABUF buf, len으로 구성
+	DWORD			WriteBytes = 0;
+	DWORD			WriteFlag = 0;
+
+	SOCKADDR_IN		RemoteAddressInfo;
+	INT				RemoteAddressInfoSize = sizeof(UdpRemoteInfo);	// 주소 데이터 길이
+
+	Wsabuf.buf = (CHAR*)data;
+	Wsabuf.len = dataLength;
+
+	// 보낼 데이터 주소를 입력
+	RemoteAddressInfo.sin_family = AF_INET;
+	RemoteAddressInfo.sin_addr.S_un.S_addr = inet_addr(remoteAddress);
+	RemoteAddressInfo.sin_port = htons(remotePort);
+
+	// WSASendTo 함수를 이용해서 전송
+	INT ReturnValue = WSASendTo(Socket,
+		&Wsabuf,
+		1,
+		&WriteBytes,
+		WriteFlag,
+		(SOCKADDR*)&RemoteAddressInfo,				// 보낼 주소 정보
+		RemoteAddressInfoSize,						// 보낼 주소 정보 길이
+		&WriteOverlapped.Overlapped,
+		NULL);
+
+	if (ReturnValue == SOCKET_ERROR && WSAGetLastError() != WSA_IO_PENDING
+		&& WSAGetLastError() != WSAEWOULDBLOCK) {
+		End();
+		return FALSE;
+	}
+
+	return TRUE;
+}
+
+SOCKET NetworkSession::GetSocket(VOID)
+{
+	ThreadSync Sync;
+
+	return Socket;
 }

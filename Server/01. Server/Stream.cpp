@@ -134,6 +134,24 @@ BOOL Stream::ReadBOOL(BOOL * data)
 	return TRUE;
 }
 
+BOOL Stream::ReadWCHAR(WCHAR * data)
+{
+	memcpy(data, bufferPointer + this->length, sizeof(WCHAR));
+
+	this->length += sizeof(WCHAR);
+
+	return TRUE;
+}
+
+BOOL Stream::ReadWCHARs(LPWSTR data, DWORD length)
+{
+	memcpy(data, bufferPointer + this->length, length * sizeof(WCHAR));
+
+	this->length += length * sizeof(WCHAR);
+
+	return TRUE;
+}
+
 BOOL Stream::WriteInt32(INT * data)
 {
 	CopyMemory(bufferPointer + this->length, &data, sizeof(INT));

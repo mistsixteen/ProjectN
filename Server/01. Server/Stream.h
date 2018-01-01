@@ -18,6 +18,8 @@ public:
 	BOOL ReadUSHORT(USHORT* data);
 	BOOL ReadSHORT(SHORT* data);
 	BOOL ReadBOOL(BOOL* data);
+	BOOL ReadWCHAR(WCHAR *data);
+	BOOL ReadWCHARs(LPWSTR data, DWORD length);
 
 	BOOL WriteInt32(INT *data);
 	BOOL WriteDWORD(DWORD *data);

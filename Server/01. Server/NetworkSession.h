@@ -34,17 +34,30 @@ public:
 	BOOL End(VOID);
 
 	BOOL TcpBind(VOID);
+	BOOL UdpBind(USHORT port);
+
 	BOOL Listen(USHORT port, INT backLog);
 	BOOL Connect(LPSTR address, USHORT port);
 	BOOL Accept(SOCKET listenSocket);
 
 	BOOL InitializeReadForIocp(VOID);
+	BOOL InitializeReadForFromIocp(VOID);
+
 	BOOL ReadForIocp(BYTE* data, DWORD& dataLength);
+	BOOL ReadFromForIocp(LPSTR remoteAddress, USHORT& remotePort, BYTE* data, DWORD& dataLength);
+
 	BOOL ReadForEventSelect(BYTE* data, DWORD& dataLength);
+	BOOL ReadFromForEventSelect(LPSTR remoteAddress, USHORT& remotePort, BYTE* data, DWORD& dataLength);
 
 	BOOL Write(BYTE* data, DWORD dataLength);
+	BOOL WriteTo(LPCSTR remoteAddress, USHORT remotePort, BYTE* data, DWORD dataLength);
+	BOOL WriteTo2(LPCSTR remoteAddress, USHORT remotePort, BYTE* data, DWORD dataLength);
+
+	SOCKET GetSocket(VOID);
+
+	VOID ReliableUdpThreadCallback(VOID);
 public:
 	NetworkSession(VOID);
-	~NetworkSession(VOID);
+	virtual ~NetworkSession(VOID);
 };
 

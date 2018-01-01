@@ -55,6 +55,15 @@
     <Filter Include="13. NetworkSession">
       <UniqueIdentifier>{cc6a681e-0d44-493e-ae49-8b2ef6ab0b27}</UniqueIdentifier>
     </Filter>
+    <Filter Include="13. NetworkSession\PacketSession">
+      <UniqueIdentifier>{4987137a-215a-4728-8cb6-6d5c5d052cbb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="14. EventSelect">
+      <UniqueIdentifier>{87924460-c415-4146-9287-e89b2d1cba5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="15. Iocp">
+      <UniqueIdentifier>{0fc12e51-e04d-4314-a92f-3f4af9239523}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -111,6 +120,15 @@
     <ClInclude Include="NetworkSession.h">
       <Filter>13. NetworkSession</Filter>
     </ClInclude>
+    <ClInclude Include="PacketSession.h">
+      <Filter>13. NetworkSession\PacketSession</Filter>
+    </ClInclude>
+    <ClInclude Include="EventSelect.h">
+      <Filter>14. EventSelect</Filter>
+    </ClInclude>
+    <ClInclude Include="Iocp.h">
+      <Filter>15. Iocp</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -145,6 +163,15 @@
     </ClCompile>
     <ClCompile Include="NetworkSession.cpp">
       <Filter>13. NetworkSession</Filter>
+    </ClCompile>
+    <ClCompile Include="PacketSession.cpp">
+      <Filter>13. NetworkSession\PacketSession</Filter>
+    </ClCompile>
+    <ClCompile Include="EventSelect.cpp">
+      <Filter>14. EventSelect</Filter>
+    </ClCompile>
+    <ClCompile Include="Iocp.cpp">
+      <Filter>15. Iocp</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
