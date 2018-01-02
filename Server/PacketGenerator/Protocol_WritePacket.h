@@ -1,20 +1,8 @@
 #pragma once
 
-inline DWORD WRITE_//주의사항으로프로토콜에딸린파라미터를정의할땐'(BYTE* buffer, S//주의사항으로프로토콜에딸린파라미터를정의할땐' &parameter	StreamSP Stream;
-	Stream->SetBuffer(buffer);
-
-
-	return Stream->GetLength();
-}
-
-inline DWORD WRITE_//현재코드에서(BYTE* buffer, S//현재코드에서 &parameter	StreamSP Stream;
-	Stream->SetBuffer(buffer);
-
-
-	return Stream->GetLength();
-}
-
-inline DWORD WRITE_PT_CHANNEL_NICKNAME(BYTE* buffer, SPT_CHANNEL_NICKNAME &parameter	StreamSP Stream;
+inline DWORD WRITE_PT_CHANNEL_NICKNAME(BYTE* buffer, SPT_CHANNEL_NICKNAME &parameter)
+{
+	StreamSP Stream;
 	Stream->SetBuffer(buffer);
 
 	Stream->WriteWCHARs(parameter.USER_ID, 32);
@@ -23,7 +11,9 @@ inline DWORD WRITE_PT_CHANNEL_NICKNAME(BYTE* buffer, SPT_CHANNEL_NICKNAME &param
 	return Stream->GetLength();
 }
 
-inline DWORD WRITE_PT_CHANNEL_NICKNAME_SUCC_U(BYTE* buffer, SPT_CHANNEL_NICKNAME_SUCC_U &parameter	StreamSP Stream;
+inline DWORD WRITE_PT_CHANNEL_NICKNAME_SUCC_U(BYTE* buffer, SPT_CHANNEL_NICKNAME_SUCC_U &parameter)
+{
+	StreamSP Stream;
 	Stream->SetBuffer(buffer);
 
 	Stream->WriteWCHARs(parameter.USER_ID, 32);
@@ -32,28 +22,12 @@ inline DWORD WRITE_PT_CHANNEL_NICKNAME_SUCC_U(BYTE* buffer, SPT_CHANNEL_NICKNAME
 	return Stream->GetLength();
 }
 
-inline DWORD WRITE_PT_CHANNEL_NICKNAME_FAIL_U(BYTE* buffer, SPT_CHANNEL_NICKNAME_FAIL_U &parameter	StreamSP Stream;
-	Stream->SetBuffer(buffer);
-
-	Stream->WriteDWORD(&parameter.);
-
-	return Stream->GetLength();
-}
-
-inline DWORD WRITE_//주의사항으로프로토콜에딸린파라미터를정의할땐'(BYTE* buffer, S//주의사항으로프로토콜에딸린파라미터를정의할땐' &parameter)
+inline DWORD WRITE_PT_CHANNEL_NICKNAME_FAIL_U(BYTE* buffer, SPT_CHANNEL_NICKNAME_FAIL_U &parameter)
 {
 	StreamSP Stream;
 	Stream->SetBuffer(buffer);
 
-
-	return Stream->GetLength();
-}
-
-inline DWORD WRITE_//현재코드에서(BYTE* buffer, S//현재코드에서 &parameter)
-{
-	StreamSP Stream;
-	Stream->SetBuffer(buffer);
-
+	Stream->WriteDWORD(&parameter.ERROR_CODE);
 
 	return Stream->GetLength();
 }
@@ -88,12 +62,12 @@ inline DWORD WRITE_PT_CHANNEL_NICKNAME_SUCC_U(BYTE* buffer, SPT_CHANNEL_NICKNAME
 	return Stream->GetLength();
 }
 
-inline DWORD WRITE_PT_CHANNEL_NICKNAME_FAIL_U(BYTE* buffer, SPT_CHANNEL_NICKNAME_FAIL_U &parameter, DWORD )
+inline DWORD WRITE_PT_CHANNEL_NICKNAME_FAIL_U(BYTE* buffer, SPT_CHANNEL_NICKNAME_FAIL_U &parameter, DWORD error_code)
 {
 	StreamSP Stream;
 	Stream->SetBuffer(buffer);
 
-	Stream->WriteDWORD();
+	Stream->WriteDWORD(error_code);
 
 	return Stream->GetLength();
 }

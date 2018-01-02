@@ -89,7 +89,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		// 이 라인의 데이터가 프로토콜 이름인지 파라미터인지 구분
 		// 파라미터일 경우 형과 변수 명으로 이뤄지고 프로토콜 이름에 따라감
 		// 파라미터는 최대 255개까지 줄 수 있음
-		
+		//
 		// 라인 안에 ','가 있으면 프로토콜
 		// enum의 특징상 ','로 확인
 		// 이부분 때문에 파라미터에는 ','가 들어가면 안됨
@@ -168,6 +168,8 @@ int _tmain(int argc, _TCHAR* argv[])
 					else {
 						// 만약 [ 기호가 없을 경우는 배열형이 아니기 때문에 길이를 0으로 세팅
 						Protocol[ProtocolPos - 1].Parameters[ParameterPos - 1].Length = 0;
+						// 그리고 파라미터 이름을 복사
+						_tcscpy(Protocol[ProtocolPos - 1].Parameters[ParameterPos - 1].Name, Pos + 1);
 					}
 				}
 			}
@@ -183,14 +185,14 @@ int _tmain(int argc, _TCHAR* argv[])
 	// structure 만들기
 	FILE* StructureFile = _tfopen(StructureFileName, L"w");
 
-	_ftprintf(StructureFile, L"pragma once\n\n");
+	_ftprintf(StructureFile, L"#pragma once\n\n");
 
 	// 읽은 프로토콜 전체 개수만큼 반복됨
 	for (DWORD i = 0; i < ProtocolPos; ++i) {
 		// 읽은 프로토콜과 파라미터 정보를 이용해서 구조체를 선언
 		_ftprintf(StructureFile, L"typedef struct _S_%s\n{\n", Protocol[i].Name);
 		// 읽은 프로토콜의 파라미터 개수만큼 반복
-		for (DWORD j = 0; j < Protocol[i].Parameters[j].Length; ++j) {
+		for (DWORD j = 0; j < Protocol[i].ParametersCount; ++j) {
 			// 배열형이 아닌 파라미터일 경우
 			if (Protocol[i].Parameters[j].Length == 0) {
 				// 데이터 형과 변수명을 써 줌
@@ -200,7 +202,7 @@ int _tmain(int argc, _TCHAR* argv[])
 			// 배열형인 파라미터일 경우
 			else {
 				// 데이텨형, 변수명, 배열 크기를 써줌
-				_ftprintf(StructureFile, L"\t%s %s[%d];",
+				_ftprintf(StructureFile, L"\t%s %s[%d];\n",
 					Protocol[i].Parameters[j].Type, Protocol[i].Parameters[j].Name,
 					Protocol[i].Parameters[j].Length);
 			}
@@ -220,7 +222,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	for (DWORD i = 0; i < ProtocolPos; ++i) {
 		// READ 함수 선언, inline 형태로 선언
 		// 이 READ 함수들은 위에서 이리 만들어 놓은 구조를 이용해서 데이터를 읽게 됨
-		_ftprintf(ReadPacketFile, L"inline VOID READ_%s(BYTE* buffer, S%s &parameter", 
+		_ftprintf(ReadPacketFile, L"inline VOID READ_%s(BYTE* buffer, S%s &parameter)\n{\n", 
 			Protocol[i].Name, Protocol[i].Name);
 		// 바이너리에서 데이터를 읽기 위해서 StreamSP 클래스를 사용
 		_ftprintf(ReadPacketFile, L"\tStreamSP Stream;\n");
@@ -331,7 +333,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	for (DWORD i = 0; i < ProtocolPos; ++i) {
 		// WRITE 함수 선언, inline 형태로 선언
 		// 이 WRITE 함수들은 위에서 이리 만들어 놓은 구조를 이용해서 데이터를 읽게 됨
-		_ftprintf(WritePacketFile, L"inline DWORD WRITE_%s(BYTE* buffer, S%s &parameter",
+		_ftprintf(WritePacketFile, L"inline DWORD WRITE_%s(BYTE* buffer, S%s &parameter)\n{\n",
 			Protocol[i].Name, Protocol[i].Name);
 		// 바이너리에서 데이터를 읽기 위해서 StreamSP 클래스를 사용
 		_ftprintf(WritePacketFile, L"\tStreamSP Stream;\n");
