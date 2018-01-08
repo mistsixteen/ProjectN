@@ -38,6 +38,6 @@ public:
 	BOOL		IsEmpty(VOID);
 public:
 	CircularQueue(VOID);
-	~CircularQueue(VOID);
+	virtual ~CircularQueue(VOID);
 };
 

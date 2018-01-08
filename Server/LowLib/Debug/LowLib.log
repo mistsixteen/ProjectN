@@ -25,9 +25,6 @@ c:\program files (x86)\windows kits\8.1\include\um\dbghelp.h(3190): warning C409
   Iocp.cpp
 c:\program files (x86)\windows kits\8.1\include\um\dbghelp.h(1544): warning C4091: 'typedef ': 변수를 선언하지 않으면 '' 왼쪽은 무시됩니다.
 c:\program files (x86)\windows kits\8.1\include\um\dbghelp.h(3190): warning C4091: 'typedef ': 변수를 선언하지 않으면 '' 왼쪽은 무시됩니다.
-d:\project\projectn\projectn\server\lowlib\iocp.cpp(57): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-d:\project\projectn\projectn\server\lowlib\iocp.cpp(70): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-d:\project\projectn\projectn\server\lowlib\iocp.cpp(80): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
   IniFile.cpp
 c:\program files (x86)\windows kits\8.1\include\um\dbghelp.h(1544): warning C4091: 'typedef ': 변수를 선언하지 않으면 '' 왼쪽은 무시됩니다.
 c:\program files (x86)\windows kits\8.1\include\um\dbghelp.h(3190): warning C4091: 'typedef ': 변수를 선언하지 않으면 '' 왼쪽은 무시됩니다.
@@ -42,4 +39,4 @@ c:\program files (x86)\windows kits\8.1\include\um\dbghelp.h(1544): warning C409
 c:\program files (x86)\windows kits\8.1\include\um\dbghelp.h(3190): warning C4091: 'typedef ': 변수를 선언하지 않으면 '' 왼쪽은 무시됩니다.
   코드를 생성하고 있습니다...
 stdafx.obj : warning LNK4221: 이 개체 파일은 이전에 정의되지 않은 공용 기호를 정의하지 않으므로 이 라이브러리를 사용하는 어떠한 링크 작업에도 사용되지 않습니다.
-  LowLib.vcxproj -> D:\Project\ProjectN\ProjectN\Server\LowLib\Debug\LowLib.lib
+  LowLib.vcxproj -> F:\Project\ProjectN\Server\LowLib\Debug\LowLib.lib

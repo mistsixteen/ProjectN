@@ -20,7 +20,7 @@ public:
 		InitializeCriticalSection(&Sync);		// CRITICAL_SECTION 개체 초기화
 	}
 
-	~CriticalSection(VOID)
+	virtual ~CriticalSection(VOID)
 	{
 		DeleteCriticalSection(&Sync);			// CRITICAL_SECTION 개체 삭제
 	}

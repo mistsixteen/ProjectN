@@ -46,7 +46,6 @@ static BYTE							gEnd[2] = { 0, 0 };
 
 // Perflib의 문자열에 추가하거나 값을 가져올 때 사용하는 함수
 // 대부분 포인터 연산
-
 BOOL AddString(LPTSTR source, LPTSTR addItem, DWORD &length)
 {
 	if (!source || !addItem)

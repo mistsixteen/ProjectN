@@ -43,6 +43,6 @@ public:
 	BOOL ResetUdp(VOID);
 public:
 	PacketSession(VOID);
-	~PacketSession(VOID);
+	virtual ~PacketSession(VOID);
 };
 

@@ -37,7 +37,7 @@ private:
 	HANDLE			IocpHandle			= NULL;
 	HANDLE			StartupEventHandle	= NULL;
 
-	INT				WorkerThreadCount	= 0;
+	DWORD			WorkerThreadCount	= 0;
 
 	vector<HANDLE>	WorkerThreadVector;
 
@@ -55,6 +55,6 @@ public:
 	VOID WorkerThreadCallback(VOID);
 public:
 	Iocp(VOID);
-	~Iocp(VOID);
+	virtual ~Iocp(VOID);
 };
 

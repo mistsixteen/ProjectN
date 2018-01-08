@@ -36,5 +36,5 @@ public:
 	DWORD GetLength(VOID) const { return this->length; }
 public:
 	Stream();
-	~Stream();
+	virtual ~Stream();
 };

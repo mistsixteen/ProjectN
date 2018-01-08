@@ -20,6 +20,6 @@ protected:
 	virtual VOID OnStopped() PURE;
 public:
 	Service();
-	~Service();
+	virtual ~Service();
 };
 

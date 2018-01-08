@@ -23,7 +23,7 @@ public:
 			T::Sync.Enter();				// 해당 클래스의 동기화 개체를 Enter
 		}
 
-		~ThreadSync(VOID)
+		virtual ~ThreadSync(VOID)
 		{
 			T::Sync.Leave();				// 해당 클래스의 동기화 개체를 Leave
 		}

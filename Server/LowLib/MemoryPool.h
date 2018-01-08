@@ -60,7 +60,7 @@ private:
 		*Current = 0;
 	}
 protected:
-	 virtual ~MemoryPool()
+	virtual ~MemoryPool()
 	{
 	}
 };

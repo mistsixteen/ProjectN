@@ -16,6 +16,6 @@ public:
 	INT ComplexRandom(VOID);
 public:
 	Random();
-	~Random();
+	virtual ~Random();
 };
 
