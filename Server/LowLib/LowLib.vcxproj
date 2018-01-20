@@ -146,6 +146,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CircularQueue.h" />
+    <ClInclude Include="ClientSession.h" />
     <ClInclude Include="CriticalSection.h" />
     <ClInclude Include="Crypt.h" />
     <ClInclude Include="EventSelect.h" />
@@ -169,6 +170,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CircularQueue.cpp" />
+    <ClCompile Include="ClientSession.cpp" />
     <ClCompile Include="Crypt.cpp" />
     <ClCompile Include="EventSelect.cpp" />
     <ClCompile Include="IniFile.cpp" />

@@ -45,6 +45,9 @@
     <ClInclude Include="ConnectedSessionManager.h">
       <Filter>02. ConnectedSessionManager</Filter>
     </ClInclude>
+    <ClInclude Include="Protocol.h">
+      <Filter>99. Protocol</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

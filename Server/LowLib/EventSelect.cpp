@@ -35,7 +35,7 @@ BOOL EventSelect::Begin(SOCKET socket)
 		return FALSE;
 
 	// 멤버 변수 소켓이 이미 NULL이 아닐 경우 중복 실행으로 간주하고 실행하지 않음
-	if (!Socket)
+	if (Socket)
 		return FALSE;
 
 	// 멤버 변수에 입력

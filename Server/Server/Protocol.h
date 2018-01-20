@@ -1,0 +1,36 @@
+#pragma once
+
+typedef enum _PROTOCOL
+{
+	// 프로토콜의 시작을 알림
+	PT_VERSION= 0x1000000,
+
+	PT_REG_USER,
+	/*
+	WCHAR:	USER_ID[32]
+	WCHAR:	USER_NAME[32]
+	DWORD:	AGE
+	BYTE:	SEX
+	WCHAR:	ADDRESS[32]
+	*/
+	PT_QUERY_USER,
+	/*
+	WCHAR:	USER_ID[32]
+	*/
+	PT_QUERY_USER_RESULT,
+	/*
+	WCHAR:	USER_ID[32]
+	WCHAR:	USER_NAME[32]
+	DWORD:	AGE
+	BYTE:	SEX
+	WCHAR:	ADDRESS[32]
+	*/
+	PT_REG_COMPUTER,
+	/*
+
+	*/
+
+	PT_END
+};
+
+

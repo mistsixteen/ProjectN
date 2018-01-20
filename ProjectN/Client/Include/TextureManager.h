@@ -2,6 +2,7 @@
 #include "Define.h"
 
 #include "Texture.h"
+#include "SingleTexture.h"
 #include "MultiTexture.h"
 
 class Texture;
