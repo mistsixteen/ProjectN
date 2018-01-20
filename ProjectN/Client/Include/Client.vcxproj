@@ -172,6 +172,7 @@
     <ClInclude Include="Macro.h" />
     <ClInclude Include="Framework.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="Math.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="MeshManager.h" />
     <ClInclude Include="MultiTexture.h" />
@@ -183,6 +184,7 @@
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="ShaderManager.h" />
+    <ClInclude Include="SingleTexture.h" />
     <ClInclude Include="SortManager.h" />
     <ClInclude Include="SphereMesh.h" />
     <ClInclude Include="stdafx.h" />
@@ -222,6 +224,7 @@
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShaderManager.cpp" />
+    <ClCompile Include="SingleTexture.cpp" />
     <ClCompile Include="SortManager.cpp" />
     <ClCompile Include="SphereMesh.cpp" />
     <ClCompile Include="stdafx.cpp">

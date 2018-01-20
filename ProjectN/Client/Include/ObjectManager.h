@@ -16,9 +16,9 @@ public:
 	void Render(void);
 	void Release(void);
 public:
+	map<const TCHAR*, list<GameObject*>>& GetObjectMap() { return objectMap; };
 	GameObject* GetGameObject(const TCHAR* key, int count = 0);
 	float GetTerrainHeight(INFO srcInfo);
-	GameObject* GetInterectedObject(INFO srcInfo);
 private:
 	ObjectManager();
 public:
