@@ -21,7 +21,7 @@ HRESULT Target::Initialize(void)
 	D3DXMatrixIdentity(&world);
 	D3DXMatrixScaling(&scale, ranNum() % 11 * 0.1f + 1.f, ranNum() % 11 * 0.1f + 1.f, ranNum() % 11 * 0.1f + 1.f);
 	information.position = { ranNum() % (VTXCNTX - 1) * VTXGAP,
-							ranNum() % (VTXCNTX - 1) * VTXGAP,
+							0,
 							ranNum() % (VTXCNTZ - 1) * VTXGAP};
 
 	// 경계 설정
@@ -47,7 +47,7 @@ HRESULT Target::Initialize(void)
 	}
 
 	// 체력 초기화
-	information.hp = 0;
+	information.hp = 1;
 
 	return S_OK;
 }
@@ -58,7 +58,7 @@ void Target::Progress(void)
 
 void Target::Render(void)
 {
-	if (information.hp <= 0) {
+	if (information.hp > 0) {
 		GameObject::Render();
 
 		// 셰이더 변수 설정
@@ -98,13 +98,63 @@ void Target::Render(void)
 		GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
 		GET_SINGLE(BufferManager)->Render(L"Target");
 		GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_LIGHTING, TRUE);
-
 		GET_SINGLE(ShaderManager)->Shader_End(L"Target");
+
+
+		//for_test
+		//render box of obb -> position based, 1^3 box
+		ID3DXLine *templine;
+		D3DXCreateLine(GET_SINGLE(DXFramework)->GetDevice(), &templine);
+		templine->SetWidth(2.0f);
+		D3DXVECTOR3 obbAxis[3] = {
+			D3DXVECTOR3(1.0f, 0.0f, 0.0f),
+			D3DXVECTOR3(0.0f, 1.0f, 0.0f),
+			D3DXVECTOR3(0.0f, 0.0f, 1.0f)
+		};
+		float length[3] = {0.5f, 0.5f, 0.5f};
+		D3DXVECTOR3 vList[8];
+		int target = 0;
+		for(int i = 0; i < 2; i++)
+		{
+			for (int j = 0; j < 2; j++)
+			{
+				for (int k = 0; k < 2; k++)
+				{
+					float a = ((float)i - 0.5f) * 1.0f;
+					float aa = ((float)j - 0.5f) * 1.0f;
+					float aaa = ((float)k - 0.5f) * 1.0f;
+
+					//
+					D3DXVECTOR3 change = ((float)i - 0.5f) * obbAxis[0] + ((float)j - 0.5f) * obbAxis[1] + ((float)k - 0.5f) * obbAxis[2];
+					
+						
+					vList[target] = information.position + change;
+
+
+					target = target + 1;
+				}
+			}
+		}
+		D3DXMATRIX temp = matView * matProj;
+		templine->Begin();
+		templine->DrawTransform(vList, 8, &temp, D3DCOLOR_XRGB(255, 255, 0));
+		//templine->Draw()
+		templine->End();
+
+		templine->Release();
+		
+		
+
 	}
 }
 
 void Target::Release(void)
 {
+}
+
+void Target::Oncolide(void)
+{
+	information.hp = 3;
 }
 
 Target::Target()

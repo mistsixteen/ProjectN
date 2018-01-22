@@ -17,6 +17,7 @@ protected:
 	D3DXMATRIX				rotY;
 	D3DXMATRIX				rotZ;
 	D3DXMATRIX				trans;
+
 protected:
 	INFO					information;
 	const TCHAR*			key;
@@ -28,6 +29,7 @@ public:
 	virtual	void	Progress(void) PURE;
 	virtual	void	Render(void);
 	virtual	void	Release(void) PURE;
+	virtual	void	Oncolide(void) PURE;
 public:
 	float GetDistanceFromCam() const
 	{

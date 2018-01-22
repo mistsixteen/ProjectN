@@ -1,4 +1,12 @@
 #pragma once
+
+#include "Factory.h"
+
+#include "ObjectManager.h"
+#include "MeshManager.h"
+#include "BufferManager.h"
+#include "CameraManager.h"
+
 #include "GameObject.h"
 #include "Input.h"
 
@@ -22,6 +30,10 @@ private:
 
 	float			buspeedmax;
 	float			buspeeddecrese;
+
+	float			temp_firebulletdelay;
+
+
 public:
 	void SetPosition();
 	void KeyCheck();
@@ -30,6 +42,7 @@ public:
 	virtual	void	Progress(void);
 	virtual	void	Render(void);
 	virtual	void	Release(void);
+	virtual	void	Oncolide(void);
 public:
 	Player();
 	Player(const TCHAR* _key, INFO _info);

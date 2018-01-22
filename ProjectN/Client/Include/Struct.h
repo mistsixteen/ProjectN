@@ -1,5 +1,10 @@
 #pragma once
 
+#define NONE 0
+#define RADIUS 1
+#define OBB 2
+
+
 typedef struct tInfo
 {
 	// 기본 위치, 오브젝트 방향, 시각 방향
@@ -24,6 +29,21 @@ typedef struct tInfo
 	int				damage;
 	// 이동속도
 	float			speed;
+
+	//충돌처리
+
+	int				flag;
+	float			size;
+
+	D3DXVECTOR3		vAxis[3];
+	float			fAxisLen[3];
+
+	tInfo()
+	{
+		flag = 0;
+		size = 0;
+	}
+
 }INFO;
 
 // 폴리곤 렌더링 순서 구조체

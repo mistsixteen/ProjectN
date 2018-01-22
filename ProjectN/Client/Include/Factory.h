@@ -5,7 +5,7 @@
 #include "Player.h"
 #include "Background.h"
 #include "Target.h"
-
+#include "Bullet.h"
 template<typename T>
 class Factory
 {

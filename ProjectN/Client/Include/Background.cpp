@@ -25,7 +25,7 @@ void Background::Render(void)
 {
 	GameObject::Render();
 	GET_SINGLE(DXFramework)->GetDevice()->SetTexture(0, 
-		GET_SINGLE(TextureManager)->GetTexture(L"Background", L"Sky", 0)->cubeTexture);
+	GET_SINGLE(TextureManager)->GetTexture(L"Background", L"Sky", 0)->cubeTexture);
 
 	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_ZENABLE, TRUE);
 	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_ZWRITEENABLE, FALSE);
@@ -39,6 +39,11 @@ void Background::Render(void)
 
 void Background::Release(void)
 {
+}
+
+void Background::Oncolide(void)
+{
+
 }
 
 Background::Background()

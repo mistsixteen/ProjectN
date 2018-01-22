@@ -127,6 +127,9 @@
     <Filter Include="03. Manager\MeshManager\Mesh\Sphere">
       <UniqueIdentifier>{59f54a36-65a6-46b4-92a1-301fc6835371}</UniqueIdentifier>
     </Filter>
+    <Filter Include="96. Math">
+      <UniqueIdentifier>{0e57956b-d03a-4a5c-a3da-2d8d5bed70ea}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />

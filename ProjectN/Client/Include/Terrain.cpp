@@ -30,6 +30,10 @@ void Terrain::Progress()
 {
 }
 
+void Terrain::Oncolide()
+{
+
+}
 void Terrain::Render()
 {
 	GameObject::Render();

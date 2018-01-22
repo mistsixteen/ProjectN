@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Player.h"
 
+
 #include "DXFramework.h"
 
 HRESULT Player::Initialize(void)
@@ -34,6 +35,8 @@ HRESULT Player::Initialize(void)
 	burstspeed = 0.0f;
 	buspeedmax = 20.0f;
 	buspeeddecrese = 3.0f;
+
+	temp_firebulletdelay = 0.0f;
 
 	// 매트릭스 초기화
 	D3DXMatrixIdentity(&world);
@@ -178,6 +181,20 @@ void Player::KeyCheck()
 	burst.z = 0.0f;
 
 	information.position += burst * GET_SINGLE(TimeManager)->GetTime() * information.speed;
+
+	INFO info;
+	ZeroMemory(&info, sizeof(INFO));
+
+	if (PUSH_KEY(DIK_3)) //임시_firebullet
+	{
+		if(temp_firebulletdelay <= 0.0f)
+		{
+			GET_SINGLE(ObjectManager)->AddObject(L"Bullet", Factory<Bullet>::CreateInstance(L"Bullet", info));
+			temp_firebulletdelay = 30.0f;
+		}
+	}
+
+	if (temp_firebulletdelay > 0.0f) temp_firebulletdelay = temp_firebulletdelay - 0.1f;
 }
 
 void Player::Render(void)
@@ -222,6 +239,11 @@ Player::Player(const TCHAR * _key, INFO _info)
 	:GameObject(_key, _info)
 {
 	memset(&prevPos, NULL, sizeof(D3DXVECTOR3));
+}
+
+void Player::Oncolide(void)
+{
+
 }
 
 
