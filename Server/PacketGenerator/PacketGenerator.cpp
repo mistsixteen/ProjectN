@@ -222,30 +222,30 @@ int _tmain(int argc, _TCHAR* argv[])
 	for (DWORD i = 0; i < ProtocolPos; ++i) {
 		// READ 함수 선언, inline 형태로 선언
 		// 이 READ 함수들은 위에서 이리 만들어 놓은 구조를 이용해서 데이터를 읽게 됨
-		_ftprintf(ReadPacketFile, L"inline VOID READ_%s(BYTE* buffer, S%s &parameter)\n{\n", 
+		_ftprintf(ReadPacketFile, L"inline VOID READ_%s(BYTE* buffer, S_%s &parameter)\n{\n", 
 			Protocol[i].Name, Protocol[i].Name);
 		// 바이너리에서 데이터를 읽기 위해서 StreamSP 클래스를 사용
-		_ftprintf(ReadPacketFile, L"\tStreamSP Stream;\n");
-		_ftprintf(ReadPacketFile, L"\tStream->SetBuffer(buffer);\n\n");
+		_ftprintf(ReadPacketFile, L"\tStreamSP stream;\n");
+		_ftprintf(ReadPacketFile, L"\tstream->SetBuffer(buffer);\n\n");
 
 		// 해당 프로토콜의 파라미터 개수 반복
 		for (DWORD j = 0; j < Protocol[i].ParametersCount; ++j) {
 			// 파라미터 형이 INT 형
 			if (!_tcscmp(Protocol[i].Parameters[j].Type, L"INT")) {
 				// ReadInt32 함수를 통해 데이터를 구조체에 입력
-				_ftprintf(ReadPacketFile, L"\tStream->ReadInt32(&parameter.%s);\n",
+				_ftprintf(ReadPacketFile, L"\tstream->ReadInt32(&parameter.%s);\n",
 					Protocol[i].Parameters[j].Name);
 			}
 			// 파라미터 형이 DWORD 형
 			else if (!_tcscmp(Protocol[i].Parameters[j].Type, L"DWORD")) {
 				// ReadDWORD 함수를 통해 데이터를 구조체에 입력
-				_ftprintf(ReadPacketFile, L"\tStream->ReadDWORD(&parameter.%s);\n",
+				_ftprintf(ReadPacketFile, L"\tstream->ReadDWORD(&parameter.%s);\n",
 					Protocol[i].Parameters[j].Name);
 			}
 			// 파라미터 형이 DWORD_PTR 형
 			else if (!_tcscmp(Protocol[i].Parameters[j].Type, L"DWORD_PTR")) {
 				// ReadDWORD_PTR 함수를 통해 데이터를 구조체에 입력
-				_ftprintf(ReadPacketFile, L"\tStream->ReadDWORD_PTR(&parameter.%s);\n",
+				_ftprintf(ReadPacketFile, L"\tstream->ReadDWORD_PTR(&parameter.%s);\n",
 					Protocol[i].Parameters[j].Name);
 			}
 			// 파라미터 형이 BYTE 형
@@ -253,13 +253,13 @@ int _tmain(int argc, _TCHAR* argv[])
 				// 만약 파라미터의 길이가 0이면
 				if (Protocol[i].Parameters[j].Length == 0) {
 					// ReadByte 함수를 통해 1바이트를 구조체에 입력
-					_ftprintf(ReadPacketFile, L"\tStream->ReadByte(&parameter.%s);\n",
+					_ftprintf(ReadPacketFile, L"\tstream->ReadByte(&parameter.%s);\n",
 						Protocol[i].Parameters[j].Name);
 				}
 				// 파라미터의 길이가 0보다 클 경우, 즉 배열인 경우
 				else {
 					// ReadBytes 함수를 이용해서 버퍼를 복사
-					_ftprintf(ReadPacketFile, L"\tStream->ReadBytes(parameter.%s, %d);\n",
+					_ftprintf(ReadPacketFile, L"\tstream->ReadBytes(parameter.%s, %d);\n",
 						Protocol[i].Parameters[j].Name,
 						Protocol[i].Parameters[j].Length);
 				}
@@ -269,13 +269,13 @@ int _tmain(int argc, _TCHAR* argv[])
 				// 만약 파라미터의 길이가 0이면
 				if (Protocol[i].Parameters[j].Length == 0) {
 					// ReadWCHAR 함수를 통해 1바이트를 구조체에 입력
-					_ftprintf(ReadPacketFile, L"\tStream->ReadWCHAR(&parameter.%s);\n",
+					_ftprintf(ReadPacketFile, L"\tstream->ReadWCHAR(&parameter.%s);\n",
 						Protocol[i].Parameters[j].Name);
 				}
 				// 파라미터의 길이가 0보다 클 경우, 즉 배열인 경우
 				else {
 					// ReadWCHARs 함수를 이용해서 버퍼를 복사
-					_ftprintf(ReadPacketFile, L"\tStream->ReadWCHARs(parameter.%s, %d);\n",
+					_ftprintf(ReadPacketFile, L"\tstream->ReadWCHARs(parameter.%s, %d);\n",
 						Protocol[i].Parameters[j].Name,
 						Protocol[i].Parameters[j].Length);
 				}
@@ -283,36 +283,36 @@ int _tmain(int argc, _TCHAR* argv[])
 			// 파라미터 형이 FLOAT 형
 			else if (!_tcscmp(Protocol[i].Parameters[j].Type, L"FLOAT")) {
 				// ReadFloat 함수를 통해 데이터를 구조체에 입력
-				_ftprintf(ReadPacketFile, L"\tStream->ReadFloat(&parameter.%s);\n",
+				_ftprintf(ReadPacketFile, L"\tstream->ReadFloat(&parameter.%s);\n",
 					Protocol[i].Parameters[j].Name);
 			}
 			// 파라미터 형이 INT64 형
 			else if (!_tcscmp(Protocol[i].Parameters[j].Type, L"INT64")) {
 				// ReadInt64 함수를 통해 데이터를 구조체에 입력
-				_ftprintf(ReadPacketFile, L"\tStream->ReadInt64(&parameter.%s);\n",
+				_ftprintf(ReadPacketFile, L"\tstream->ReadInt64(&parameter.%s);\n",
 					Protocol[i].Parameters[j].Name);
 			}
 			// 파라미터 형이 USHORT 형
 			else if (!_tcscmp(Protocol[i].Parameters[j].Type, L"USHORT")) {
 				// ReadUSHORT 함수를 통해 데이터를 구조체에 입력
-				_ftprintf(ReadPacketFile, L"\tStream->ReadUSHORT(&parameter.%s);\n",
+				_ftprintf(ReadPacketFile, L"\tstream->ReadUSHORT(&parameter.%s);\n",
 					Protocol[i].Parameters[j].Name);
 			}
 			// 파라미터 형이 SHORT 형
 			else if (!_tcscmp(Protocol[i].Parameters[j].Type, L"SHORT")) {
 				// ReadSHORT 함수를 통해 데이터를 구조체에 입력
-				_ftprintf(ReadPacketFile, L"\tStream->ReadSHORT(&parameter.%s);\n",
+				_ftprintf(ReadPacketFile, L"\tstream->ReadSHORT(&parameter.%s);\n",
 					Protocol[i].Parameters[j].Name);
 			}
 			// 파라미터 형이 BOOL 형
 			else if (!_tcscmp(Protocol[i].Parameters[j].Type, L"BOOL")) {
 				// ReadBOOL 함수를 통해 데이터를 구조체에 입력
-				_ftprintf(ReadPacketFile, L"\tStream->ReadBOOL(&parameter.%s);\n",
+				_ftprintf(ReadPacketFile, L"\tstream->ReadBOOL(&parameter.%s);\n",
 					Protocol[i].Parameters[j].Name);
 			}
 			// 그 외의 경우는 BYTE을 이용해서 구조체에 입력
 			else {
-				_ftprintf(ReadPacketFile, L"\tStream->ReadBytes((BYTE*)parameter.%s, sizeof(%s) * %d);\n",
+				_ftprintf(ReadPacketFile, L"\tstream->ReadBytes((BYTE*)parameter.%s, sizeof(%s) * %d);\n",
 					Protocol[i].Parameters[j].Name, Protocol[i].Parameters[j].Type, 
 					Protocol[i].Parameters[j].Length);
 			}
@@ -333,30 +333,30 @@ int _tmain(int argc, _TCHAR* argv[])
 	for (DWORD i = 0; i < ProtocolPos; ++i) {
 		// WRITE 함수 선언, inline 형태로 선언
 		// 이 WRITE 함수들은 위에서 이리 만들어 놓은 구조를 이용해서 데이터를 읽게 됨
-		_ftprintf(WritePacketFile, L"inline DWORD WRITE_%s(BYTE* buffer, S%s &parameter)\n{\n",
+		_ftprintf(WritePacketFile, L"inline DWORD WRITE_%s(BYTE* buffer, S_%s &parameter)\n{\n",
 			Protocol[i].Name, Protocol[i].Name);
 		// 바이너리에서 데이터를 읽기 위해서 StreamSP 클래스를 사용
-		_ftprintf(WritePacketFile, L"\tStreamSP Stream;\n");
-		_ftprintf(WritePacketFile, L"\tStream->SetBuffer(buffer);\n\n");
+		_ftprintf(WritePacketFile, L"\tStreamSP stream;\n");
+		_ftprintf(WritePacketFile, L"\tstream->SetBuffer(buffer);\n\n");
 
 		// 해당 프로토콜의 파라미터 개수 반복
 		for (DWORD j = 0; j < Protocol[i].ParametersCount; ++j) {
 			// 파라미터 형이 INT 형
 			if (!_tcscmp(Protocol[i].Parameters[j].Type, L"INT")) {
 				// WriteInt32 함수를 통해 데이터를 구조체에 입력
-				_ftprintf(WritePacketFile, L"\tStream->WriteInt32(&parameter.%s);\n",
+				_ftprintf(WritePacketFile, L"\tstream->WriteInt32(parameter.%s);\n",
 					Protocol[i].Parameters[j].Name);
 			}
 			// 파라미터 형이 DWORD 형
 			else if (!_tcscmp(Protocol[i].Parameters[j].Type, L"DWORD")) {
 				// WriteDWORD 함수를 통해 데이터를 구조체에 입력
-				_ftprintf(WritePacketFile, L"\tStream->WriteDWORD(&parameter.%s);\n",
+				_ftprintf(WritePacketFile, L"\tstream->WriteDWORD(parameter.%s);\n",
 					Protocol[i].Parameters[j].Name);
 			}
 			// 파라미터 형이 DWORD_PTR 형
 			else if (!_tcscmp(Protocol[i].Parameters[j].Type, L"DWORD_PTR")) {
 				// WriteDWORD_PTR 함수를 통해 데이터를 구조체에 입력
-				_ftprintf(WritePacketFile, L"\tStream->WriteDWORD_PTR(&parameter.%s);\n",
+				_ftprintf(WritePacketFile, L"\tstream->WriteDWORD_PTR(parameter.%s);\n",
 					Protocol[i].Parameters[j].Name);
 			}
 			// 파라미터 형이 BYTE 형
@@ -364,13 +364,13 @@ int _tmain(int argc, _TCHAR* argv[])
 				// 만약 파라미터의 길이가 0이면
 				if (Protocol[i].Parameters[j].Length == 0) {
 					// WriteByte 함수를 통해 1바이트를 구조체에 입력
-					_ftprintf(WritePacketFile, L"\tStream->WriteByte(&parameter.%s);\n",
+					_ftprintf(WritePacketFile, L"\tstream->WriteByte(parameter.%s);\n",
 						Protocol[i].Parameters[j].Name);
 				}
 				// 파라미터의 길이가 0보다 클 경우, 즉 배열인 경우
 				else {
 					// WriteBytes 함수를 이용해서 버퍼를 복사
-					_ftprintf(WritePacketFile, L"\tStream->WriteBytes(parameter.%s, %d);\n",
+					_ftprintf(WritePacketFile, L"\tstream->WriteBytes(parameter.%s, %d);\n",
 						Protocol[i].Parameters[j].Name,
 						Protocol[i].Parameters[j].Length);
 				}
@@ -380,13 +380,13 @@ int _tmain(int argc, _TCHAR* argv[])
 				// 만약 파라미터의 길이가 0이면
 				if (Protocol[i].Parameters[j].Length == 0) {
 					// WriteWCHAR 함수를 통해 1바이트를 구조체에 입력
-					_ftprintf(WritePacketFile, L"\tStream->WriteWCHAR(&parameter.%s);\n",
+					_ftprintf(WritePacketFile, L"\tstream->WriteWCHAR(parameter.%s);\n",
 						Protocol[i].Parameters[j].Name);
 				}
 				// 파라미터의 길이가 0보다 클 경우, 즉 배열인 경우
 				else {
 					// WriteWCHARs 함수를 이용해서 버퍼를 복사
-					_ftprintf(WritePacketFile, L"\tStream->WriteWCHARs(parameter.%s, %d);\n",
+					_ftprintf(WritePacketFile, L"\tstream->WriteWCHARs(parameter.%s, %d);\n",
 						Protocol[i].Parameters[j].Name,
 						Protocol[i].Parameters[j].Length);
 				}
@@ -394,41 +394,41 @@ int _tmain(int argc, _TCHAR* argv[])
 			// 파라미터 형이 FLOAT 형
 			else if (!_tcscmp(Protocol[i].Parameters[j].Type, L"FLOAT")) {
 				// WriteFloat 함수를 통해 데이터를 구조체에 입력
-				_ftprintf(WritePacketFile, L"\tStream->WriteFloat(&parameter.%s);\n",
+				_ftprintf(WritePacketFile, L"\tstream->WriteFloat(parameter.%s);\n",
 					Protocol[i].Parameters[j].Name);
 			}
 			// 파라미터 형이 INT64 형
 			else if (!_tcscmp(Protocol[i].Parameters[j].Type, L"INT64")) {
 				// WriteInt64 함수를 통해 데이터를 구조체에 입력
-				_ftprintf(ReadPacketFile, L"\tStream->WriteInt64(&parameter.%s);\n",
+				_ftprintf(ReadPacketFile, L"\tstream->WriteInt64(parameter.%s);\n",
 					Protocol[i].Parameters[j].Name);
 			}
 			// 파라미터 형이 USHORT 형
 			else if (!_tcscmp(Protocol[i].Parameters[j].Type, L"USHORT")) {
 				// WriteUSHORT 함수를 통해 데이터를 구조체에 입력
-				_ftprintf(WritePacketFile, L"\tStream->WriteUSHORT(&parameter.%s);\n",
+				_ftprintf(WritePacketFile, L"\tstream->WriteUSHORT(parameter.%s);\n",
 					Protocol[i].Parameters[j].Name);
 			}
 			// 파라미터 형이 SHORT 형
 			else if (!_tcscmp(Protocol[i].Parameters[j].Type, L"SHORT")) {
 				// WriteSHORT 함수를 통해 데이터를 구조체에 입력
-				_ftprintf(WritePacketFile, L"\tStream->WriteSHORT(&parameter.%s);\n",
+				_ftprintf(WritePacketFile, L"\tstream->WriteSHORT(parameter.%s);\n",
 					Protocol[i].Parameters[j].Name);
 			}
 			// 파라미터 형이 BOOL 형
 			else if (!_tcscmp(Protocol[i].Parameters[j].Type, L"BOOL")) {
 				// WriteBOOL 함수를 통해 데이터를 구조체에 입력
-				_ftprintf(ReadPacketFile, L"\tStream->WriteBOOL(&parameter.%s);\n",
+				_ftprintf(ReadPacketFile, L"\tstream->WriteBOOL(parameter.%s);\n",
 					Protocol[i].Parameters[j].Name);
 			}
 			// 그 외의 경우는 BYTE을 이용해서 구조체에 입력
 			else {
-				_ftprintf(WritePacketFile, L"\tStream->WriteBytes((BYTE*)parameter.%s, sizeof(%s) * %d);\n",
+				_ftprintf(WritePacketFile, L"\tstream->WriteBytes((BYTE*)parameter.%s, sizeof(%s) * %d);\n",
 					Protocol[i].Parameters[j].Name, Protocol[i].Parameters[j].Type,
 					Protocol[i].Parameters[j].Length);
 			}
 		}
-		_ftprintf(WritePacketFile, L"\n\treturn Stream->GetLength();\n}\n\n");
+		_ftprintf(WritePacketFile, L"\n\treturn stream->GetLength();\n}\n\n");
 	}
 
 	// 같은 함수 이름에 파라미터만 ㄷ라리해서 파라미터 타입 함수를 제작
@@ -438,7 +438,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		// Write 함수의 원형을 만듦
 		// WRITE 함수 선언, inline 형태로 선언
 		// 이 WRITE 함수들은 위에서 이리 만들어 놓은 구조를 이용해서 데이터를 읽게 됨
-		_ftprintf(WritePacketFile, L"inline DWORD WRITE_%s(BYTE* buffer, S%s &parameter",
+		_ftprintf(WritePacketFile, L"inline DWORD WRITE_%s(BYTE* buffer",
 			Protocol[i].Name, Protocol[i].Name);
 
 		for (DWORD j = 0; j < Protocol[i].ParametersCount; j++)
@@ -452,33 +452,33 @@ int _tmain(int argc, _TCHAR* argv[])
 		}
 
 		_ftprintf(WritePacketFile, _T(")\n{\n"));
-		_ftprintf(WritePacketFile, _T("\tStreamSP Stream;\n"));
-		_ftprintf(WritePacketFile, _T("\tStream->SetBuffer(buffer);\n\n"));
+		_ftprintf(WritePacketFile, _T("\tStreamSP stream;\n"));
+		_ftprintf(WritePacketFile, _T("\tstream->SetBuffer(buffer);\n\n"));
 
 		for (DWORD j = 0; j<Protocol[i].ParametersCount; j++)
 		{
 			if (!_tcscmp(Protocol[i].Parameters[j].Type, _T("INT")))
-				_ftprintf(WritePacketFile, _T("\tStream->WriteInt32(%s);\n"), 
+				_ftprintf(WritePacketFile, _T("\tstream->WriteInt32(%s);\n"), 
 					_tcslwr(Protocol[i].Parameters[j].Name));
 			else if (!_tcscmp(Protocol[i].Parameters[j].Type, _T("DWORD")))
-				_ftprintf(WritePacketFile, _T("\tStream->WriteDWORD(%s);\n"), 
+				_ftprintf(WritePacketFile, _T("\tstream->WriteDWORD(%s);\n"), 
 					_tcslwr(Protocol[i].Parameters[j].Name));
 			else if (!_tcscmp(Protocol[i].Parameters[j].Type, _T("DWORD_PTR")))
-				_ftprintf(WritePacketFile, _T("\tStream->WriteDWORD_PTR(%s);\n"), 
+				_ftprintf(WritePacketFile, _T("\tstream->WriteDWORD_PTR(%s);\n"), 
 					_tcslwr(Protocol[i].Parameters[j].Name));
 			else if (!_tcscmp(Protocol[i].Parameters[j].Type, _T("BYTE")))
 			{
 				if (Protocol[i].Parameters[j].Length == 0)
-					_ftprintf(WritePacketFile, _T("\tStream->WriteByte(%s);\n"), 
+					_ftprintf(WritePacketFile, _T("\tstream->WriteByte(%s);\n"), 
 						_tcslwr(Protocol[i].Parameters[j].Name));
 				else
-					_ftprintf(WritePacketFile, _T("\tStream->WriteBytes(%s, %d);\n"), 
+					_ftprintf(WritePacketFile, _T("\tstream->WriteBytes(%s, %d);\n"), 
 						_tcslwr(Protocol[i].Parameters[j].Name), Protocol[i].Parameters[j].Length);
 			}
 			else if (!_tcscmp(Protocol[i].Parameters[j].Type, _T("WCHAR")))
 			{
 				if (Protocol[i].Parameters[j].Length == 0)
-					_ftprintf(WritePacketFile, _T("\tStream->WriteWCHAR(%s);\n"), 
+					_ftprintf(WritePacketFile, _T("\tstream->WriteWCHAR(%s);\n"), 
 						_tcslwr(Protocol[i].Parameters[j].Name));
 				else
 				{
@@ -486,31 +486,31 @@ int _tmain(int argc, _TCHAR* argv[])
 						_tcslwr(Protocol[i].Parameters[j].Name), Protocol[i].Parameters[j].Length);
 					_ftprintf(WritePacketFile, _T("\t_tcsncpy(_%s, %s, %d);\n"),
 						_tcslwr(Protocol[i].Parameters[j].Name), _tcslwr(Protocol[i].Parameters[j].Name), Protocol[i].Parameters[j].Length);
-					_ftprintf(WritePacketFile, _T("\tStream->WriteWCHARs(_%s, %d);\n"), 
+					_ftprintf(WritePacketFile, _T("\tstream->WriteWCHARs(_%s, %d);\n"), 
 						_tcslwr(Protocol[i].Parameters[j].Name), Protocol[i].Parameters[j].Length);
 				}
 			}
 			else if (!_tcscmp(Protocol[i].Parameters[j].Type, _T("FLOAT")))
-				_ftprintf(WritePacketFile, _T("\tStream->WriteFloat(%s);\n"), 
+				_ftprintf(WritePacketFile, _T("\tstream->WriteFloat(%s);\n"), 
 					_tcslwr(Protocol[i].Parameters[j].Name));
 			else if (!_tcscmp(Protocol[i].Parameters[j].Type, _T("INT64")))
-				_ftprintf(WritePacketFile, _T("\tStream->WriteInt64(%s);\n"), 
+				_ftprintf(WritePacketFile, _T("\tstream->WriteInt64(%s);\n"), 
 					_tcslwr(Protocol[i].Parameters[j].Name));
 			else if (!_tcscmp(Protocol[i].Parameters[j].Type, _T("USHORT")))
-				_ftprintf(WritePacketFile, _T("\tStream->WriteUSHORT(%s);\n"),
+				_ftprintf(WritePacketFile, _T("\tstream->WriteUSHORT(%s);\n"),
 					_tcslwr(Protocol[i].Parameters[j].Name));
 			else if (!_tcscmp(Protocol[i].Parameters[j].Type, _T("SHORT")))
-				_ftprintf(WritePacketFile, _T("\tStream->WriteSHORT(%s);\n"), 
+				_ftprintf(WritePacketFile, _T("\tstream->WriteSHORT(%s);\n"), 
 					_tcslwr(Protocol[i].Parameters[j].Name));
 			else if (!_tcscmp(Protocol[i].Parameters[j].Type, _T("BOOL")))
-				_ftprintf(WritePacketFile, _T("\tStream->WriteBOOL(%s);\n"), 
+				_ftprintf(WritePacketFile, _T("\tstream->WriteBOOL(%s);\n"), 
 					_tcslwr(Protocol[i].Parameters[j].Name));
 			else
-				_ftprintf(WritePacketFile, _T("\tStream->WriteBytes((BYTE*) %s, sizeof(%s) * %d);\n"),
+				_ftprintf(WritePacketFile, _T("\tstream->WriteBytes((BYTE*) %s, sizeof(%s) * %d);\n"),
 					_tcslwr(Protocol[i].Parameters[j].Name), Protocol[i].Parameters[j].Type, 
 					Protocol[i].Parameters[j].Length);
 		}
-		_ftprintf(WritePacketFile, _T("\n\treturn Stream->GetLength();\n}\n\n"));
+		_ftprintf(WritePacketFile, _T("\n\treturn stream->GetLength();\n}\n\n"));
 	}
 
 	fclose(WritePacketFile);

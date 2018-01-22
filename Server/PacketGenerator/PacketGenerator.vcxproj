@@ -147,9 +147,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Protocol.h" />
-    <ClInclude Include="Protocol_ReadPacket.h" />
-    <ClInclude Include="Protocol_Structure.h" />
-    <ClInclude Include="Protocol_WritePacket.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>

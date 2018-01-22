@@ -13,7 +13,54 @@ DWORD WINAPI KeepThreadCallback(LPVOID parameter)
 
 VOID ServerIocp::OnIoRead(VOID * object, DWORD dataLength)
 {
+	// 여기 가상 함수에서 넘어온 object는 OnIoConnected와 마찬가지로
+	// 접속을 담당한 개체가 넘어오게 함
+	// 이것을 여기서 클라이언트를 관리할 ConnectedSession으로 형 변환을 거쳐 받게 됨
+	// 형 변환은 reinterpret_cast를 사용
+	ConnectedSession* connectedSession = reinterpret_cast<ConnectedSession*>(object);
 
+	// 받은 프로토콜과 패킷 길이를 저장하는 변수
+	DWORD protocol = 0, packetLength = 0;
+
+	// 패킷을 저장하는 변수
+	BYTE packet[MAX_BUFFER_LENGTH] = { 0, };
+
+	// NetworkSEssion에서 PacketSession으로 데이터를 가져옴
+	if (connectedSession->ReadPacketForIocp(dataLength)) {
+		// PacketSession에서 패킷을 뽑아냄
+		while(connectedSession->GetPacket(protocol, packet, packetLength)) {
+			// 프로토콜에 따른 switch 문
+			switch (protocol) {
+			// 사용자 등록 프로토콜일 경우
+			case PT_REG_USER:
+				PROC_PT_REG_USER(connectedSession, protocol, packet, packetLength);
+				break;
+			// 사용자 검색 프로토콜일 경우
+			case PT_QUERY_USER:
+				PROC_PT_QUERY_USER(connectedSession, protocol, packet, packetLength);
+				break;
+			// 컴퓨터 등록 프로토콜일 경우
+			case PT_REG_COMPUTER:
+				PROC_PT_REG_COMPUTER(connectedSession, protocol, packet, packetLength);
+				break;
+			// 컴퓨터 검색 프로토콜일 경우
+			case PT_QUERY_COMPUTER:
+				PROC_PT_QUERY_COMPUTER(connectedSession, protocol, packet, packetLength);
+				break;
+			// 프로그램 등록 프로토콜일 경우
+			case PT_REG_PROGRAM:
+				PROC_PT_REG_PROGRAM(connectedSession, protocol, packet, packetLength);
+				break;
+			// 프로그램 검색 프로토콜일 경우
+			case PT_QUERY_PROGRAM:
+				PROC_PT_QUERY_PROGRAM(connectedSession, protocol, packet, packetLength);
+				break;
+
+			}
+		}
+	}
+	if (!connectedSession->InitializeReadForIocp())
+		connectedSession->Restart(listen->GetSocket());
 }
 
 VOID ServerIocp::OnIoWrote(VOID * Object, DWORD dataLength)
@@ -123,6 +170,28 @@ BOOL ServerIocp::Begin(VOID)
 BOOL ServerIocp::End(VOID)
 {
 	// ServerIocp 종료 시
+
+	// UserMap 삭제
+	for (auto iter = UserMap.begin(); iter != UserMap.end(); ++iter) {
+		delete iter->second;
+		iter->second = NULL;
+	}
+	UserMap.clear();
+
+	// ComputerMap 삭제
+	for (auto iter = ComputerMap.begin(); iter != ComputerMap.end(); ++iter) {
+		delete iter->second;
+		iter->second = NULL;
+	}
+	ComputerMap.clear();
+
+	// ProgramMap 삭제
+	for (auto iter = ProgramMap.begin(); iter != ProgramMap.end(); ++iter) {
+		delete iter->second;
+		iter->second = NULL;
+	}
+	ProgramMap.clear();
+
 	// keepThread가 NULL이 아니면 KeepAlive 스레드를 종료
 	if (keepThread) {
 		// 종료 이벤트 발생

@@ -3,7 +3,7 @@
 
 BOOL ConnectedSessionManager::Begin(SOCKET listenSocket)
 {
-	MultiThreadSync Sync;
+	ThreadSync Sync;
 
 	// 파라미터로 Listen 개체의 소켓을 받아야 함
 	// 값이 NULL일 경우 실패

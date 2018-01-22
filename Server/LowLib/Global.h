@@ -1,4 +1,5 @@
 #pragma once
+#pragma warning(disable: 4091)
 
 #include <iostream>
 #include <tchar.h>
