@@ -128,7 +128,14 @@
       <UniqueIdentifier>{59f54a36-65a6-46b4-92a1-301fc6835371}</UniqueIdentifier>
     </Filter>
     <Filter Include="96. Math">
+<<<<<<< HEAD
       <UniqueIdentifier>{0e57956b-d03a-4a5c-a3da-2d8d5bed70ea}</UniqueIdentifier>
+=======
+      <UniqueIdentifier>{8f00af47-7617-4907-b7db-a7a6ae57ef34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Manager\TextureManager\Texture\SingleTexture">
+      <UniqueIdentifier>{13864bcb-6539-4406-8f92-cc8269caa6ae}</UniqueIdentifier>
+>>>>>>> master
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -264,6 +271,12 @@
     <ClInclude Include="SphereMesh.h">
       <Filter>03. Manager\MeshManager\Mesh\Sphere</Filter>
     </ClInclude>
+    <ClInclude Include="Math.h">
+      <Filter>96. Math</Filter>
+    </ClInclude>
+    <ClInclude Include="SingleTexture.h">
+      <Filter>03. Manager\TextureManager\Texture\SingleTexture</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -370,6 +383,9 @@
     </ClCompile>
     <ClCompile Include="SphereMesh.cpp">
       <Filter>03. Manager\MeshManager\Mesh\Sphere</Filter>
+    </ClCompile>
+    <ClCompile Include="SingleTexture.cpp">
+      <Filter>03. Manager\TextureManager\Texture\SingleTexture</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

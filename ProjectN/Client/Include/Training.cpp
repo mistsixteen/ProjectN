@@ -64,6 +64,11 @@ HRESULT Training::Initialize()
 	GET_SINGLE(ObjectManager)->AddObject(L"Target", Factory<Target>::CreateInstance(L"Player", info));
 	GET_SINGLE(ObjectManager)->AddObject(L"Target", Factory<Target>::CreateInstance(L"Player", info));
 
+
+	ZeroMemory(&info, sizeof(INFO));
+	info.position = D3DXVECTOR3((VTXCNTX - 1) * 0.5f * VTXGAP, 0.5f, (VTXCNTZ - 1) * 0.5f * VTXGAP);
+	GET_SINGLE(ObjectManager)->AddObject(L"Bullet", Factory<Bullet>::CreateInstance(L"Bullet", info));
+
 	// 카메라 초기화
 	GET_SINGLE(CameraManager)->InitCamera(CAMERA_BACKVIEW);
 

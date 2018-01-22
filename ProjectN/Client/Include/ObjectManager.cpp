@@ -104,11 +104,11 @@ float ObjectManager::GetTerrainHeight(INFO srcInfo)
 		D3DXVec3TransformCoord(&destMin, &(*iter)->GetInfo().min, &world);
 		D3DXVec3TransformCoord(&destMax, &(*iter)->GetInfo().max, &world);
 
-		// ¿ÀºêÁ§Æ® ±âÁØ ¿¬»ê
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		/*destMin.x <= srcMin.x && srcMax.x <= destMax.x
 			&& destMin.z <= srcMin.z && srcMax.z <= destMax.z*/
 
-		// ÅÍ·¹ÀÎ ³»ºÎ¿¡ ÀÖÀ» °æ¿ì ¿¬»ê
+		// ï¿½Í·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Î¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		if (destMin.x <= srcInfo.position.x && srcInfo.position.x <= destMax.x
 			&& destMin.z <= srcInfo.position.z && srcInfo.position.z <= destMax.z)
 		{
@@ -119,13 +119,13 @@ float ObjectManager::GetTerrainHeight(INFO srcInfo)
 			float ratioZ = ((*iter)->GetVtxTex()[index + VTXCNTX].position.z - srcInfo.position.z) / VTXGAP;
 
 			float fY[4] = {
-				(*iter)->GetVtxTex()[index + VTXCNTX].position.y,			// ÁÂÃø »ó´Ü
-				(*iter)->GetVtxTex()[index + VTXCNTX + 1].position.y,		// ¿ìÃø »ó´Ü
-				(*iter)->GetVtxTex()[index + 1].position.y,					// ¿ìÃø ÇÏ´Ü
-				(*iter)->GetVtxTex()[index].position.y,						// ÁÂÃø ÇÏ´Ü
+				(*iter)->GetVtxTex()[index + VTXCNTX].position.y,			// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+				(*iter)->GetVtxTex()[index + VTXCNTX + 1].position.y,		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+				(*iter)->GetVtxTex()[index + 1].position.y,					// ï¿½ï¿½ï¿½ï¿½ ï¿½Ï´ï¿½
+				(*iter)->GetVtxTex()[index].position.y,						// ï¿½ï¿½ï¿½ï¿½ ï¿½Ï´ï¿½
 			};
 
-			// »ç°¢ÇüºÎºÐ¿¡¼­ ÁÂ¿ì À§Ä¡¿¡ µû¸¥ ³ôÀÌ + ¿ÀºêÁ§Æ® ÃÖ¼Ò Ãæµ¹ y ¹ÝÈ¯
+			// ï¿½ç°¢ï¿½ï¿½ï¿½ÎºÐ¿ï¿½ï¿½ï¿½ ï¿½Â¿ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ + ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Ö¼ï¿½ ï¿½æµ¹ y ï¿½ï¿½È¯
 			if (ratioX > ratioZ)
 				return fY[0] + (fY[1] - fY[0]) * ratioX + (fY[2] - fY[1]) * ratioZ + abs(srcInfo.min.y);
 			else
@@ -145,7 +145,7 @@ GameObject * ObjectManager::GetInterectedObject(INFO srcInfo)
 			for (auto iterList = (*iterMap).second.begin();
 				iterList != (*iterMap).second.end(); ++iterList)
 			{
-				//MSGBOX(L"ÀÎµ¦½º ¹öÆÛ »ý¼º ½ÇÆÐ");
+				//MSGBOX(L"ï¿½Îµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 
 				D3DXVECTOR3 distance = (*iterList)->GetInfo().position - srcInfo.position;
 				if (D3DXVec3Length(&distance) < 1.f) {
@@ -159,4 +159,3 @@ GameObject * ObjectManager::GetInterectedObject(INFO srcInfo)
 	}
 	return nullptr;
 }
-

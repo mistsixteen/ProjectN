@@ -15,7 +15,15 @@ HRESULT TextureManager::AddTexture(const TCHAR * path, TEXTYPE type, const TCHAR
 {
 	auto iterMap = texMap.find(key);
 	if (iterMap == texMap.end()) {
-		Texture* texture = new MultiTexture;
+		Texture* texture = NULL;
+		if (count == 0) {
+			texture = new SingleTexture;
+		}
+		else {
+			texture = new MultiTexture;
+		}
+
+
 		if (FAILED(texture->AddTexture(path, type, state, count))) {
 			return E_FAIL;
 		}
