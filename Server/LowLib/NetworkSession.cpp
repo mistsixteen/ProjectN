@@ -660,9 +660,6 @@ BOOL NetworkSession::Write(BYTE * data, DWORD dataLength)
 	if (!data)
 		return FALSE;
 
-	if (!Socket)
-		return FALSE;
-
 	WSABUF			Wsabuf;								// write에서도 WSABUF를 사용
 	DWORD			WriteBytes	= 0;
 	DWORD			WriteFlag	= 0;

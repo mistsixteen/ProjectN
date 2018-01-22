@@ -23,18 +23,39 @@ public:
 	BOOL ReadWCHARs(LPWSTR data, DWORD length);
 
 	BOOL WriteInt32(INT *data);
-	BOOL WriteDWORD(DWORD *data);
+	BOOL WriteDWORD(DWORD data);
 	BOOL WriteDWORD_PTR(DWORD_PTR data);
-	BOOL WriteByte(BYTE* data);
+	BOOL WriteByte(BYTE data);
 	BOOL WriteBytes(BYTE* data, DWORD length);
-	BOOL WriteFloat(FLOAT* data);
-	BOOL WriteInt64(INT64* data);
-	BOOL WriteUSHORT(USHORT* data);
-	BOOL WriteSHORT(SHORT* data);
-	BOOL WriteBOOL(BOOL* data);
+	BOOL WriteFloat(FLOAT data);
+	BOOL WriteInt64(INT64 data);
+	BOOL WriteUSHORT(USHORT data);
+	BOOL WriteSHORT(SHORT data);
+	BOOL WriteBOOL(BOOL data);
+	BOOL WriteWCHAR(WCHAR data);
+	BOOL WriteWCHARs(LPCWSTR data, DWORD length);
 
 	DWORD GetLength(VOID) const { return this->length; }
 public:
 	Stream();
 	virtual ~Stream();
 };
+
+class StreamSP
+{
+private:
+	Stream*	stream;
+public:
+	Stream* operator->(VOID) { return stream; }
+	operator Stream*(VOID) { return stream; }
+public:
+	StreamSP()
+	{
+		stream = new Stream();
+	}
+	~StreamSP()
+	{
+		delete stream;
+	}
+};
+

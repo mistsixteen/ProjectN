@@ -154,6 +154,7 @@ VOID ClientSession::OnIoRead(VOID)
 
 ClientSession::ClientSession(VOID)
 {
+	IsUdp = FALSE;
 }
 
 

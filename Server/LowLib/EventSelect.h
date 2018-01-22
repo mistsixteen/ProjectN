@@ -20,9 +20,9 @@ private:
 
 	SOCKET			Socket;
 protected:
-	virtual VOID OnIoConnect(VOID) PURE;
-	//virtual VOID OnIoWrote(VOID) PURE;
 	virtual VOID OnIoRead(VOID) PURE;
+	//virtual VOID OnIoWrote(VOID) PURE;
+	virtual VOID OnIoConnected(VOID) PURE;
 	virtual VOID OnIoDisconnected(VOID) PURE;
 public:
 	BOOL Begin(SOCKET socket);

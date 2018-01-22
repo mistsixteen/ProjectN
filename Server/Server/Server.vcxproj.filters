@@ -13,9 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="99. Protocol">
-      <UniqueIdentifier>{d4dba4cc-a372-4204-ab82-e8fa276d4d73}</UniqueIdentifier>
-    </Filter>
     <Filter Include="01. ServerIocp">
       <UniqueIdentifier>{a50bea1c-6cc6-406f-9511-50cac3d09a3b}</UniqueIdentifier>
     </Filter>
@@ -24,6 +21,9 @@
     </Filter>
     <Filter Include="02. ConnectedSessionManager\ConnectedSession">
       <UniqueIdentifier>{4a2d7e04-c7d5-4512-9621-95a1e4abf6bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="99. Protocol">
+      <UniqueIdentifier>{7755b97a-188f-4038-a1cb-782e6ffde560}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -64,6 +64,9 @@
     </ClCompile>
     <ClCompile Include="ConnectedSessionManager.cpp">
       <Filter>02. ConnectedSessionManager</Filter>
+    </ClCompile>
+    <ClCompile Include="ProcProtocol.cpp">
+      <Filter>01. ServerIocp</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

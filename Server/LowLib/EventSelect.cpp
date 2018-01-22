@@ -153,7 +153,7 @@ VOID EventSelect::SelectThreadCallback(VOID)
 				// Connect 이벤트 발생
 				if (NetworkEvents.lNetworkEvents & FD_CONNECT) {
 					// 가상 함수 호출
-					OnIoConnect();
+					OnIoConnected();
 
 					if (NetworkEvents.iErrorCode[FD_CONNECT_BIT])
 						return;

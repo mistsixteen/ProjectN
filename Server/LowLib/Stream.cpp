@@ -160,7 +160,7 @@ BOOL Stream::WriteInt32(INT * data)
 	return TRUE;
 }
 
-BOOL Stream::WriteDWORD(DWORD * data)
+BOOL Stream::WriteDWORD(DWORD data)
 {
 	CopyMemory(bufferPointer + this->length, &data, sizeof(DWORD));
 
@@ -178,7 +178,7 @@ BOOL Stream::WriteDWORD_PTR(DWORD_PTR data)
 	return TRUE;
 }
 
-BOOL Stream::WriteByte(BYTE * data)
+BOOL Stream::WriteByte(BYTE data)
 {
 	CopyMemory(bufferPointer + this->length, &data, sizeof(BYTE));
 
@@ -196,7 +196,7 @@ BOOL Stream::WriteBytes(BYTE * data, DWORD length)
 	return TRUE;
 }
 
-BOOL Stream::WriteFloat(FLOAT * data)
+BOOL Stream::WriteFloat(FLOAT data)
 {
 	CopyMemory(bufferPointer + this->length, &data, sizeof(FLOAT));
 
@@ -205,7 +205,7 @@ BOOL Stream::WriteFloat(FLOAT * data)
 	return TRUE;
 }
 
-BOOL Stream::WriteInt64(INT64 * data)
+BOOL Stream::WriteInt64(INT64 data)
 {
 	CopyMemory(bufferPointer + this->length, &data, sizeof(INT64));
 
@@ -214,7 +214,7 @@ BOOL Stream::WriteInt64(INT64 * data)
 	return TRUE;
 }
 
-BOOL Stream::WriteUSHORT(USHORT * data)
+BOOL Stream::WriteUSHORT(USHORT data)
 {
 	CopyMemory(bufferPointer + this->length, &data, sizeof(USHORT));
 
@@ -223,7 +223,7 @@ BOOL Stream::WriteUSHORT(USHORT * data)
 	return TRUE;
 }
 
-BOOL Stream::WriteSHORT(SHORT * data)
+BOOL Stream::WriteSHORT(SHORT data)
 {
 	CopyMemory(bufferPointer + this->length, &data, sizeof(SHORT));
 
@@ -232,11 +232,29 @@ BOOL Stream::WriteSHORT(SHORT * data)
 	return TRUE;
 }
 
-BOOL Stream::WriteBOOL(BOOL * data)
+BOOL Stream::WriteBOOL(BOOL data)
 {
 	CopyMemory(bufferPointer + this->length, &data, sizeof(BOOL));
 
 	this->length += sizeof(BOOL);
+
+	return TRUE;
+}
+
+BOOL Stream::WriteWCHAR(WCHAR data)
+{
+	memcpy(bufferPointer + this->length, &data, sizeof(WCHAR));
+
+	this->length += sizeof(WCHAR);
+
+	return TRUE;
+}
+
+BOOL Stream::WriteWCHARs(LPCWSTR data, DWORD length)
+{
+	memcpy(bufferPointer + this->length, data, length * sizeof(WCHAR));
+
+	this->length += length * sizeof(WCHAR);
 
 	return TRUE;
 }

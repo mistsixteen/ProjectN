@@ -10,8 +10,6 @@
 #include <stdio.h>
 #include <tchar.h>
 
-
-
 // TODO: 프로그램에 필요한 추가 헤더는 여기에서 참조합니다.
 #define DEFAULT_PORT 1820
 
@@ -28,3 +26,8 @@
 #include "../LowLib/MiniDump.h"
 #include "../LowLib/IniFile.h"
 #include "../LowLib/ClientSession.h"
+
+#include "../Server/Protocol.h"
+#include "../Server/PT_Structure.h"
+#include "../Server/PT_ReadPacket.h"
+#include "../Server/PT_WritePacket.h"
