@@ -1,10 +1,8 @@
 ﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(368,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
-<<<<<<< HEAD
-  Target.cpp
-c:\project\projectn\projectn\projectn\client\include\target.cpp(17): warning C4244: 'initializing': conversion from 'std::chrono::system_clock::rep' to 'unsigned int', possible loss of data
-  Client.vcxproj -> C:\project\projectN\ProjectN\ProjectN\Client\Include\../bin\Client.exe
-=======
   Bullet.cpp
-  Client.vcxproj -> F:\Project\ProjectN\ProjectN\Client\Include\../bin\Client.exe
->>>>>>> master
-  Client.vcxproj -> ../bin\Client.pdb (Full PDB)
+c:\project\projectn\projectn\projectn\client\include\bullet.cpp : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
+c:\project\projectn\projectn\projectn\client\include\bullet.cpp(17): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\project\projectn\projectn\projectn\client\include\bullet.cpp(71): error C2065: 'texInfo': undeclared identifier
+c:\project\projectn\projectn\projectn\client\include\bullet.cpp(78): error C2065: 'texInfo': undeclared identifier
+c:\project\projectn\projectn\projectn\client\include\bullet.cpp(78): error C2227: left of '->texture' must point to class/struct/union/generic type
+  c:\project\projectn\projectn\projectn\client\include\bullet.cpp(78): note: type is 'unknown-type'
