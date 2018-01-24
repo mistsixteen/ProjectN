@@ -18,6 +18,8 @@ HRESULT Bullet::Initialize(void)
 	bgMin = GET_SINGLE(ObjectManager)->GetGameObject(L"Background")->GetInfo().min;
 	bgMax = GET_SINGLE(ObjectManager)->GetGameObject(L"Background")->GetInfo().max;
 
+	// GET_SINGLE(TextureManager)->AddTexture(L"./Resource/Texture/Bullet/beams.png", TEXTYPE_GENERAL, L"Bullet", L"Beam");
+
 	initBullet();
 
 	return S_OK;
@@ -35,25 +37,22 @@ void Bullet::initBullet()
 	information.position = playerInfo.position;
 	information.direction = playerInfo.look;
 
-
 	active = true;
 }
 
 
 void Bullet::Progress(void)
 {
-	// �߻� �� �̵�
 	if (isFired()) {
 		information.position += information.direction
 								* information.speed * GET_SINGLE(TimeManager)->GetTime();
 
-		// ���� ��Ż
 		if (information.position.x < bgMin.x || bgMax.x < information.position.x
 			|| information.position.y < bgMin.y || bgMax.y < information.position.y
 			|| information.position.z < bgMin.z || bgMax.z < information.position.z) {
 			//initBullet();
 		}
-		// ������Ʈ �ǰ�
+
 		GameObject* dest = GET_SINGLE(ObjectManager)->GetInterectedObject(information);
 		if (dest != nullptr) {
 			dest->GetInfo().damage = information.attack;
@@ -67,18 +66,29 @@ void Bullet::Render(void)
 {
 	GameObject::Render();
 
-	// �߻� �ÿ��� ���
-	const TEXINFO* texInfo = GET_SINGLE(TextureManager)->GetTexture(L"Bullet", L"Beam");
-	if (texInfo == NULL) {
-		return;
-	}
+	// 임의로 타겟 셰이더 빌려옴
+	LPD3DXEFFECT effect = GET_SINGLE(ShaderManager)->GetShader(L"Target");
 
-	RECT frame = {210, 260, 310, 400};
-	D3DXVECTOR3 center = { (frame.right - frame.left) * 0.5f, (frame.bottom - frame.top) * 0.5f, 0.f};
-	GET_SINGLE(DXFramework)->GetSprite()->SetTransform(&world);
-	if (FAILED(GET_SINGLE(DXFramework)->GetSprite()->Draw(texInfo->texture, &frame, &center, NULL, D3DCOLOR_ARGB(255, 255, 255, 255)))) {
-		MSGBOX(L"2");
-	}
+	D3DXMATRIX matView, matProj;
+	GET_SINGLE(DXFramework)->GetDevice()->GetTransform(D3DTS_VIEW, &matView);
+	GET_SINGLE(DXFramework)->GetDevice()->GetTransform(D3DTS_PROJECTION, &matProj);
+
+	effect->SetMatrix("gWorldMatrix", &world);
+	effect->SetMatrix("gViewMatrix", &matView);
+	effect->SetMatrix("gProjectionMatrix", &matProj);
+	effect->SetVector("gColor", &D3DXVECTOR4(1.f,1.f,0.f,1.f));
+
+	GET_SINGLE(ShaderManager)->Shader_Begin(L"Target");
+
+	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_ZENABLE, TRUE);
+	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_ZWRITEENABLE, FALSE);
+	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_LIGHTING, TRUE);
+	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
+	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW); 
+	GET_SINGLE(MeshManager)->Render(L"Bullet");
+	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_LIGHTING, TRUE);
+
+	GET_SINGLE(ShaderManager)->Shader_End(L"Target");
 }
 
 void Bullet::Release(void)

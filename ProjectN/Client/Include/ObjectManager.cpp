@@ -145,14 +145,9 @@ GameObject * ObjectManager::GetInterectedObject(INFO srcInfo)
 			for (auto iterList = (*iterMap).second.begin();
 				iterList != (*iterMap).second.end(); ++iterList)
 			{
-				//MSGBOX(L"�ε��� ���� ���� ����");
-
 				D3DXVECTOR3 distance = (*iterList)->GetInfo().position - srcInfo.position;
 				if (D3DXVec3Length(&distance) < 1.f) {
-
 					(*iterList)->Oncolide();
-					
-
 				}
 			}
 		}

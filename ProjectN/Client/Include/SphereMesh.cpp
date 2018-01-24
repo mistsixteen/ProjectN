@@ -4,7 +4,7 @@
 
 HRESULT SphereMesh::Initialize(const TCHAR * path, const TCHAR * fileName)
 {
-	if (FAILED(D3DXCreateSphere(GET_SINGLE(DXFramework)->GetDevice(), 0.5f, 6, 4, &mesh, NULL))) {
+	if (FAILED(D3DXCreateSphere(GET_SINGLE(DXFramework)->GetDevice(), 0.01f, 15, 10, &mesh, NULL))) {
 		return E_FAIL;
 	}
 
