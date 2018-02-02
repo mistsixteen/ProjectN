@@ -1,5 +1,4 @@
 #pragma once
-#include "Define.h"
 
 #include "Mesh.h"
 #include "TerrainMesh.h"

@@ -1,5 +1,4 @@
 #pragma once
-#include "Define.h"
 #include "Buffer.h"
 #include "BoxBuffer.h"
 #include "TerrainBuffer.h"

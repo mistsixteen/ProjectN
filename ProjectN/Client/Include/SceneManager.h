@@ -1,6 +1,4 @@
 #pragma once
-#include "Define.h"
-
 #include "GameObject.h"
 
 #include "GameScene.h"

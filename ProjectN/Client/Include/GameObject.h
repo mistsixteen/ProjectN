@@ -1,5 +1,4 @@
 #pragma once
-#include "Define.h"
 
 #include "ObjectManager.h"
 #include "MeshManager.h"

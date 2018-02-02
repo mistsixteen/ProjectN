@@ -153,6 +153,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Aim.h" />
     <ClInclude Include="Background.h" />
     <ClInclude Include="BackView.h" />
     <ClInclude Include="BoxBuffer.h" />
@@ -198,8 +199,11 @@
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="TimeManager.h" />
     <ClInclude Include="Training.h" />
+    <ClInclude Include="UI.h" />
+    <ClInclude Include="UIManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Aim.cpp" />
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="BackView.cpp" />
     <ClCompile Include="BoxBuffer.cpp" />
@@ -241,6 +245,8 @@
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="Training.cpp" />
+    <ClCompile Include="UI.cpp" />
+    <ClCompile Include="UIManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc" />

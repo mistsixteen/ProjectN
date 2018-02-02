@@ -1,5 +1,4 @@
 #pragma once
-#include "Define.h"
 
 #include "DXFramework.h"
 #include "Input.h"
@@ -11,6 +10,7 @@
 #include "ShaderManager.h"
 #include "TextureManager.h"
 #include "BufferManager.h"
+#include "UIManager.h"
 
 class Framework
 {

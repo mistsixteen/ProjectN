@@ -65,5 +65,6 @@ void Framework::Release()
 	SAFE_DELETE_SINGLE(ShaderManager);
 	SAFE_DELETE_SINGLE(TextureManager);
 	SAFE_DELETE_SINGLE(BufferManager);
+	SAFE_DELETE_SINGLE(UIManager);
 	_CrtDumpMemoryLeaks();
 }

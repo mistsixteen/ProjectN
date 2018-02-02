@@ -1,5 +1,4 @@
 #pragma once
-#include "Define.h"
 #include "DXFramework.h"
 
 class Shader

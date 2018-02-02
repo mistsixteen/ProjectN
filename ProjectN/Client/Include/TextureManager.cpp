@@ -16,6 +16,7 @@ HRESULT TextureManager::AddTexture(const TCHAR * path, TEXTYPE type, const TCHAR
 	auto iterMap = texMap.find(key);
 	if (iterMap == texMap.end()) {
 		Texture* texture = NULL;
+		// 연산자 오버로딩으로 count 값에 미표기
 		if (count == 0) {
 			texture = new SingleTexture;
 		}

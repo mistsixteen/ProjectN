@@ -1,5 +1,4 @@
 #pragma once
-#include "Define.h"
 #include "GameObject.h"
 
 class GameObject;
