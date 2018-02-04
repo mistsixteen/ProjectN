@@ -38,6 +38,11 @@ HRESULT Training::Initialize()
 		MSGBOX(L"표적 box 버퍼 추가 실패");
 		return E_FAIL;
 	}
+	if (FAILED(GET_SINGLE(BufferManager)->AddBuffer(L"UI", L"Rectangle")))
+	{
+		MSGBOX(L"UI 버퍼 추가 실패");
+		return E_FAIL;
+	}
 
 	// 메쉬 초기화
 	if (FAILED(GET_SINGLE(MeshManager)->AddMesh(L"Bullet", L"Sphere")))
@@ -69,6 +74,9 @@ HRESULT Training::Initialize()
 	//info.position = D3DXVECTOR3((VTXCNTX - 1) * 0.5f * VTXGAP, 0.5f, (VTXCNTZ - 1) * 0.5f * VTXGAP);
 	//GET_SINGLE(ObjectManager)->AddObject(L"Bullet", Factory<Bullet>::CreateInstance(L"Bullet", info));
 
+	// UI 추가
+	GET_SINGLE(UIManager)->AddUI(L"Aim", Factory<Aim>::CreateInstance(L"Aim"));
+
 	// 카메라 초기화
 	GET_SINGLE(CameraManager)->InitCamera(CAMERA_BACKVIEW);
 
@@ -79,11 +87,13 @@ void Training::Progress()
 {
 	GET_SINGLE(CameraManager)->Progress();
 	GET_SINGLE(ObjectManager)->Progress();
+	GET_SINGLE(UIManager)->Progress();
 }
 
 void Training::Render()
 {
 	GET_SINGLE(ObjectManager)->Render();
+	GET_SINGLE(UIManager)->Render();
 }
 
 void Training::Release()
@@ -91,5 +101,6 @@ void Training::Release()
 	GET_SINGLE(MeshManager)->Release();
 	GET_SINGLE(BufferManager)->Release();
 	GET_SINGLE(ObjectManager)->Release();
+	GET_SINGLE(UIManager)->Release();
 }
 

@@ -179,6 +179,7 @@
     <ClInclude Include="MultiTexture.h" />
     <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="RectangleBuffer.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="Resource\Shader\Terrain.hpp" />
@@ -225,6 +226,7 @@
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="RectangleBuffer.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShaderManager.cpp" />

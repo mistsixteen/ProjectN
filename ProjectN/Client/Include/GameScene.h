@@ -2,9 +2,11 @@
 #include "Factory.h"
 
 #include "ObjectManager.h"
+#include "UIManager.h"
 #include "MeshManager.h"
 #include "BufferManager.h"
 #include "CameraManager.h"
+
 
 class GameScene
 {

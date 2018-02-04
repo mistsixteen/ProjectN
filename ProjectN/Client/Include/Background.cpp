@@ -5,8 +5,8 @@
 HRESULT Background::Initialize(void)
 {
 	// 큐브 텍스쳐 초기화
-	if (FAILED(GET_SINGLE(TextureManager)->AddTexture(L"./Resource/Texture/Environment/Background/Sky_%d.dds"
-														, TEXTYPE_CUBE, L"Background", L"Sky", 1))) {
+	if (FAILED(GET_SINGLE(TextureManager)->AddTexture(L"./Resource/Texture/Environment/Background/Space.dds"
+														, TEXTYPE_CUBE, L"Background", L"Space"))) {
 		return E_FAIL;
 	}
 
@@ -25,7 +25,7 @@ void Background::Render(void)
 {
 	GameObject::Render();
 	GET_SINGLE(DXFramework)->GetDevice()->SetTexture(0, 
-	GET_SINGLE(TextureManager)->GetTexture(L"Background", L"Sky", 0)->cubeTexture);
+	GET_SINGLE(TextureManager)->GetTexture(L"Background", L"Space", 0)->cubeTexture);
 
 	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_ZENABLE, TRUE);
 	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_ZWRITEENABLE, FALSE);

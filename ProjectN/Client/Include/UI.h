@@ -16,10 +16,16 @@ protected:
 protected:
 	INFO					information;
 	const TCHAR*			key;
+protected:
+	D3DXMATRIX				projection;
+	D3DXMATRIX				view;
+	D3DXVECTOR3				converPos;
+	float					sizeX, sizeY;
+	RECT					rc;
 public:
 	virtual HRESULT Initialize(void) PURE;
 	virtual	void	Progress(void) PURE;
-	virtual	void	Render(void);
+	virtual	void	Render(void) PURE;
 	virtual	void	Release(void) PURE;
 public:
 	UI();

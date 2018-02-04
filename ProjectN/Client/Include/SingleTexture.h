@@ -4,7 +4,7 @@ class SingleTexture :
 	public Texture
 {
 private:
-	TEXINFO*	texInfo;
+	map<const TCHAR*, TEXINFO*> texMap;
 public:
 	virtual const TEXINFO*	GetTexture(const TCHAR*	state = NULL, const int& count = 0);
 public:

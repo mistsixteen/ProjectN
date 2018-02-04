@@ -31,6 +31,12 @@ HRESULT BufferManager::AddBuffer(const TCHAR * mapKey, const TCHAR * bufferKey)
 			return E_FAIL;
 		}
 	}
+	else if (_tcscmp(bufferKey, L"Rectangle") == 0) {
+		buffer = new RectangleBuffer;
+		if (FAILED(buffer->Initialize())) {
+			return E_FAIL;
+		}
+	}
 
 	bufferMap.insert(make_pair(mapKey, buffer));
 	return S_OK;

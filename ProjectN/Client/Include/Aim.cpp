@@ -12,42 +12,76 @@ HRESULT Aim::Initialize(void)
 
 	// 매트릭스 초기화
 	D3DXMatrixIdentity(&world);
-	information.position = { WINSIZEX / 2.f, WINSIZEY / 2.f, 0.f};
+	D3DXMatrixIdentity(&view);
+
+	information.position = {100.f, 100.f, 0.f};
+	converPos = information.position;
+	converPos.y *= -1.f;
+	converPos.y += WINSIZEY / 2.f;
+	converPos.x -= WINSIZEX / 2.f;
+	sizeX = 200.f;
+	sizeY = 200.f;
+
+	SetRect(&rc,
+		int(information.position.x - sizeX / 2.f),
+		int(information.position.y - sizeY / 2.f),
+		int(information.position.x + sizeX / 2.f),
+		int(information.position.y + sizeY / 2.f));
 
 	return S_OK;
 }
 
 void Aim::Progress(void)
 {
+	D3DXMATRIX matTrans;
+	D3DXMatrixTranslation(&matTrans, information.position.x
+		, information.position.y, information.position.z);
+
+	//직교 투영행렬 생성
+	D3DXMatrixOrthoLH(&this->projection, float(WINSIZEX), float(WINSIZEY), 0.f, 1.f);
+	D3DXVECTOR3 vTest(-WINSIZEX / 2.f, -WINSIZEY / 2.f, 0);
+
+	//윈도우 0,0 투영좌표 0,0
+	//윈도우 400,300 투영좌표 1,1
+	//윈도우 -400,-300 투영좌표 -1,-1
+	D3DXVec3TransformCoord(&vTest, &vTest, &this->projection);
 }
 
 void Aim::Render(void)
 {
+	this->view._11 = sizeX / 2.f;
+	this->view._22 = sizeY / 2.f;
+	this->view._33 = 1.f;
+
+	this->view._41 = converPos.x;
+	this->view._42 = converPos.y;
+
+	D3DXMATRIX	view, projection;
+	GET_SINGLE(DXFramework)->GetDevice()->GetTransform(D3DTS_VIEW, &view);
+	GET_SINGLE(DXFramework)->GetDevice()->GetTransform(D3DTS_PROJECTION, &projection);
+
+	GET_SINGLE(DXFramework)->GetDevice()->SetTransform(D3DTS_VIEW, &this->view);
+	GET_SINGLE(DXFramework)->GetDevice()->SetTransform(D3DTS_PROJECTION, &this->projection);
+	GET_SINGLE(DXFramework)->GetDevice()->SetTransform(D3DTS_WORLD, &this->world);
+
+	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_LIGHTING, FALSE);
 	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
 	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
 	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
-	
-	// D3DRS_ALPHATESTENABLE
-	// 기본이 FALSE 
-	// TRUE는 알파 테스팅을 사용 하겠다
-	// Z버퍼에 기입을 할건지 말건지 선택
-	// D3DRS_ALPHAREF 알파테스팅중 사용할 알파 수치
-	// D3DRS_ALPHAFUNC 알파값 크기 비교해서 높은놈만 출력하게
 	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_ALPHATESTENABLE, TRUE);
 	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_ALPHAREF, 0x00000088);
 	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
 
-	const TEXINFO* texInfo = GET_SINGLE(TextureManager)->GetTexture(L"Aim", L"1");
-	if (texInfo == NULL)
-		return;
+	GET_SINGLE(DXFramework)->GetDevice()->SetTexture(0, 
+	GET_SINGLE(TextureManager)->GetTexture(L"Aim", L"1")->texture);
 
-	GET_SINGLE(DXFramework)->GetDevice()->SetTexture(0, texInfo->texture);
-	UI::Render();
+	GET_SINGLE(BufferManager)->Render(L"UI");
+	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
+	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_LIGHTING, TRUE);
 
-	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
-	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_ALPHATESTENABLE, FALSE);
-
-
+	GET_SINGLE(DXFramework)->GetDevice()->SetTransform(D3DTS_VIEW, &view);
+	GET_SINGLE(DXFramework)->GetDevice()->SetTransform(D3DTS_PROJECTION, &projection);
+	
 }
 
 void Aim::Release(void)

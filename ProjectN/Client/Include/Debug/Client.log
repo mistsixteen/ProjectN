@@ -1,3 +1,6 @@
 ﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(368,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
-  Client.vcxproj -> D:\Project\ProjectN\ProjectN\ProjectN\Client\Include\../bin\Client.exe
+  Bullet.cpp
+f:\project\projectn\projectn\client\include\bullet.cpp : warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+f:\project\projectn\projectn\client\include\bullet.cpp(17): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Client.vcxproj -> F:\Project\ProjectN\ProjectN\Client\Include\../bin\Client.exe
   Client.vcxproj -> ../bin\Client.pdb (Full PDB)

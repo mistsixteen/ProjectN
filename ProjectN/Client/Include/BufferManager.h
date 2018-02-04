@@ -2,6 +2,7 @@
 #include "Buffer.h"
 #include "BoxBuffer.h"
 #include "TerrainBuffer.h"
+#include "RectangleBuffer.h"
 
 class BufferManager
 {

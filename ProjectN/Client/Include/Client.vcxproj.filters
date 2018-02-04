@@ -40,6 +40,7 @@
     <ClCompile Include="UIManager.cpp" />
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="Aim.cpp" />
+    <ClCompile Include="RectangleBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Background.h" />
@@ -90,6 +91,7 @@
     <ClInclude Include="UIManager.h" />
     <ClInclude Include="UI.h" />
     <ClInclude Include="Aim.h" />
+    <ClInclude Include="RectangleBuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc" />

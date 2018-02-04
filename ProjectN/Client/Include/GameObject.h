@@ -40,7 +40,7 @@ public:
 	VTXCOL* GetVtxCol() const { return vtxCol; }
 public:
 	bool operator<(GameObject& another) {
-		return this->GetDistanceFromCam() < another.GetDistanceFromCam();
+		return this->GetDistanceFromCam() > another.GetDistanceFromCam();
 	}
 public:
 	GameObject();
