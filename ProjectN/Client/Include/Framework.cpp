@@ -46,8 +46,11 @@ void Framework::Progress()
 void Framework::Render()
 {
 	GET_SINGLE(DXFramework)->Render_Begin();
-	
 	GET_SINGLE(SceneManager)->Render();
+
+	TCHAR szFps[128] = L"";
+	wsprintf(szFps, L"FPS : %d", GET_SINGLE(TimeManager)->GetFps());
+	GET_SINGLE(DXFramework)->Drawtext(szFps, 0, 0);
 
 	GET_SINGLE(DXFramework)->Render_End();
 }

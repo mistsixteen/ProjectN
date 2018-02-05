@@ -197,8 +197,14 @@ void Player::KeyCheck()
 	if (temp_firebulletdelay > 0.0f) temp_firebulletdelay = temp_firebulletdelay - 0.1f;
 }
 
+//D3DRS_ALPHATESTENABLE 기본이 FALSE 
+//TRUE는 알파 테스팅을 사용 하겠다
+//Z버퍼에 기입을 할건지 말건지 선택
+//D3DRS_ALPHAREF 알파테스팅중 사용할 알파 수치
+//D3DRS_ALPHAFUNC 알파값 크기 비교해서 높은놈만 출력하게
 void Player::Render(void)
 {
+
 	GameObject::Render();
 
 	// 셰이더 변수 설정
@@ -215,16 +221,10 @@ void Player::Render(void)
 
 	// 메쉬 렌더링
 	GET_SINGLE(ShaderManager)->Shader_Begin(L"Player");
-
-	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_ZENABLE, TRUE);
-	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_ZWRITEENABLE, FALSE);
-	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_LIGHTING, FALSE);
-	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
-	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
 	GET_SINGLE(BufferManager)->Render(L"Player");
-	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_LIGHTING, TRUE);
-
 	GET_SINGLE(ShaderManager)->Shader_End(L"Player");
+
+	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
 }
 
 void Player::Release(void)

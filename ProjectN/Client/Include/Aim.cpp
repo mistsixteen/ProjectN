@@ -45,10 +45,18 @@ void Aim::Progress(void)
 	//윈도우 400,300 투영좌표 1,1
 	//윈도우 -400,-300 투영좌표 -1,-1
 	D3DXVec3TransformCoord(&vTest, &vTest, &this->projection);
+
 }
 
 void Aim::Render(void)
 {
+	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
+	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
+	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
+	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_ALPHATESTENABLE, TRUE);
+	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_ALPHAREF, 0x00000088);
+	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
+
 	this->view._11 = sizeX / 2.f;
 	this->view._22 = sizeY / 2.f;
 	this->view._33 = 1.f;
@@ -64,23 +72,17 @@ void Aim::Render(void)
 	GET_SINGLE(DXFramework)->GetDevice()->SetTransform(D3DTS_PROJECTION, &this->projection);
 	GET_SINGLE(DXFramework)->GetDevice()->SetTransform(D3DTS_WORLD, &this->world);
 
-	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_LIGHTING, FALSE);
-	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
-	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
-	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
-	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_ALPHATESTENABLE, TRUE);
-	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_ALPHAREF, 0x00000088);
-	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
-
 	GET_SINGLE(DXFramework)->GetDevice()->SetTexture(0, 
 	GET_SINGLE(TextureManager)->GetTexture(L"Aim", L"1")->texture);
 
 	GET_SINGLE(BufferManager)->Render(L"UI");
 	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
-	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_LIGHTING, TRUE);
 
 	GET_SINGLE(DXFramework)->GetDevice()->SetTransform(D3DTS_VIEW, &view);
 	GET_SINGLE(DXFramework)->GetDevice()->SetTransform(D3DTS_PROJECTION, &projection);
+
+	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
+	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_ALPHATESTENABLE, FALSE);
 	
 }
 

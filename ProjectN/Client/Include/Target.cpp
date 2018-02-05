@@ -90,14 +90,7 @@ void Target::Render(void)
 
 		// ¸Þ½¬ ·»´õ¸µ
 		GET_SINGLE(ShaderManager)->Shader_Begin(L"Target");
-
-		GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_ZENABLE, TRUE);
-		GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_ZWRITEENABLE, FALSE);
-		GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_LIGHTING, FALSE);
-		GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
-		GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
 		GET_SINGLE(BufferManager)->Render(L"Target");
-		GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_LIGHTING, TRUE);
 		GET_SINGLE(ShaderManager)->Shader_End(L"Target");
 
 
@@ -142,9 +135,6 @@ void Target::Render(void)
 		templine->End();
 
 		templine->Release();
-		
-		
-
 	}
 }
 

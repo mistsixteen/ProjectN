@@ -18,38 +18,26 @@ void ObjectManager::AddObject(const TCHAR* key, GameObject* object)
 
 void ObjectManager::Progress(void)
 {
-	(*objectMap[L"Background"].begin())->Progress();
-	for(auto iterList = objectMap[L"Terrain"].begin() ; iterList != objectMap[L"Terrain"].end() ; ++iterList)
-		(*iterList)->Progress();
-
 	for(auto iterMap = objectMap.begin() ; iterMap != objectMap.end() ; ++iterMap)
 	{ 
-		if ((*iterMap).first != L"Terrain" && (*iterMap).first != L"Background")
+		for (auto iterList = (*iterMap).second.begin();
+			iterList != (*iterMap).second.end(); ++iterList)
 		{
-			for (auto iterList = (*iterMap).second.begin();
-				iterList != (*iterMap).second.end(); ++iterList)
-			{
-				(*iterList)->Progress();
-				GET_SINGLE(SortManager)->Insert(*iterList);
-			}
+			(*iterList)->Progress();
 		}
 	}
 }
 
 void ObjectManager::Render(void)
 {
-	(*objectMap[L"Background"].begin())->Render();
-	for (auto iterList = objectMap[L"Terrain"].begin(); iterList != objectMap[L"Terrain"].end(); ++iterList)
-		(*iterList)->Render();
-	GET_SINGLE(SortManager)->Render();
-	/*for (auto iterMap = objectMap.begin(); iterMap != objectMap.end(); ++iterMap)
+	for (auto iterMap = objectMap.begin(); iterMap != objectMap.end(); ++iterMap)
 	{
 		for (auto iterList = (*iterMap).second.begin();
 			iterList != (*iterMap).second.end(); ++iterList)
 		{
 			(*iterList)->Render();
 		}
-	}*/
+	}
 }
 
 void ObjectManager::Release(void)

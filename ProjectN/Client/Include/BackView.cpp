@@ -16,7 +16,7 @@ void BackView::Initialize()
 	D3DXMatrixLookAtLH(&viewMatrix, &eye, &at, &up);
 	GET_SINGLE(DXFramework)->GetDevice()->SetTransform(D3DTS_VIEW, &viewMatrix);
 
-	D3DXMatrixPerspectiveFovLH(&projectionMatrix, D3DXToRadian(60.f), WINSIZEX / (float)WINSIZEY, 0.f, 1000.f);
+	D3DXMatrixPerspectiveFovLH(&projectionMatrix, D3DXToRadian(60.f), WINSIZEX / (float)WINSIZEY, 1.f, 1000.f);
 	GET_SINGLE(DXFramework)->GetDevice()->SetTransform(D3DTS_PROJECTION, &projectionMatrix);
 
 	/* 픽셀화된 텍스쳐를 선형으로 늘려 선명화 */
@@ -24,6 +24,7 @@ void BackView::Initialize()
 	GET_SINGLE(DXFramework)->GetDevice()->SetSamplerState(0, D3DSAMP_MAGFILTER, D3DTEXF_LINEAR);
 	GET_SINGLE(DXFramework)->GetDevice()->SetSamplerState(0, D3DSAMP_MIPFILTER, D3DTEXF_LINEAR);
 
+	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_LIGHTING, FALSE);
 }
 
 void BackView::Progress()
@@ -84,9 +85,6 @@ void BackView::Progress()
 
 	D3DXMatrixLookAtLH(&viewMatrix, &eye, &at, &up);
 	GET_SINGLE(DXFramework)->GetDevice()->SetTransform(D3DTS_VIEW, &viewMatrix);
-
-	D3DXMatrixPerspectiveFovLH(&projectionMatrix, D3DXToRadian(60.f), WINSIZEX / (float)WINSIZEY, 0.f, 1000.f);
-	GET_SINGLE(DXFramework)->GetDevice()->SetTransform(D3DTS_PROJECTION, &projectionMatrix);
 
 	/* 전역 카메라 위치 변수 초기화 */
 	gCameraEye = eye;

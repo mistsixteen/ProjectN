@@ -12,29 +12,28 @@ HRESULT Background::Initialize(void)
 
 	// 매트릭스 초기화
 	D3DXMatrixIdentity(&world);
-	D3DXMatrixScaling(&scale, 512.f, 512.f, 512.f);
+	D3DXMatrixScaling(&scale, 1024.f, 1024.f, 1024.f);
 
 	return S_OK;
 }
 
 void Background::Progress(void)
 {
+	INFO playerInfo = GET_SINGLE(ObjectManager)->GetGameObject(L"Player")->GetInfo();
+	information.position = playerInfo.position;
 }
 
 void Background::Render(void)
 {
-	GameObject::Render();
-	GET_SINGLE(DXFramework)->GetDevice()->SetTexture(0, 
-	GET_SINGLE(TextureManager)->GetTexture(L"Background", L"Space", 0)->cubeTexture);
-
-	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_ZENABLE, TRUE);
-	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_ZWRITEENABLE, FALSE);
-	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_LIGHTING, FALSE);
-	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
 	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_CULLMODE, D3DCULL_CW);
+
+	GameObject::Render();
+	GET_SINGLE(DXFramework)->GetDevice()->SetTexture(0,
+	GET_SINGLE(TextureManager)->GetTexture(L"Background", L"Space", 0)->cubeTexture);
 	GET_SINGLE(BufferManager)->Render(L"Background");
+
 	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
-	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_LIGHTING, TRUE);
+
 }
 
 void Background::Release(void)

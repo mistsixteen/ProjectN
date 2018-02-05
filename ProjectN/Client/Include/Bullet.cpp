@@ -79,15 +79,7 @@ void Bullet::Render(void)
 	effect->SetVector("gColor", &D3DXVECTOR4(1.f,1.f,0.f,1.f));
 
 	GET_SINGLE(ShaderManager)->Shader_Begin(L"Target");
-
-	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_ZENABLE, TRUE);
-	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_ZWRITEENABLE, TRUE);
-	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_LIGHTING, FALSE);
-	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
-	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW); 
 	GET_SINGLE(MeshManager)->Render(L"Bullet");
-	GET_SINGLE(DXFramework)->GetDevice()->SetRenderState(D3DRS_LIGHTING, TRUE);
-
 	GET_SINGLE(ShaderManager)->Shader_End(L"Target");
 }
 

@@ -10,7 +10,7 @@ private:
 	LARGE_INTEGER		cpuTick;
 	float				time;
 
-	float				fps;
+	DWORD				fps;
 	int					frameCount;
 	float				passedTime;
 public:
@@ -18,7 +18,7 @@ public:
 	void SetTime();
 public:
 	float GetTime() const { return time; }
-	float GetFps() const { return fps; }
+	DWORD GetFps() const { return fps; }
 private:
 	TimeManager(void);
 public:
