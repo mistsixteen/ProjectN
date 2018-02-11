@@ -1,106 +1,421 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Background.cpp" />
-    <ClCompile Include="BackView.cpp" />
-    <ClCompile Include="BoxBuffer.cpp" />
-    <ClCompile Include="BoxMesh.cpp" />
-    <ClCompile Include="Buffer.cpp" />
-    <ClCompile Include="BufferManager.cpp" />
-    <ClCompile Include="Bullet.cpp" />
-    <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="CameraManager.cpp" />
-    <ClCompile Include="Client.cpp" />
-    <ClCompile Include="DXFramework.cpp" />
-    <ClCompile Include="FirstPerson.cpp" />
-    <ClCompile Include="Input.cpp" />
-    <ClCompile Include="Framework.cpp" />
-    <ClCompile Include="GameObject.cpp" />
-    <ClCompile Include="Mesh.cpp" />
-    <ClCompile Include="MeshManager.cpp" />
-    <ClCompile Include="MultiTexture.cpp" />
-    <ClCompile Include="ObjectManager.cpp" />
-    <ClCompile Include="GameScene.cpp" />
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="SceneManager.cpp" />
-    <ClCompile Include="Shader.cpp" />
-    <ClCompile Include="ShaderManager.cpp" />
-    <ClCompile Include="SingleTexture.cpp" />
-    <ClCompile Include="SortManager.cpp" />
-    <ClCompile Include="SphereMesh.cpp" />
-    <ClCompile Include="stdafx.cpp" />
-    <ClCompile Include="Target.cpp" />
-    <ClCompile Include="Terrain.cpp" />
-    <ClCompile Include="TerrainBuffer.cpp" />
-    <ClCompile Include="TerrainMesh.cpp" />
-    <ClCompile Include="Texture.cpp" />
-    <ClCompile Include="TextureManager.cpp" />
-    <ClCompile Include="TimeManager.cpp" />
-    <ClCompile Include="Training.cpp" />
-    <ClCompile Include="UIManager.cpp" />
-    <ClCompile Include="UI.cpp" />
-    <ClCompile Include="Aim.cpp" />
-    <ClCompile Include="RectangleBuffer.cpp" />
+    <ClCompile Include="Framework.cpp">
+      <Filter>01. Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>03. Object</Filter>
+    </ClCompile>
+    <ClCompile Include="GameScene.cpp">
+      <Filter>02. Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Aim.cpp">
+      <Filter>03. Object\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI.cpp">
+      <Filter>%28Deprecated%29</Filter>
+    </ClCompile>
+    <ClCompile Include="UIManager.cpp">
+      <Filter>%28Deprecated%29</Filter>
+    </ClCompile>
+    <ClCompile Include="Client.cpp">
+      <Filter>Source File</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source File</Filter>
+    </ClCompile>
+    <ClCompile Include="Background.cpp">
+      <Filter>03. Object\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>03. Object\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Target.cpp">
+      <Filter>03. Object\Target</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>03. Object\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Terrain.cpp">
+      <Filter>03. Object\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="Training.cpp">
+      <Filter>02. Scene\Training</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraManager.cpp">
+      <Filter>04. Manager\CameraManger</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>04. Manager\CameraManger\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="BackView.cpp">
+      <Filter>04. Manager\CameraManger\Camera\BackView</Filter>
+    </ClCompile>
+    <ClCompile Include="FirstPerson.cpp">
+      <Filter>04. Manager\CameraManger\Camera\FirstPerson</Filter>
+    </ClCompile>
+    <ClCompile Include="BufferManager.cpp">
+      <Filter>04. Manager\BufferManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Buffer.cpp">
+      <Filter>04. Manager\BufferManager\Buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="BoxBuffer.cpp">
+      <Filter>04. Manager\BufferManager\Buffer\Box</Filter>
+    </ClCompile>
+    <ClCompile Include="RectangleBuffer.cpp">
+      <Filter>04. Manager\BufferManager\Buffer\Rectangle</Filter>
+    </ClCompile>
+    <ClCompile Include="TerrainBuffer.cpp">
+      <Filter>04. Manager\BufferManager\Buffer\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshManager.cpp">
+      <Filter>04. Manager\MeshManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>04. Manager\MeshManager\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="BoxMesh.cpp">
+      <Filter>04. Manager\MeshManager\Mesh\Box</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureManager.cpp">
+      <Filter>04. Manager\TextureManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>04. Manager\TextureManager\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiTexture.cpp">
+      <Filter>04. Manager\TextureManager\Texture\Multi</Filter>
+    </ClCompile>
+    <ClCompile Include="SingleTexture.cpp">
+      <Filter>04. Manager\TextureManager\Texture\Single</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectManager.cpp">
+      <Filter>04. Manager\ObjectManager</Filter>
+    </ClCompile>
+    <ClCompile Include="SortManager.cpp">
+      <Filter>%28Deprecated%29</Filter>
+    </ClCompile>
+    <ClCompile Include="SphereMesh.cpp">
+      <Filter>04. Manager\MeshManager\Mesh\Sphere</Filter>
+    </ClCompile>
+    <ClCompile Include="TerrainMesh.cpp">
+      <Filter>04. Manager\MeshManager\Mesh\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>97. Input</Filter>
+    </ClCompile>
+    <ClCompile Include="DXFramework.cpp">
+      <Filter>98. DXFramework</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>04. Manager\SceneManager</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderManager.cpp">
+      <Filter>04. Manager\ShaderManager</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeManager.cpp">
+      <Filter>04. Manager\TimeManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>04. Manager\ShaderManager\Shader</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Background.h" />
-    <ClInclude Include="BackView.h" />
-    <ClInclude Include="BoxBuffer.h" />
-    <ClInclude Include="BoxMesh.h" />
-    <ClInclude Include="Buffer.h" />
-    <ClInclude Include="BufferManager.h" />
-    <ClInclude Include="Bullet.h" />
-    <ClInclude Include="Camera.h" />
-    <ClInclude Include="CameraManager.h" />
-    <ClInclude Include="Client.h" />
-    <ClInclude Include="Constant.h" />
-    <ClInclude Include="Define.h" />
-    <ClInclude Include="DXFramework.h" />
-    <ClInclude Include="Factory.h" />
-    <ClInclude Include="FirstPerson.h" />
-    <ClInclude Include="Input.h" />
-    <ClInclude Include="Macro.h" />
-    <ClInclude Include="Framework.h" />
-    <ClInclude Include="GameObject.h" />
-    <ClInclude Include="Math.h" />
-    <ClInclude Include="Mesh.h" />
-    <ClInclude Include="MeshManager.h" />
-    <ClInclude Include="MultiTexture.h" />
-    <ClInclude Include="ObjectManager.h" />
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="Resource.h" />
-    <ClInclude Include="GameScene.h" />
-    <ClInclude Include="Resource\Shader\Terrain.hpp" />
-    <ClInclude Include="SceneManager.h" />
-    <ClInclude Include="Shader.h" />
-    <ClInclude Include="ShaderManager.h" />
-    <ClInclude Include="SingleTexture.h" />
-    <ClInclude Include="SortManager.h" />
-    <ClInclude Include="SphereMesh.h" />
-    <ClInclude Include="stdafx.h" />
-    <ClInclude Include="Struct.h" />
-    <ClInclude Include="Target.h" />
-    <ClInclude Include="targetver.h" />
-    <ClInclude Include="Terrain.h" />
-    <ClInclude Include="TerrainBuffer.h" />
-    <ClInclude Include="TerrainMesh.h" />
-    <ClInclude Include="Texture.h" />
-    <ClInclude Include="TextureManager.h" />
-    <ClInclude Include="TimeManager.h" />
-    <ClInclude Include="Training.h" />
-    <ClInclude Include="UIManager.h" />
-    <ClInclude Include="UI.h" />
-    <ClInclude Include="Aim.h" />
-    <ClInclude Include="RectangleBuffer.h" />
+    <ClInclude Include="Struct.h">
+      <Filter>99. Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Constant.h">
+      <Filter>99. Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Define.h">
+      <Filter>99. Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework.h">
+      <Filter>01. Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>03. Object</Filter>
+    </ClInclude>
+    <ClInclude Include="GameScene.h">
+      <Filter>02. Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Aim.h">
+      <Filter>03. Object\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Macro.h">
+      <Filter>99. Header</Filter>
+    </ClInclude>
+    <ClInclude Include="UI.h">
+      <Filter>%28Deprecated%29</Filter>
+    </ClInclude>
+    <ClInclude Include="UIManager.h">
+      <Filter>%28Deprecated%29</Filter>
+    </ClInclude>
+    <ClInclude Include="Client.h">
+      <Filter>Source File</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="Math.h">
+      <Filter>95. Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory.h">
+      <Filter>96. Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="Background.h">
+      <Filter>03. Object\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>03. Object\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Target.h">
+      <Filter>03. Object\Target</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>03. Object\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Terrain.h">
+      <Filter>03. Object\Terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="Training.h">
+      <Filter>02. Scene\Training</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraManager.h">
+      <Filter>04. Manager\CameraManger</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>04. Manager\CameraManger\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="BackView.h">
+      <Filter>04. Manager\CameraManger\Camera\BackView</Filter>
+    </ClInclude>
+    <ClInclude Include="FirstPerson.h">
+      <Filter>04. Manager\CameraManger\Camera\FirstPerson</Filter>
+    </ClInclude>
+    <ClInclude Include="BufferManager.h">
+      <Filter>04. Manager\BufferManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Buffer.h">
+      <Filter>04. Manager\BufferManager\Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="BoxBuffer.h">
+      <Filter>04. Manager\BufferManager\Buffer\Box</Filter>
+    </ClInclude>
+    <ClInclude Include="RectangleBuffer.h">
+      <Filter>04. Manager\BufferManager\Buffer\Rectangle</Filter>
+    </ClInclude>
+    <ClInclude Include="TerrainBuffer.h">
+      <Filter>04. Manager\BufferManager\Buffer\Terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshManager.h">
+      <Filter>04. Manager\MeshManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>04. Manager\MeshManager\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="BoxMesh.h">
+      <Filter>04. Manager\MeshManager\Mesh\Box</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureManager.h">
+      <Filter>04. Manager\TextureManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>04. Manager\TextureManager\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiTexture.h">
+      <Filter>04. Manager\TextureManager\Texture\Multi</Filter>
+    </ClInclude>
+    <ClInclude Include="SingleTexture.h">
+      <Filter>04. Manager\TextureManager\Texture\Single</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectManager.h">
+      <Filter>04. Manager\ObjectManager</Filter>
+    </ClInclude>
+    <ClInclude Include="SortManager.h">
+      <Filter>%28Deprecated%29</Filter>
+    </ClInclude>
+    <ClInclude Include="SphereMesh.h">
+      <Filter>04. Manager\MeshManager\Mesh\Sphere</Filter>
+    </ClInclude>
+    <ClInclude Include="TerrainMesh.h">
+      <Filter>04. Manager\MeshManager\Mesh\Terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>97. Input</Filter>
+    </ClInclude>
+    <ClInclude Include="DXFramework.h">
+      <Filter>98. DXFramework</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>04. Manager\SceneManager</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderManager.h">
+      <Filter>04. Manager\ShaderManager</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeManager.h">
+      <Filter>04. Manager\TimeManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>04. Manager\ShaderManager\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Shader\Terrain.hpp">
+      <Filter>Shader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="Client.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="Client.ico" />
-    <Image Include="small.ico" />
+    <Image Include="Client.ico">
+      <Filter>Source File</Filter>
+    </Image>
+    <Image Include="small.ico">
+      <Filter>Source File</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="01. Framework">
+      <UniqueIdentifier>{5564b9ee-d3ab-438a-8c10-b1fc1ac3125f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Scene">
+      <UniqueIdentifier>{d6472bff-a85d-4bd1-a1d0-b381e6a3633e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Object">
+      <UniqueIdentifier>{d4393dd9-d7cc-4eca-9f53-527407e50bec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Object\UI">
+      <UniqueIdentifier>{c2cd98ac-27b0-4d61-9ccf-221014c1d539}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="99. Header">
+      <UniqueIdentifier>{e6c7c527-0b74-4994-9495-f1eafbd13d6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager">
+      <UniqueIdentifier>{41ca29c1-7f72-4b7f-a6c6-40ddb19816d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="%28Deprecated%29">
+      <UniqueIdentifier>{c24b0012-477f-4a41-b522-37f25036f749}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source File">
+      <UniqueIdentifier>{8c91626e-c411-4372-966f-220f4a95d176}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header File">
+      <UniqueIdentifier>{471797de-9e77-49d1-bd7e-955bf7776fc0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Object\Background">
+      <UniqueIdentifier>{da9a3b2e-5ade-46df-bce7-54584a5fa7bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Object\Target">
+      <UniqueIdentifier>{e9ed5904-a20f-4a0c-b008-1dd308195147}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Object\Player">
+      <UniqueIdentifier>{2d0b49c9-94c5-47dd-bf78-822bbcf147ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Object\Terrain">
+      <UniqueIdentifier>{b4b90d45-cf8e-456b-8833-3adf6f2dd8ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Scene\Training">
+      <UniqueIdentifier>{7cb44827-b2cb-4dfd-8484-0a408e26366f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\CameraManger">
+      <UniqueIdentifier>{684fcfc4-e6b8-4cb7-be8b-b64a198a2ab3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\CameraManger\Camera">
+      <UniqueIdentifier>{bc3379fe-5b5d-43f1-a5ec-3f0ae54cb3a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\CameraManger\Camera\BackView">
+      <UniqueIdentifier>{f0e8ebff-8ae6-4c61-8a42-3b42fb3f098e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\BufferManager">
+      <UniqueIdentifier>{cec2b2a0-9ba9-417d-b5c5-77d2cbe0f9b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\BufferManager\Buffer">
+      <UniqueIdentifier>{c067bff7-7f1a-4e5f-9379-fdaf083c45aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\BufferManager\Buffer\Box">
+      <UniqueIdentifier>{c4550bd1-05aa-48fb-bedf-08a90de6ed19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\BufferManager\Buffer\Terrain">
+      <UniqueIdentifier>{292bce37-6911-4089-a904-b3d7cc949db8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\BufferManager\Buffer\Rectangle">
+      <UniqueIdentifier>{98e156ff-957c-45fa-9128-032825aa2ff1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\MeshManager">
+      <UniqueIdentifier>{0c3ee07b-305d-4317-a8ff-0b270e2813c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\MeshManager\Mesh">
+      <UniqueIdentifier>{18a019ca-99fe-4ce2-a9ea-ace352f7ff90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\MeshManager\Mesh\Box">
+      <UniqueIdentifier>{fbc33ee8-8773-4c21-9cfe-7a9c21c98f9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\TextureManager">
+      <UniqueIdentifier>{3f321cf8-1c90-40ff-9586-d6d6c6763864}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\TextureManager\Texture">
+      <UniqueIdentifier>{00a5779b-a5e7-4624-84b0-d2f6e826f33f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\TextureManager\Texture\Single">
+      <UniqueIdentifier>{7ae2e97b-5c42-49a3-89e6-9c8efb042e47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\TextureManager\Texture\Multi">
+      <UniqueIdentifier>{d5c363b0-ef88-4291-a184-5aa5242f9c68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\ObjectManager">
+      <UniqueIdentifier>{589fe790-9647-40ca-8a8a-14f60f2c0c0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\MeshManager\Mesh\Sphere">
+      <UniqueIdentifier>{36bfd419-3f61-44b5-9f3f-796a79fb9dae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\MeshManager\Mesh\Terrain">
+      <UniqueIdentifier>{72252f5b-001a-421c-bd2e-ff143a508365}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="98. DXFramework">
+      <UniqueIdentifier>{bb2f3c17-89a5-435e-b030-33b5afdac4a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="97. Input">
+      <UniqueIdentifier>{da5218ad-ad3e-4805-8459-410ae948e60f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="95. Math">
+      <UniqueIdentifier>{c2511a56-6728-4239-b279-48591daab387}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="96. Factory">
+      <UniqueIdentifier>{84fcecac-203d-4bed-9eb8-c7b76d6fb10a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\SceneManager">
+      <UniqueIdentifier>{9ddb2c25-344f-41f9-8b7b-5aca53d5afbb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\ShaderManager">
+      <UniqueIdentifier>{8cdd0c15-7d70-4b85-8fd6-0931adfb1635}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\TimeManager">
+      <UniqueIdentifier>{43fe974e-4bfd-4065-b7eb-340cdf0630f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\ShaderManager\Shader">
+      <UniqueIdentifier>{37c8ffaa-d37e-44ba-8066-7d4979214c10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shader">
+      <UniqueIdentifier>{516aacfa-0622-48dc-b94b-24d2d44849e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\CameraManger\Camera\FirstPerson">
+      <UniqueIdentifier>{9258a8cf-e44a-4ae7-9431-7b150b98d7ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Object\Bullet">
+      <UniqueIdentifier>{9a367b20-ef75-427d-9392-cfccff2b73e1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Client.rc">
+      <Filter>Source File</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

@@ -55,7 +55,7 @@ HRESULT Training::Initialize()
 	GET_SINGLE(ObjectManager)->AddObject(L"Background", Factory<Background>::CreateInstance(L"Background", info));
 
 	ZeroMemory(&info, sizeof(INFO));
-	//info.position = D3DXVECTOR3((VTXCNTX - 1) * 0.5f * VTXGAP, 10.f, (VTXCNTZ - 1) * 0.5f * VTXGAP);
+	info.position = D3DXVECTOR3((VTXCNTX - 1) * 0.5f * VTXGAP, 1.f, (VTXCNTZ - 1) * 0.5f * VTXGAP);
 	info.look = D3DXVECTOR3(0.f, 0.f, 1.f);
 	GET_SINGLE(ObjectManager)->AddObject(L"Player", Factory<Player>::CreateInstance(L"Player", info));
 

@@ -6,60 +6,31 @@ HRESULT Bullet::Initialize(void)
 {
 	information.min = *(GET_SINGLE(MeshManager)->GetMin(L"Bullet"));
 	information.max = *(GET_SINGLE(MeshManager)->GetMax(L"Bullet"));
-	active = false;
 
-	// ��Ʈ���� �ʱ�ȭ
 	D3DXMatrixIdentity(&world);
 	D3DXMatrixScaling(&scale, 5.f, 5.f, 5.f);
 
-	// �ʱ� �ɼ� �ʱ�ȭ
 	information.speed = 10.f;
 	information.attack = 1.f;
-	bgMin = GET_SINGLE(ObjectManager)->GetGameObject(L"Background")->GetInfo().min;
-	bgMax = GET_SINGLE(ObjectManager)->GetGameObject(L"Background")->GetInfo().max;
 
-	// GET_SINGLE(TextureManager)->AddTexture(L"./Resource/Texture/Bullet/beams.png", TEXTYPE_GENERAL, L"Bullet", L"Beam");
+	printf("Pos : %.3f, %.3f, %.3f\n", information.position.x, information.position.y, information.position.z);
 
-	initBullet();
+	isFired = true;
 
 	return S_OK;
 }
 
-bool Bullet::isFired() const
-{
-	return active;
-}
-
-void Bullet::initBullet()
-{
-	INFO playerInfo = GET_SINGLE(ObjectManager)->GetGameObject(L"Player")->GetInfo();
-
-	information.position = playerInfo.position;
-	information.direction = playerInfo.look;
-
-	active = true;
-}
-
-
 void Bullet::Progress(void)
 {
-	if (isFired()) {
-		information.position += information.direction
-								* information.speed * GET_SINGLE(TimeManager)->GetTime();
-
-		if (information.position.x < bgMin.x || bgMax.x < information.position.x
-			|| information.position.y < bgMin.y || bgMax.y < information.position.y
-			|| information.position.z < bgMin.z || bgMax.z < information.position.z) {
-			//initBullet();
-		}
+	if (isFired) {
+		information.position += information.look * information.speed * GET_SINGLE(TimeManager)->GetTime();
 
 		GameObject* dest = GET_SINGLE(ObjectManager)->GetInterectedObject(information);
 		if (dest != nullptr) {
 			dest->GetInfo().damage = information.attack;
-			//initBullet();
+			isFired = false;
 		}
 	}
-
 }
 
 void Bullet::Render(void)

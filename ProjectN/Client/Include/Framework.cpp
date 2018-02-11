@@ -32,6 +32,18 @@ HRESULT Framework::InitApp(void)
 	// 씬 초기화 (트레이닝 룸으로 초기화)
 	GET_SINGLE(SceneManager)->InitScene(SCENE_TRAINING);
 
+#ifdef _DEBUG
+	// 디버그 콘솔 창
+	if (!AllocConsole()) {
+		MSGBOX(L"콘솔 창 불러오기 실패");
+		return E_FAIL;
+	}
+
+	freopen("CONIN$", "r", stdin);
+	freopen("CONOUT$", "w", stderr);
+	freopen("CONOUT$", "w", stdout);
+#endif
+
 	return S_OK;
 }
 
@@ -69,5 +81,10 @@ void Framework::Release()
 	SAFE_DELETE_SINGLE(TextureManager);
 	SAFE_DELETE_SINGLE(BufferManager);
 	SAFE_DELETE_SINGLE(UIManager);
+
+#ifdef _DEBUG
+	FreeConsole();
+#endif
+
 	_CrtDumpMemoryLeaks();
 }

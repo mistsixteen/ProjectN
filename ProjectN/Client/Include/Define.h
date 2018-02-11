@@ -17,15 +17,12 @@
 #include <list>
 #include <algorithm>
 
+#ifdef _DEBUG
 // 메모리 누수 전처리 문장
-#ifndef _DEBUG
-#define new new(_CLIENT_BLOCK,__FILE__,__LINE)
+#define new new(_CLIENT_BLOCK,__FILE__,__LINE__)
 #endif
 
 using namespace std;
 
 extern HWND						g_hWnd;
 extern HINSTANCE				hInst;
-
-// 정렬용 카메라 위치 변수
-extern D3DXVECTOR3 gCameraEye;

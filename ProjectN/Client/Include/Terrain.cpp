@@ -69,6 +69,8 @@ Terrain::Terrain()
 Terrain::Terrain(const TCHAR* _key, INFO _info)
 	:GameObject(_key, _info)
 {
+	vtxTex = NULL;
+	vtxCol = NULL;
 }
 
 Terrain::~Terrain()

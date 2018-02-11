@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "CameraManager.h"
 
-
 void CameraManager::InitCamera(CAMERA type, const TCHAR * objectKey)
 {
 	SAFE_DELETE(camera);
@@ -61,6 +60,7 @@ HRESULT CameraManager::SetLight()
 }
 
 CameraManager::CameraManager()
+	:camera(NULL)
 {
 }
 
