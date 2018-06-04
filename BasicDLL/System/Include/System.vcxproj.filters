@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="헤더 파일">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="99. Header">
+      <UniqueIdentifier>{9c7f3c4b-c17a-481f-a04a-057a53808546}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. ExportFunction">
+      <UniqueIdentifier>{46af93bf-89df-435e-9dc7-cc8a3aa806d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Device">
+      <UniqueIdentifier>{f500d0d9-4dce-451d-bf2f-a674eb371a9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Input">
+      <UniqueIdentifier>{eae9c269-fa1c-4867-a227-b6b688381168}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Time">
+      <UniqueIdentifier>{dbbd2b9c-d6b0-48c7-a505-2d80af601bf6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Device.cpp">
+      <Filter>01. Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>02. Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Time.cpp">
+      <Filter>03. Time</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemExport.cpp">
+      <Filter>00. ExportFunction</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Device.h">
+      <Filter>01. Device</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\SystemConst.h">
+      <Filter>99. Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\SystemDefine.h">
+      <Filter>99. Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\SystemMacro.h">
+      <Filter>99. Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>02. Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Time.h">
+      <Filter>03. Time</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemExport.h">
+      <Filter>00. ExportFunction</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
